@@ -42,9 +42,11 @@ public:
 			delete [] tab[i];
 		delete [] tab;
 	}
-	// cambiarPosicion(int x,int y,int posicionx, int posiciony);
+	 void cambiarPosicion(int x,int y,int posicionx, int posiciony);
 	int getSize(){return N;}
 	Piece** getTab(){return tab;}
+
+
 };
 
 #endif

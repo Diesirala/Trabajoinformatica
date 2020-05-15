@@ -17,6 +17,7 @@
     <ClInclude Include="src\piece.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="board.cpp" />
     <ClCompile Include="src\boardgl.cpp" />
     <ClCompile Include="src\game.cpp" />
     <ClCompile Include="src\gltools.cpp" />
