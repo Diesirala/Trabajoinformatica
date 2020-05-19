@@ -13,9 +13,12 @@ class Board{
 protected:
 	const int N;		//NxN board
 	Piece ** tab;
+	void reina(int posicionx, int posiciony);
+	int turno;
+	int movimientos;
 
 public:
-	Board(int n):N(n){
+	Board(int n):turno(1),movimientos(1) ,N(n){
 		
 		tab=new Piece*[N];
 		for (int i=0; i<N; i++){
@@ -42,11 +45,11 @@ public:
 			delete [] tab[i];
 		delete [] tab;
 	}
-	 void cambiarPosicion(int x,int y,int posicionx, int posiciony);
+	void cambiarPosicion(int x,int y,int posicionx, int posiciony);
+	void pasoTurno(void);
+	void comer(int x, int y, int posicionx, int posiciony);
 	int getSize(){return N;}
 	Piece** getTab(){return tab;}
-
-
 };
 
 #endif

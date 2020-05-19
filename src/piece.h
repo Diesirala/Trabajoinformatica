@@ -12,7 +12,7 @@ using namespace std;
 class Object{
 //interface class for all pieces
 public:
-	enum type_t{QUEEN_GREEN, QUEEN_BLACK, EMPTY_CELL};
+	enum type_t { EMPTY_CELL, QUEEN_GREEN, QUEEN_BLACK,  QUEEN_GREENR, QUEEN_BLACKR };
 	virtual void getCellNumber(int&x, int&y)=0;
 	virtual type_t getType()=0;
 };

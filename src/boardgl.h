@@ -24,7 +24,8 @@ public:
 		center_z=0;
 	}
 	virtual ~BoardGL(){}
-
+	//mouse	
+	int xcell_sel, ycell_sel;			//cell selected with mouse
 //Initizalization
 	void init();						//enable lights
 		 	
@@ -63,8 +64,7 @@ protected:
 	double center_x,center_y,center_z;
 	double dist;
 
-//mouse	
-	int xcell_sel, ycell_sel;			//cell selected with mouse
+
 
 	//mouse+special-keys combination state events 
 	bool controlKey;

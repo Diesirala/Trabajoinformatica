@@ -50,7 +50,7 @@ void BoardGL::DrawCell(int i,int j){
 	case Object::QUEEN_GREEN:
 		cell2center(i, j, glx, gly);
 		glDisable(GL_LIGHTING);
-		GLTools::Color(gltools::RED);//color de las esferas solidas
+		GLTools::Color(gltools::GREEN);//color de las esferas solidas
 		glTranslatef(glx, gly, 0);
 		glutSolidSphere((width/2.0f)*0.9f, 50, 50);
 		glTranslatef(-glx, -gly, 0);
@@ -63,6 +63,28 @@ void BoardGL::DrawCell(int i,int j){
 		GLTools::Color(gltools::BLACK);
 		glTranslatef(glx, gly, 0);
 		glutSolidSphere((width/2.0f)*0.9f, 50, 50);
+		glTranslatef(-glx, -gly, 0);
+		glEnable(GL_LIGHTING);
+
+		break;
+
+	case Object::QUEEN_GREENR:
+		cell2center(i, j, glx, gly);
+		glDisable(GL_LIGHTING);
+		GLTools::Color(gltools::RED);//color de las esferas solidas
+		glTranslatef(glx, gly, 0);
+		glutSolidSphere((width / 2.0f)*0.9f, 50, 50);
+		glTranslatef(-glx, -gly, 0);
+		glEnable(GL_LIGHTING);
+
+		break;
+
+	case Object::QUEEN_BLACKR:
+		cell2center(i, j, glx, gly);
+		glDisable(GL_LIGHTING);
+		GLTools::Color(gltools::GREY);
+		glTranslatef(glx, gly, 0);
+		glutSolidSphere((width / 2.0f)*0.9f, 50, 50);
 		glTranslatef(-glx, -gly, 0);
 		glEnable(GL_LIGHTING);
 
