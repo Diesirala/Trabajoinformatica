@@ -172,3 +172,4 @@ void Board::pasoTurno(void) {
 		turno = -turno;
 	}
 }
+//Prueba 3 de GITHUB
