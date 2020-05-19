@@ -11,16 +11,16 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\board.cpp" />
+    <ClCompile Include="src\boardgl.cpp" />
+    <ClCompile Include="src\game.cpp" />
+    <ClCompile Include="src\gltools.cpp" />
+  </ItemGroup>
+  <ItemGroup>
     <ClInclude Include="src\board.h" />
     <ClInclude Include="src\boardgl.h" />
     <ClInclude Include="src\gltools.h" />
     <ClInclude Include="src\piece.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="board.cpp" />
-    <ClCompile Include="src\boardgl.cpp" />
-    <ClCompile Include="src\game.cpp" />
-    <ClCompile Include="src\gltools.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{A1A2E73C-0D77-49EA-91DD-052F22CA7DC0}</ProjectGuid>
