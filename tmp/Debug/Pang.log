@@ -1,3 +1,15 @@
-﻿  board.cpp
-  LINK : no se encontró D:\OneDrive - Universidad Politécnica de Madrid\Documents\Trabajo Informatica\trabajoGit\Trabajoinformatica\bin\Pang.exe o no lo generó el último vínculo incremental; ejecutando vínculo completo
-  Pang.vcxproj -> D:\OneDrive - Universidad Politécnica de Madrid\Documents\Trabajo Informatica\trabajoGit\Trabajoinformatica\bin\Pang.exe
+﻿  boardgl.cpp
+  game.cpp
+D:\OneDrive - Universidad Politécnica de Madrid\Documents\Trabajo Informatica\trabajoGit\Trabajoinformatica\src\game.cpp(138,19): error C2248: 'BoardGL::xcell_sel': no se puede obtener acceso al miembro protected miembro declarado en la clase 'BoardGL'
+D:\OneDrive - Universidad Politécnica de Madrid\Documents\Trabajo Informatica\trabajoGit\Trabajoinformatica\src\boardgl.h(69): message : vea la declaración de 'BoardGL::xcell_sel'
+D:\OneDrive - Universidad Politécnica de Madrid\Documents\Trabajo Informatica\trabajoGit\Trabajoinformatica\src\boardgl.h(17): message : vea la declaración de 'BoardGL'
+D:\OneDrive - Universidad Politécnica de Madrid\Documents\Trabajo Informatica\trabajoGit\Trabajoinformatica\src\game.cpp(139,19): error C2248: 'BoardGL::ycell_sel': no se puede obtener acceso al miembro protected miembro declarado en la clase 'BoardGL'
+D:\OneDrive - Universidad Politécnica de Madrid\Documents\Trabajo Informatica\trabajoGit\Trabajoinformatica\src\boardgl.h(69): message : vea la declaración de 'BoardGL::ycell_sel'
+D:\OneDrive - Universidad Politécnica de Madrid\Documents\Trabajo Informatica\trabajoGit\Trabajoinformatica\src\boardgl.h(17): message : vea la declaración de 'BoardGL'
+D:\OneDrive - Universidad Politécnica de Madrid\Documents\Trabajo Informatica\trabajoGit\Trabajoinformatica\src\game.cpp(144,21): error C2248: 'BoardGL::xcell_sel': no se puede obtener acceso al miembro protected miembro declarado en la clase 'BoardGL'
+D:\OneDrive - Universidad Politécnica de Madrid\Documents\Trabajo Informatica\trabajoGit\Trabajoinformatica\src\boardgl.h(69): message : vea la declaración de 'BoardGL::xcell_sel'
+D:\OneDrive - Universidad Politécnica de Madrid\Documents\Trabajo Informatica\trabajoGit\Trabajoinformatica\src\boardgl.h(17): message : vea la declaración de 'BoardGL'
+D:\OneDrive - Universidad Politécnica de Madrid\Documents\Trabajo Informatica\trabajoGit\Trabajoinformatica\src\game.cpp(145,21): error C2248: 'BoardGL::ycell_sel': no se puede obtener acceso al miembro protected miembro declarado en la clase 'BoardGL'
+D:\OneDrive - Universidad Politécnica de Madrid\Documents\Trabajo Informatica\trabajoGit\Trabajoinformatica\src\boardgl.h(69): message : vea la declaración de 'BoardGL::ycell_sel'
+D:\OneDrive - Universidad Politécnica de Madrid\Documents\Trabajo Informatica\trabajoGit\Trabajoinformatica\src\boardgl.h(17): message : vea la declaración de 'BoardGL'
+  Generando código...

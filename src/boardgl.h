@@ -24,8 +24,7 @@ public:
 		center_z=0;
 	}
 	virtual ~BoardGL(){}
-	//mouse	
-	int xcell_sel, ycell_sel;			//cell selected with mouse
+	
 //Initizalization
 	void init();						//enable lights
 		 	
@@ -36,6 +35,9 @@ public:
 	void KeyDown(unsigned char key);
 	void SpecialKeyDown(unsigned char key);
 	void MouseButton(int x,int y,int button,bool down,bool shiftKey, bool ctrlKey);
+
+	//Funcion friend para poder acceder a las cordenadas pulsadas por el raton y utilizarlas
+	friend void OnMouseClick(int b, int state, int x, int y);
 	
 	//info
 	void setSize(int s){N=s;}
@@ -63,7 +65,8 @@ protected:
 //visualization	
 	double center_x,center_y,center_z;
 	double dist;
-
+	//mouse	
+	int xcell_sel, ycell_sel;			//cell selected with mouse
 
 
 	//mouse+special-keys combination state events 
