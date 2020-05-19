@@ -34,6 +34,8 @@
 
 //probando a subir cambios
 
+
+//ya podemos trabajar con esto
 #ifdef WIN32
 #include <windows.h> //required for GL in Windows
 #include <wingdi.h>
