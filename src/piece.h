@@ -9,7 +9,7 @@
 #include "glut.h"
 
 using namespace std;
-
+//Prueba 2 conjunta
 class Object{
 //interface class for all pieces
 public:
