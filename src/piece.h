@@ -1,6 +1,8 @@
 //piece.h: interface for the Piece class Hierarchy and definitions
 
 //Prueba conjunta github
+//Pruaba clau
+//Visual 2017
 #ifndef __PIECE_H__
 #define __PIECE_H__
 
