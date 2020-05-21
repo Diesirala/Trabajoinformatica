@@ -18,16 +18,16 @@ protected:
 	int turno;
 	int movimientos;
 	est estado;
-	int blancas = (N / 2) * 3;
-	int negras = (N / 2) * 3;
+	int blancas;
+	int negras;
 
 
 
 	void reina(int posicionx, int posiciony);
-	void cambiarEstado(void);
+	
 
 public:
-	Board(int n):turno(1),movimientos(1) ,N(n),estado(JUGANDO){
+	Board(int n):turno(1),movimientos(1) ,N(n),estado(JUGANDO),blancas((n / 2) * 3), negras((n / 2) * 3) {
 		
 		tab=new Piece*[N];
 		for (int i=0; i<N; i++){
@@ -55,16 +55,34 @@ public:
 		delete [] tab;
 	}
 
+	Board(Board& a):turno(a.turno), movimientos(a.movimientos), N(a.N), estado(a.estado), blancas(a.blancas), negras(a.negras) {
+		
+		tab = new Piece * [N];                 //Reservo memoria para la copia
+		for (int i = 0; i < N; i++) {
+			tab[i] = new Piece[N];			
+		}
+
+		for (int i = 0; i < N; i++) {
+			for (int j = 0; j < N; j++) {
+				tab[i][j] = a.tab[i][j];
+
+
+			}
+		}
+
+
+	}
 
 
 
 
-	void cambiarPosicion(int x,int y,int posicionx, int posiciony);
+	int cambiarPosicion(int x,int y,int posicionx, int posiciony);
 	void pasoTurno(void);
-	void comer(int x, int y, int posicionx, int posiciony);
+	int comer(int x, int y, int posicionx, int posiciony);
 	int getSize(){return N;}
 	Piece** getTab(){return tab;}
 	est  estadoPartida(void);
+	void consultarEstado(void);
 };
 
 #endif
