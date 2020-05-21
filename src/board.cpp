@@ -81,6 +81,8 @@ void Board::comer(int x, int y, int posicionx, int posiciony)
 				tab[x][y].setCell(x, y, Object::EMPTY_CELL);
 				tab[pmediox][pmedioy].setCell(pmediox, pmedioy, Object::EMPTY_CELL);
 				movimientos = 0;
+				negras--;
+				cambiarEstado();
 				if (posicionx == 0) {
 					reina(posicionx, posiciony);
 					pasoTurno();
@@ -101,6 +103,8 @@ void Board::comer(int x, int y, int posicionx, int posiciony)
 				tab[x][y].setCell(x, y, Object::EMPTY_CELL);
 				tab[pmediox][pmedioy].setCell(pmediox, pmedioy, Object::EMPTY_CELL);
 				movimientos = 0;
+				blancas--;
+				cambiarEstado();
 				if (posicionx == (N - 1)) {
 					reina(posicionx, posiciony);
 					pasoTurno();
@@ -133,6 +137,9 @@ void Board::comer(int x, int y, int posicionx, int posiciony)
 						tab[posicionx - u][posiciony - k].setCell(posicionx - u, posiciony - k, Object::EMPTY_CELL);
 						tab[x][y].setCell(x, y, Object::EMPTY_CELL);
 						movimientos = 0;
+						negras--;
+						cambiarEstado();
+
 					}
 					if (tab[x][y].getType() == Object::QUEEN_BLACKR && turno == -1)
 					{
@@ -140,6 +147,8 @@ void Board::comer(int x, int y, int posicionx, int posiciony)
 						tab[posicionx - u][posiciony - k].setCell(posicionx - u, posiciony - k, Object::EMPTY_CELL);
 						tab[x][y].setCell(x, y, Object::EMPTY_CELL);
 						movimientos = 0;
+						blancas--;
+						cambiarEstado();
 					}
 				}
 			}
@@ -148,6 +157,16 @@ void Board::comer(int x, int y, int posicionx, int posiciony)
 		;
 	}
 }
+
+Board::est Board::estadoPartida(void) {
+
+	return estado;
+
+}
+
+
+
+
 
 void Board::reina(int posicionx, int posiciony)
 {
@@ -164,6 +183,29 @@ void Board::reina(int posicionx, int posiciony)
 	default:
 		;
 	}
+}
+
+void Board::cambiarEstado(void)
+{
+	if (blancas != 0 && negras != 0)
+		estado = JUGANDO;
+	if (blancas == 0) //GANAN NEGRAS
+		estado = DERROTAB;
+	if (negras == 0)  //GANAN BLANCAS
+		estado = VICTORIAB;
+
+
+	//Seguir jugando
+	/*for (int i = 0; i < N; i++) {
+		for (int j = 0; j < N; j++) {
+			if(tab[i][j]==)
+
+		}
+
+
+	}*/
+
+
 }
 
 void Board::pasoTurno(void) {

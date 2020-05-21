@@ -149,6 +149,7 @@ void OnMouseClick(int b,int state, int x,int y){
 			gameboard.comer(xactual, yactual, posicionx, posiciony);
 
 		}
+		cout << gameboard.estadoPartida() << endl;
 	}
 	
 	if (button == MOUSE_RIGHT_BUTTON && down)
