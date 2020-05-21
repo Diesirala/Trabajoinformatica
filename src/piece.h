@@ -1,5 +1,5 @@
 //piece.h: interface for the Piece class Hierarchy and definitions
-
+//Prueba conjunta 3
 //Prueba conjunta github
 //Pruaba clau
 //Visual 2017
@@ -11,7 +11,7 @@
 #include "glut.h"
 
 using namespace std;
-
+//Prueba 2 conjunta
 class Object{
 //interface class for all pieces
 public:
