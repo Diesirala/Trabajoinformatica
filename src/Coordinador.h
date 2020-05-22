@@ -10,47 +10,20 @@ public:
 protected:
 	est estado;
 
-
-
-
-
-
 public:
-	Coordinador() :estado(INICIO) {}
+	Coordinador();
+	virtual ~Coordinador();
 
 	void estadoPartida(est a) {
 		estado = a;
-
 	}
-
-
-	est  estadoPartida(void){
-
+	est estadoPartida(void)
+	{
 		return estado;
-
 	}
-	void cambiarPantallas(void) {
-		switch (estado)
 
 
-
-
-
-		VARIANTES: {
-		//if peruanas
-		Board Logica(8);
-		BoardGL (*Logica);
-
-
-
-		}
-
-
-
-
-
-
-	}
+	void cambiarPantallas(void);
 
 };
 
