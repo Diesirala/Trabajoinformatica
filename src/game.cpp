@@ -6,6 +6,7 @@
 
 #include <iostream>
 #include "boardgl.h"
+
 #include "glut.h"
 
 //#define GRID_SIZE	8		//NxN grid
