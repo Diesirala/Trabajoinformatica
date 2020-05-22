@@ -115,6 +115,8 @@ void OnMouseClick(int b,int state, int x,int y){
 	bool down=(state==GLUT_DOWN);
 	static int xactual, yactual, posicionx, posiciony, count=0;
 	 
+
+
 	int button;
 	if(b==GLUT_LEFT_BUTTON ){
 		button=MOUSE_LEFT_BUTTON;

@@ -10,7 +10,7 @@ using namespace std;
 
 class Board{
 public:
-	enum est { JUGANDO, VICTORIAB, DERROTAB, TABLAS };
+	enum est { JUGANDO=2, VICTORIAB, DERROTAB, TABLAS };
 
 protected:
 	const int N;		//NxN board
