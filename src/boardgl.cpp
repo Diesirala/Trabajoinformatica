@@ -4,8 +4,11 @@
 #include <math.h>
 #include <iostream>
 #include <glut.h>
+#include "ETSIDI.h"
 
 #define DEG2RAD M_PI/180.0			//not used
+
+BoardGL::BoardGL(){}
 
 void BoardGL::init(){	
 	glEnable(GL_LIGHT0);
@@ -205,4 +208,5 @@ void BoardGL::KeyDown(unsigned char key){
 		//};
 	//}
 }
+
 

@@ -1,7 +1,2 @@
-﻿  board.cpp
-  boardgl.cpp
-  game.cpp
-  Generando código...
-D:\OneDrive - Universidad Politécnica de Madrid\Documents\Trabajo Informatica\trabajoGit\Trabajoinformatica\src\board.cpp(70): warning C4715: 'Board::cambiarPosicion': no todas las rutas de acceso de control devuelven un valor
-D:\OneDrive - Universidad Politécnica de Madrid\Documents\Trabajo Informatica\trabajoGit\Trabajoinformatica\src\board.cpp(164): warning C4715: 'Board::comer': no todas las rutas de acceso de control devuelven un valor
-  Pang.vcxproj -> D:\OneDrive - Universidad Politécnica de Madrid\Documents\Trabajo Informatica\trabajoGit\Trabajoinformatica\bin\Pang.exe
+﻿  game.cpp
+  Pang.vcxproj -> C:\Users\marta\Desktop\TrabajoinformaticaGitHub\bin\Pang.exe
