@@ -9,16 +9,25 @@
 using namespace std;
 
 class Board{
+public:
+	enum est { JUGANDO=2, VICTORIAB, DERROTAB, TABLAS };
 
 protected:
 	const int N;		//NxN board
 	Piece ** tab;
-	void reina(int posicionx, int posiciony);
 	int turno;
 	int movimientos;
+	est estado;
+	int blancas;
+	int negras;
+
+
+
+	void reina(int posicionx, int posiciony);
+	
 
 public:
-	Board(int n):turno(1),movimientos(1) ,N(n){
+	Board(int n):turno(1),movimientos(1) ,N(n),estado(JUGANDO),blancas((n / 2) * 3), negras((n / 2) * 3) {
 		
 		tab=new Piece*[N];
 		for (int i=0; i<N; i++){
@@ -45,11 +54,35 @@ public:
 			delete [] tab[i];
 		delete [] tab;
 	}
-	void cambiarPosicion(int x,int y,int posicionx, int posiciony);
+
+	Board(Board& a):turno(a.turno), movimientos(a.movimientos), N(a.N), estado(a.estado), blancas(a.blancas), negras(a.negras) {
+		
+		tab = new Piece * [N];                 //Reservo memoria para la copia
+		for (int i = 0; i < N; i++) {
+			tab[i] = new Piece[N];			
+		}
+
+		for (int i = 0; i < N; i++) {
+			for (int j = 0; j < N; j++) {
+				tab[i][j] = a.tab[i][j];
+
+
+			}
+		}
+
+
+	}
+
+
+
+
+	int cambiarPosicion(int x,int y,int posicionx, int posiciony);
 	void pasoTurno(void);
-	void comer(int x, int y, int posicionx, int posiciony);
+	int comer(int x, int y, int posicionx, int posiciony);
 	int getSize(){return N;}
 	Piece** getTab(){return tab;}
+	est  estadoPartida(void);
+	void consultarEstado(void);
 };
 
 #endif

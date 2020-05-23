@@ -1,7 +1,7 @@
 #include "board.h"
 #include <math.h>
 
-void Board::cambiarPosicion(int x, int y, int posicionx, int posiciony)
+int Board::cambiarPosicion(int x, int y, int posicionx, int posiciony)
 {
 	switch (tab[x][y].getType()*movimientos*turno)// Enumeracion por el turno
 	{
@@ -25,8 +25,10 @@ void Board::cambiarPosicion(int x, int y, int posicionx, int posiciony)
 			pasoTurno();
 			if (posicionx == (N-1))
 				reina(posicionx, posiciony);
+			return 1;
 		}
 	case 0:
+		return 0;
 		break;
 
 	default:// vamos a utilizarlo para las reinas que se mueven las dos igual
@@ -51,6 +53,7 @@ void Board::cambiarPosicion(int x, int y, int posicionx, int posiciony)
 					movimientos = 0;
 					pasoTurno();
 					tab[x][y].setCell(x, y, Object::EMPTY_CELL);
+					return 1;
 				}
 				if (tab[x][y].getType() == Object::QUEEN_BLACKR && turno == -1 && movimientos == 1 )
 				{
@@ -58,6 +61,7 @@ void Board::cambiarPosicion(int x, int y, int posicionx, int posiciony)
 					movimientos = 0;
 					pasoTurno();
 					tab[x][y].setCell(x, y, Object::EMPTY_CELL);
+					return 1;
 				}
 				
 			}
@@ -65,7 +69,7 @@ void Board::cambiarPosicion(int x, int y, int posicionx, int posiciony)
 	}
 }
 
-void Board::comer(int x, int y, int posicionx, int posiciony)
+int Board::comer(int x, int y, int posicionx, int posiciony)
 {
 	switch (tab[x][y].getType()*turno)
 	{
@@ -81,10 +85,12 @@ void Board::comer(int x, int y, int posicionx, int posiciony)
 				tab[x][y].setCell(x, y, Object::EMPTY_CELL);
 				tab[pmediox][pmedioy].setCell(pmediox, pmedioy, Object::EMPTY_CELL);
 				movimientos = 0;
+				negras--;
 				if (posicionx == 0) {
 					reina(posicionx, posiciony);
 					pasoTurno();
 				}
+				return 1;
 			}
 		}
 		break;
@@ -101,13 +107,16 @@ void Board::comer(int x, int y, int posicionx, int posiciony)
 				tab[x][y].setCell(x, y, Object::EMPTY_CELL);
 				tab[pmediox][pmedioy].setCell(pmediox, pmedioy, Object::EMPTY_CELL);
 				movimientos = 0;
+				blancas--;
 				if (posicionx == (N - 1)) {
 					reina(posicionx, posiciony);
 					pasoTurno();
 				}
+				return 1;
 			}
 		}
 	case 0:
+		return 0;
 		break;
 	default:// vamos a utilizarlo para las reinas que se mueven las dos igual
 		if (tab[posicionx][posiciony].getType() == Object::EMPTY_CELL && (abs(posicionx - x) == abs(posiciony - y)) )
@@ -133,6 +142,9 @@ void Board::comer(int x, int y, int posicionx, int posiciony)
 						tab[posicionx - u][posiciony - k].setCell(posicionx - u, posiciony - k, Object::EMPTY_CELL);
 						tab[x][y].setCell(x, y, Object::EMPTY_CELL);
 						movimientos = 0;
+						negras--;
+						return 1;
+
 					}
 					if (tab[x][y].getType() == Object::QUEEN_BLACKR && turno == -1)
 					{
@@ -140,6 +152,8 @@ void Board::comer(int x, int y, int posicionx, int posiciony)
 						tab[posicionx - u][posiciony - k].setCell(posicionx - u, posiciony - k, Object::EMPTY_CELL);
 						tab[x][y].setCell(x, y, Object::EMPTY_CELL);
 						movimientos = 0;
+						blancas--;
+						return 1;
 					}
 				}
 			}
@@ -148,6 +162,16 @@ void Board::comer(int x, int y, int posicionx, int posiciony)
 		;
 	}
 }
+
+Board::est Board::estadoPartida(void) {
+
+	return estado;
+
+}
+
+
+
+
 
 void Board::reina(int posicionx, int posiciony)
 {
@@ -164,6 +188,42 @@ void Board::reina(int posicionx, int posiciony)
 	default:
 		;
 	}
+}
+
+void Board::consultarEstado(void)
+{
+	Board copia(*this);
+	int posDeComer=0;
+	int posDeMover=0;
+	
+	if (blancas == 0) //GANAN NEGRAS
+		estado = DERROTAB;
+	if (negras == 0)  //GANAN BLANCAS
+		estado = VICTORIAB;
+
+
+	
+
+	for (int i = 0; i < N; i++) {
+		for (int j = 0; j < N; j++) {
+			for (int k = 0; k < N; k++) {
+				for (int l = 0; l < N; l++) {
+					if (copia.comer(i, j, k, l) == 1)
+						posDeComer++;
+					if (copia.cambiarPosicion(i, j, k, l) == 1)
+						posDeMover++;
+
+
+				}
+			}
+			
+		}
+
+
+	}
+
+	cout << "Las posibilidades de comer son: " << posDeComer << endl;
+	cout << "Las posibilidades de moverse son: " << posDeMover << endl;
 }
 
 void Board::pasoTurno(void) {

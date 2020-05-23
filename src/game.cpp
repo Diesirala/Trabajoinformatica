@@ -6,9 +6,12 @@
 
 #include <iostream>
 #include "boardgl.h"
+#include"Coordinador.h"
 #include "glut.h"
 
 //#define GRID_SIZE	8		//NxN grid
+
+Coordinador escena;
 
 /////////////////////////////////
 //call back declarations: will be called by glut when registered
@@ -84,6 +87,7 @@ int main(int argc,char* argv[]){
 	//glutTimerFunc(25,OnTimer,0);			 //set timer if required, currently not used
 
 	//sets light and perspective
+
 	scene.init();
 	
 	//glut takes control
@@ -97,6 +101,8 @@ void OnDraw(void){
 //captures drawing event
 //gives control to scene
 	scene.Draw();
+	
+	//escena.Draw();
 	glutSwapBuffers();
 }
 
@@ -115,6 +121,8 @@ void OnMouseClick(int b,int state, int x,int y){
 	bool down=(state==GLUT_DOWN);
 	static int xactual, yactual, posicionx, posiciony, count=0;
 	 
+
+
 	int button;
 	if(b==GLUT_LEFT_BUTTON ){
 		button=MOUSE_LEFT_BUTTON;
@@ -147,8 +155,9 @@ void OnMouseClick(int b,int state, int x,int y){
 			cout << posicionx << posiciony << endl;
 			gameboard.cambiarPosicion(xactual, yactual, posicionx, posiciony);
 			gameboard.comer(xactual, yactual, posicionx, posiciony);
-
+			gameboard.consultarEstado();
 		}
+		cout << gameboard.estadoPartida() << endl;
 	}
 	
 	if (button == MOUSE_RIGHT_BUTTON && down)

@@ -25,6 +25,8 @@ public:
 	}
 	virtual ~BoardGL(){}
 	
+	BoardGL();
+
 //Initizalization
 	void init();						//enable lights
 		 	
