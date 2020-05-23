@@ -1,6 +1,13 @@
 #include "board.h"
 #include <math.h>
 
+void Board::tablas(int x, int y, int posicionx, int posiciony, int & posDeComer,int& posDeMover)
+{
+
+	
+	
+}
+
 int Board::cambiarPosicion(int x, int y, int posicionx, int posiciony)
 {
 	switch (tab[x][y].getType()*movimientos*turno)// Enumeracion por el turno
@@ -14,7 +21,9 @@ int Board::cambiarPosicion(int x, int y, int posicionx, int posiciony)
 			pasoTurno();
 			if (posicionx == 0)
 				reina(posicionx, posiciony);
+			return 1;
 		}
+		else return 0;
 		break;
 	case -2://turno de las negras tienes un movimiento y la pieza seleccionada es una negra
 		if (tab[posicionx][posiciony].getType() == Object::EMPTY_CELL && posicionx == (x + 1) && (posiciony == (y - 1) || posiciony == (y + 1)))
@@ -27,6 +36,8 @@ int Board::cambiarPosicion(int x, int y, int posicionx, int posiciony)
 				reina(posicionx, posiciony);
 			return 1;
 		}
+		else return 0;
+		break;
 	case 0:
 		return 0;
 		break;
@@ -63,10 +74,15 @@ int Board::cambiarPosicion(int x, int y, int posicionx, int posiciony)
 					tab[x][y].setCell(x, y, Object::EMPTY_CELL);
 					return 1;
 				}
+				else return 0;
 				
 			}
+			else return 0;
 		}
+		else return 0;
+		break;
 	}
+	
 }
 
 int Board::comer(int x, int y, int posicionx, int posiciony)
@@ -90,9 +106,12 @@ int Board::comer(int x, int y, int posicionx, int posiciony)
 					reina(posicionx, posiciony);
 					pasoTurno();
 				}
+				
 				return 1;
 			}
+			else return 0;
 		}
+		else return 0;
 		break;
 	case -2:
 		if (tab[posicionx][posiciony].getType() == Object::EMPTY_CELL && (posicionx == (x - 2) || posicionx == (x + 2)) && (posiciony == (y - 2) || posiciony == (y + 2)))
@@ -112,9 +131,13 @@ int Board::comer(int x, int y, int posicionx, int posiciony)
 					reina(posicionx, posiciony);
 					pasoTurno();
 				}
+				
 				return 1;
 			}
+			else return 0;
 		}
+		else return 0;
+		break;
 	case 0:
 		return 0;
 		break;
@@ -153,14 +176,21 @@ int Board::comer(int x, int y, int posicionx, int posiciony)
 						tab[x][y].setCell(x, y, Object::EMPTY_CELL);
 						movimientos = 0;
 						blancas--;
+						
 						return 1;
 					}
+					else return 0;
 				}
+				else return 0;
 			}
+			else return 0;
 		}
-
+		else return 0;
+		
 		;
+		break;
 	}
+	
 }
 
 Board::est Board::estadoPartida(void) {
@@ -190,9 +220,9 @@ void Board::reina(int posicionx, int posiciony)
 	}
 }
 
-void Board::consultarEstado(void)
+void Board::actualizarEstado(void)
 {
-	Board copia(*this);
+	
 	int posDeComer=0;
 	int posDeMover=0;
 	
@@ -201,13 +231,12 @@ void Board::consultarEstado(void)
 	if (negras == 0)  //GANAN BLANCAS
 		estado = VICTORIAB;
 
-
-	
-
 	for (int i = 0; i < N; i++) {
 		for (int j = 0; j < N; j++) {
 			for (int k = 0; k < N; k++) {
 				for (int l = 0; l < N; l++) {
+
+					Board copia(*this);
 					if (copia.comer(i, j, k, l) == 1)
 						posDeComer++;
 					if (copia.cambiarPosicion(i, j, k, l) == 1)
@@ -216,11 +245,14 @@ void Board::consultarEstado(void)
 
 				}
 			}
-			
+
 		}
 
 
 	}
+	if (posDeComer == 0 && posDeMover == 0)
+		estado = TABLAS;
+
 
 	cout << "Las posibilidades de comer son: " << posDeComer << endl;
 	cout << "Las posibilidades de moverse son: " << posDeMover << endl;

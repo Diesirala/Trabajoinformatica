@@ -155,7 +155,7 @@ void OnMouseClick(int b,int state, int x,int y){
 			cout << posicionx << posiciony << endl;
 			gameboard.cambiarPosicion(xactual, yactual, posicionx, posiciony);
 			gameboard.comer(xactual, yactual, posicionx, posiciony);
-			gameboard.consultarEstado();
+			gameboard.actualizarEstado();
 		}
 		cout << gameboard.estadoPartida() << endl;
 	}

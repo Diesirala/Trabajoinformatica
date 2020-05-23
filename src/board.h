@@ -75,14 +75,14 @@ public:
 
 
 
-
+	void Board::tablas(int x, int y, int posicionx, int posiciony, int& posDeComer, int& posDeMover);
 	int cambiarPosicion(int x,int y,int posicionx, int posiciony);
 	void pasoTurno(void);
 	int comer(int x, int y, int posicionx, int posiciony);
 	int getSize(){return N;}
 	Piece** getTab(){return tab;}
 	est  estadoPartida(void);
-	void consultarEstado(void);
+	void actualizarEstado(void);
 };
 
 #endif
