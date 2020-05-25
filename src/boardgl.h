@@ -29,15 +29,14 @@ public:
 	
 
 
-//Initizalization
-	void init();						//enable lights
+
 		 	
 //Event managers
 	void Draw();
 	void DrawGrid();
 	void DrawCell(int i,int j);
-	void KeyDown(unsigned char key);
-	void SpecialKeyDown(unsigned char key);
+	/*void KeyDown(unsigned char key);
+	void SpecialKeyDown(unsigned char key);*/
 	void MouseButton(int x,int y,int button,bool down,bool shiftKey, bool ctrlKey);
 
 	//Funcion friend para poder acceder a las cordenadas pulsadas por el raton y utilizarlas
@@ -70,7 +69,7 @@ protected:
 	double center_x,center_y,center_z;
 	double dist;
 	//mouse	
-	int xcell_sel, ycell_sel;			//cell selected with mouse
+	//int xcell_sel, ycell_sel;			//cell selected with mouse
 
 
 	//mouse+special-keys combination state events 

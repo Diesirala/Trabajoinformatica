@@ -11,8 +11,6 @@
 
 //#define GRID_SIZE	8		//NxN grid
 
-Coordinador escena;
-
 /////////////////////////////////
 //call back declarations: will be called by glut when registered
 void OnDraw(void); 
@@ -22,8 +20,11 @@ void OnTimer(int value);
 
 ////////////////////////////////////////////////
 //global objects which make the world
-Board gameboard(8);
-BoardGL scene(&gameboard);
+//Board gameboard(8);
+//BoardGL scene(&gameboard);
+
+Coordinador escena;
+
 
 ///////////////////////////////////////////////
 
@@ -87,8 +88,7 @@ int main(int argc,char* argv[]){
 	//glutTimerFunc(25,OnTimer,0);			 //set timer if required, currently not used
 
 	//sets light and perspective
-
-	scene.init();
+    //escena.init();
 	
 	//glut takes control
 	glutMainLoop();	
@@ -101,12 +101,12 @@ void OnDraw(void){
 //captures drawing event
 //gives control to scene
 
-	scene.Draw();
+	//scene.Draw();
 	
-	//escena.Draw();
+	escena.Draw();
 	glutSwapBuffers();
 }
-
+//
 void OnKeyboardDown(unsigned char key, int x_t, int y_t){
 //////////////////////
 //captures keyboard event
@@ -141,36 +141,37 @@ void OnMouseClick(int b,int state, int x,int y){
 	int specialKey = glutGetModifiers();
 	bool ctrlKey= (specialKey & GLUT_ACTIVE_CTRL)? true:false ;
 	bool sKey= specialKey & GLUT_ACTIVE_SHIFT ;
-	scene.MouseButton(x,y,b,down,sKey,ctrlKey);
+	escena.MouseButton(x,y,b,down,sKey,ctrlKey);
 	if (button == MOUSE_LEFT_BUTTON && down) {
 		if (count == 0) {
-			xactual = scene.xcell_sel;
-			yactual = scene.ycell_sel;
+			xactual = escena.xcell_sel;
+			yactual = escena.ycell_sel;
 			count++;
 			cout << xactual << yactual <<"   actual"<< endl;
 		}
 		else {
-			posicionx = scene.xcell_sel;
-			posiciony = scene.ycell_sel;
+			posicionx = escena.xcell_sel;
+			posiciony = escena.ycell_sel;
 			count--;
 			cout << posicionx << posiciony << endl;
-			gameboard.cambiarPosicion(xactual, yactual, posicionx, posiciony);
-			gameboard.comer(xactual, yactual, posicionx, posiciony);
-			gameboard.actualizarEstado();
+
+			escena.a->cambiarPosicion(xactual, yactual, posicionx, posiciony);
+			escena.a->comer(xactual, yactual, posicionx, posiciony);
+			escena.a->actualizarEstado();
 		}
-		cout << gameboard.estadoPartida() << endl;
+		cout << escena.a->estadoPartida() << endl;
 	}
 	
 	if (button == MOUSE_RIGHT_BUTTON && down)
-		gameboard.pasoTurno();
+		escena.a->pasoTurno();
 	glutPostRedisplay();
 }
 
 
-/*void OnTimer(int value){
+void OnTimer(int value){
 	//****WRITE TIMER CODE HERE
 
 	//sets new timer (do not delete)
 	glutTimerFunc(25,OnTimer,0);
 	glutPostRedisplay();
-}*/
+}

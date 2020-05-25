@@ -10,15 +10,7 @@
 
 
 
-void BoardGL::init(){	
-	glEnable(GL_LIGHT0);
-	glEnable(GL_LIGHTING);
-	glEnable(GL_DEPTH_TEST);
-	glEnable(GL_COLOR_MATERIAL);
-	
-	glMatrixMode(GL_PROJECTION);
-	gluPerspective(40.0, 800/600.0f, 0.1, 150);
-}
+
 
 void BoardGL::DrawGrid(){
 //////////////////////
@@ -99,6 +91,8 @@ void BoardGL::DrawCell(int i,int j){
 }
 
 void BoardGL::Draw(){
+	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	
 	
 	center_x=N*width/2;
 	center_y=-N*width/2;
@@ -189,24 +183,24 @@ void BoardGL::MouseButton(int x,int y,int button,bool down, bool sKey, bool ctrl
 	}
 	
 }
-
-void BoardGL::KeyDown(unsigned char key){
-//////////////////
-// enlarges or reduces grid by one
-
-	//if(key=='s'){// para poder redibujar algo 
-		//** do something
-		//if(N<=8) N++;
-	//}
-
-	//if(key=='a'){
-		//** do something
-		//if (N >= 2)
-		//{
-			
-			//setSize(N-=1);// o N--
-		//};
-	//}
-}
+//
+//void BoardGL::KeyDown(unsigned char key){
+////////////////////
+//// enlarges or reduces grid by one
+//
+//	//if(key=='s'){// para poder redibujar algo 
+//		//** do something
+//		//if(N<=8) N++;
+//	//}
+//
+//	//if(key=='a'){
+//		//** do something
+//		//if (N >= 2)
+//		//{
+//			
+//			//setSize(N-=1);// o N--
+//		//};
+//	//}
+//}
 
 
