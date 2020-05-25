@@ -100,6 +100,7 @@ void OnDraw(void){
 //////////////////////
 //captures drawing event
 //gives control to scene
+
 	scene.Draw();
 	
 	//escena.Draw();
@@ -110,7 +111,7 @@ void OnKeyboardDown(unsigned char key, int x_t, int y_t){
 //////////////////////
 //captures keyboard event
 //gives control to scene
-	scene.KeyDown(key);
+	escena.KeyDown(key);
 	glutPostRedisplay();
 }
 

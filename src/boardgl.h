@@ -24,8 +24,10 @@ public:
 		center_z=0;
 	}
 	virtual ~BoardGL(){}
+
 	
-	BoardGL();
+	
+
 
 //Initizalization
 	void init();						//enable lights

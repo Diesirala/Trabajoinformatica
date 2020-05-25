@@ -7,7 +7,7 @@ class Coordinador{
 public:
 	
 	Coordinador();
-	virtual ~Coordinador();
+	
 	
 
 	//void estadoPartida(est a);
@@ -20,13 +20,15 @@ public:
 	void KeyDown(unsigned char key);
 	void SpecialKeyDown(unsigned char key);
 	void MouseButton(int x, int y, int button, bool down, bool shiftKey, bool ctrlKey);
-	void cargarFondo();
+	
 
 	
 protected:
 	enum est { INICIO, VARIANTES, JUGANDO, VICTORIAB, DERROTAB, TABLAS };
 	est estado;
-	BoardGL boardgll;
+	//BoardGL boardgl(&game);
+	//Board board;
+	
 	
 
 };
