@@ -91,7 +91,7 @@ void BoardGL::DrawCell(int i,int j){
 }
 
 void BoardGL::Draw(){
-	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	
 	
 	center_x=N*width/2;
@@ -130,77 +130,4 @@ void BoardGL::Draw(){
 
 
 }
-void BoardGL::MouseButton(int x,int y,int button,bool down, bool sKey, bool ctrlKey){
-/////////////////////////
-// sets state of mouse control buttons + special keys
-
-/////////
-//computes cell coordinates from mouse coordinates
-	
-	GLint viewport[4];
-    GLdouble modelview[16];
-    GLdouble projection[16];
-    GLfloat winX, winY, winZ;
-    GLdouble posX, posY, posZ;
-
-    glGetDoublev( GL_MODELVIEW_MATRIX, modelview );
-    glGetDoublev( GL_PROJECTION_MATRIX, projection );
-    glGetIntegerv( GL_VIEWPORT, viewport );
-
-    winX = (float)x;
-    winY = (float)viewport[3] - (float)y;
-    glReadPixels( x, int(winY), 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &winZ );
-	gluUnProject( winX, winY, winZ, modelview, projection, viewport, &posX, &posY, &posZ);      
-   
-	//finally cell coordinates
-	world2cell(posX,posY,xcell_sel, ycell_sel);					
-		
-///////////////////////////	
-//capture other mouse events
-
-	if(down){	
-		controlKey=ctrlKey;
-		shiftKey=sKey;
-	}else{
-		controlKey=shiftKey=false;
-	}
-			
-	if(button==MOUSE_LEFT_BUTTON)
-		leftButton=down;
-	else if(button==MOUSE_RIGHT_BUTTON)
-		rightButton=down;
-	else if(button==MOUSE_MIDDLE_BUTTON)
-		midButton=down;
-///////////////////////////
-	
-	//***WRITE ACTIONS CONNECTED TO MOUSE STATE HERE
-
-	//print cell coordinates after click
-	if (down)
-	{
-		cout << "(" << xcell_sel << "," << ycell_sel << ")" << endl;// estas dos variables son las coordenadas de cada casilla
-		cout << "(" << posX << "," << posY << ")" << endl;// con esto coges todas las posiciones que pertenecen a la misma casilla
-	}
-	
-}
-//
-//void BoardGL::KeyDown(unsigned char key){
-////////////////////
-//// enlarges or reduces grid by one
-//
-//	//if(key=='s'){// para poder redibujar algo 
-//		//** do something
-//		//if(N<=8) N++;
-//	//}
-//
-//	//if(key=='a'){
-//		//** do something
-//		//if (N >= 2)
-//		//{
-//			
-//			//setSize(N-=1);// o N--
-//		//};
-//	//}
-//}
-
 

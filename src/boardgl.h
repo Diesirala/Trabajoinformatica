@@ -35,9 +35,7 @@ public:
 	void Draw();
 	void DrawGrid();
 	void DrawCell(int i,int j);
-	/*void KeyDown(unsigned char key);
-	void SpecialKeyDown(unsigned char key);*/
-	void MouseButton(int x,int y,int button,bool down,bool shiftKey, bool ctrlKey);
+
 
 	//Funcion friend para poder acceder a las cordenadas pulsadas por el raton y utilizarlas
 	friend void OnMouseClick(int b, int state, int x, int y);
@@ -48,17 +46,11 @@ public:
 
 	//coord
 	void cell2center(int cell_x, int cell_y, float& glx, float& gly){
-		//cell_x, cell_y are the board cell coordinates (upper left hand corner is (0,0))
-		//glx, gly refer to the center of the cell(cell_x,cell_y) in world coordinates
+		
 		glx=cell_y*width+width/2.0f;
 		gly=-cell_x*width-width/2.0f;
 	}
-	
-	void world2cell(double x, double y, int& cell_x, int& cell_y){
-		//world coordinates to cell
-		cell_x= (int)(abs(y/width));
-		cell_y= (int)(x/width);
-	}
+
 
 protected:
 	float width;

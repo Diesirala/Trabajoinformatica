@@ -6,32 +6,30 @@
 
  class Coordinador{
  protected:
-	enum est { INICIO, VARIANTES, JUGANDO, VICTORIAB, DERROTAB, TABLAS };
+	
 	
 public:
-	 Board* a;
-
-	 Coordinador():width(0.15), dist(2),center_z(0){
+	
+	Board* a;     //PUNTERO A PARTE LOGICA SE CREA EN CREAR TABLERO
+	BoardGL* scene;// PUNTERO AL DIBUJADO DEL TABLERO, SE CREA EN CREAR TABLERO
+	 Coordinador():width(0.15), dist(2),center_z(0),tablero(0),estado(INICIO){
 		 a = NULL;
-		  est a = INICIO;
-		 estado =a;
+		 scene = NULL;
+		
 		
 	};
 	
 	friend void OnMouseClick(int b, int state, int x, int y);
-
-	//void estadoPartida(est a);
-	//est estadoPartida(void);
-	//void cambiarPantallas(void);
+	int getHayTablero(void) { return tablero; }
+	
 	//Initizalization
 	 void init();						//enable lights
 	 void Draw();
 	 void KeyDown(unsigned char key);
 	void SpecialKeyDown(unsigned char key);
 	void MouseButton(int x, int y, int button, bool down, bool shiftKey, bool ctrlKey);
-	/*static void OnMouseClick(int b, int state, int x, int y);
-	static void OnDraw(void);
-	static void OnKeyboardDown(unsigned char key, int x_t, int y_t);*/
+	void crearTablero(void);
+	
 	//coord
 	void cell2center(int cell_x, int cell_y, float& glx, float& gly) {
 		//cell_x, cell_y are the board cell coordinates (upper left hand corner is (0,0))
@@ -63,13 +61,14 @@ protected:
 	bool rightButton;
 	bool midButton;
 
-
-
-
+	enum est { INICIO, VARIANTES, JUGANDO, VICTORIAB, DERROTAB, TABLAS };
+	est  estado;
 
 	
-protected:
-	 est  estado;
+	int tablero; //1 SI SE HA CREADO EL TABLERO 0 SI NO SE HA CREADO
+
+	
+
 	
 	
 	

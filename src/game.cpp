@@ -86,9 +86,9 @@ int main(int argc,char* argv[]){
 	glutKeyboardFunc(OnKeyboardDown);
 	glutMouseFunc(OnMouseClick);
 	//glutTimerFunc(25,OnTimer,0);			 //set timer if required, currently not used
-
+	
 	//sets light and perspective
-    //escena.init();
+      escena.init();
 	
 	//glut takes control
 	glutMainLoop();	
@@ -100,10 +100,13 @@ void OnDraw(void){
 //////////////////////
 //captures drawing event
 //gives control to scene
-
-	//scene.Draw();
 	
 	escena.Draw();
+	if(escena.getHayTablero()==1)
+	escena.scene->Draw();
+	//scene.Draw();
+	
+	//escena.Draw();
 	glutSwapBuffers();
 }
 //
@@ -142,7 +145,7 @@ void OnMouseClick(int b,int state, int x,int y){
 	bool ctrlKey= (specialKey & GLUT_ACTIVE_CTRL)? true:false ;
 	bool sKey= specialKey & GLUT_ACTIVE_SHIFT ;
 	escena.MouseButton(x,y,b,down,sKey,ctrlKey);
-	if (button == MOUSE_LEFT_BUTTON && down) {
+	if (button == MOUSE_LEFT_BUTTON && down && escena.getHayTablero() == 1) {
 		if (count == 0) {
 			xactual = escena.xcell_sel;
 			yactual = escena.ycell_sel;

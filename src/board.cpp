@@ -42,7 +42,7 @@ int Board::cambiarPosicion(int x, int y, int posicionx, int posiciony)
 		return 0;
 		break;
 
-	default:// vamos a utilizarlo para las reinas que se mueven las dos igual
+	default: // vamos a utilizarlo para las reinas que se mueven las dos igual
 		if (tab[posicionx][posiciony].getType() == Object::EMPTY_CELL && abs(posicionx - x) == abs(posiciony - y))
 		{
 			int u, k, cont = 0;
@@ -250,7 +250,7 @@ void Board::actualizarEstado(void)
 
 
 	}
-	if (posDeComer == 0 && posDeMover == 0)
+	if (posDeComer == 0 && posDeMover == 0 && movimientos==1)
 		estado = TABLAS;
 
 

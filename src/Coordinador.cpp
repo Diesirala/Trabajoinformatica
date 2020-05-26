@@ -19,35 +19,35 @@ void Coordinador::KeyDown(unsigned char key)
 	}
 	else if (estado == VARIANTES)
 	{
-		//switch (key)
-		//{
-		//case '1': {
-		//	
-		//	////Tablero damas españolas
-		//	////iniciliza tablero 
-		//	//scene.init();
-		//	//estado = JUGANDO;
-		//	
-		//	break;
-		//}
-		//case '2': {
-		//	//tablero damas peruanas
-		//	//a = new Peruanas();
-		//	break;
-		//}
-		//case'3': {
-		//	//tablero damas inglesas
-		//	break;
-		//}
-		//case'4': {
-		//	//tablero damas rusas
-		//	break;
-		//}
+		switch (key)
+		{
+		case '1': {
+			
+			////Tablero damas españolas
+			////iniciliza tablero 
+			//scene.init();
+			estado = JUGANDO;
+			
+			break;
+		}
+		case '2': {
+			//tablero damas peruanas
+			//a = new Peruanas();
+			break;
+		}
+		case'3': {
+			//tablero damas inglesas
+			break;
+		}
+		case'4': {
+			//tablero damas rusas
+			break;
+		}
 
-		//}
+		}
 		//estado = JUGANDO;
 		
-		estado = JUGANDO;
+		
 	}
 	else if (estado == JUGANDO)
 	{ 
@@ -67,8 +67,9 @@ void Coordinador::KeyDown(unsigned char key)
 
 }
 void Coordinador::Draw(){
-	if (estado == INICIO) {
-		init();
+	
+	if (estado == INICIO ) {
+		//init();
 		//glClearColor(1, 1, 1, 1);// blanco del fondo
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glMatrixMode(GL_MODELVIEW);
@@ -77,7 +78,7 @@ void Coordinador::Draw(){
 		gluLookAt(0, 7.5, 30, // posicion del ojo
 			0.0, 7.5, 0.0, // hacia que punto mira (0,7.5,0)
 			0.0, 1.0, 0.0); // definimos hacia arriba (eje Y)
-		//Fondo pantala inicio
+		//Fondo pantala inicig
 		
 		glEnable(GL_TEXTURE_2D);
 		glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("imagenes/tablero.png").id);
@@ -103,11 +104,7 @@ void Coordinador::Draw(){
 	}
 	else if (estado == VARIANTES)
 	{
-		//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		gluLookAt(0, 7.5, 30, // posicion del ojo
-			0.0, 7.5, 0.0, // hacia que punto mira (0,7.5,0)
-			0.0, 1.0, 0.0); // definimos hacia arriba (eje Y)
-		//glClearColor(1, 1, 1, 1);// blanco del fondo
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		ETSIDI::setTextColor(1, 1, 0);
 		ETSIDI::setFont("fuentes/icecube.ttf", 50);
 		ETSIDI::printxy("Elige el tipo de damas:", -5, 9);
@@ -121,17 +118,11 @@ void Coordinador::Draw(){
 
 	}else if (estado == JUGANDO)
 	{
-		a = new Board(8);
-		//Board* a = new Board(8);
-		BoardGL scene(a);
-		scene.Draw();
-		scene.MouseButton( x, y, int button, bool down, bool sKey, bool ctrlKey);
-		/*
-			glutDisplayFunc(OnDraw);
-			glutKeyboardFunc(OnKeyboardDown);
-			glutMouseFunc(OnMouseClick);*/
-			//Draw();
-			
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		
+
+		crearTablero();
+
 			
 	}
 	else if (estado == DERROTAB)
@@ -219,77 +210,17 @@ void Coordinador::MouseButton(int x, int y, int button, bool down, bool sKey, bo
 	}
 
 }
+void Coordinador::crearTablero(void)
+{
+	if (tablero == 0) {
+		a = new Board(8);
+		//Board* a = new Board(8);
+		scene = new BoardGL(a);
+		scene->Draw();
+		tablero++;
 
-//
-//void Coordinador:: OnMouseClick(int b, int state, int x, int y) {
-//	//////////////
-//	//captures clicks with mouse with or without special keys (CTRL or SHIFT)// CAPTURA LOS MOVIMIENTOS TANTO SI USAS LAS TECLAS SHIFT Y CONTROL COMO SIN ELLAS
-//	//gives control to board scene
-//
-//	//if (estado == JUGANDO) {
-//		/*bool down = (state == GLUT_DOWN);
-//		static int xactual, yactual, posicionx, posiciony, count = 0;
-//
-//
-//
-//		int button;
-//		if (b == GLUT_LEFT_BUTTON) {
-//			button = MOUSE_LEFT_BUTTON;
-//
-//		}
-//		if (b == GLUT_RIGHT_BUTTON) {
-//			button = MOUSE_RIGHT_BUTTON;
-//			cout << "MOUSE_RIGHT_BUTTON" << endl;
-//		}
-//		if (b == GLUT_MIDDLE_BUTTON) {
-//			button = MOUSE_MIDDLE_BUTTON;
-//			cout << "MOUSE_MIDDLE_BUTTON" << endl;
-//		}
-//
-//		int specialKey = glutGetModifiers();
-//		bool ctrlKey = (specialKey & GLUT_ACTIVE_CTRL) ? true : false;
-//		bool sKey = specialKey & GLUT_ACTIVE_SHIFT;
-//		MouseButton(x, y, b, down, sKey, ctrlKey);
-//		if (button == MOUSE_LEFT_BUTTON && down) {
-//			if (count == 0) {
-//				xactual = xcell_sel;
-//				yactual = ycell_sel;
-//				count++;
-//				cout << xactual << yactual << "   actual" << endl;
-//			}
-//			else {
-//				posicionx = xcell_sel;
-//				posiciony = ycell_sel;
-//				count--;
-//				cout << posicionx << posiciony << endl;
-//				gameboard.cambiarPosicion(xactual, yactual, posicionx, posiciony);
-//				gameboard.comer(xactual, yactual, posicionx, posiciony);
-//				gameboard.actualizarEstado();
-//			}
-//			cout << gameboard.estadoPartida() << endl;
-//		}
-//
-//		if (button == MOUSE_RIGHT_BUTTON && down)
-//			gameboard.pasoTurno();
-//		glutPostRedisplay();
-//	}*/
-//}
-//
-// void Coordinador::OnDraw(void) {
-//	//////////////////////
-//	//captures drawing event
-//	//gives control to scene
-//
-//		//scene.Draw();
-//
-//	Draw();
-//	glutSwapBuffers();
-//}
-//
-//void Coordinador::OnKeyboardDown(unsigned char key, int x_t, int y_t) {
-//	//////////////////////
-//	//captures keyboard event
-//	//gives control to scene
-//	KeyDown(key);
-//	glutPostRedisplay();
-//}
+	}
+
+
+}
+
