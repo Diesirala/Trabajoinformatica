@@ -102,11 +102,9 @@ void OnDraw(void){
 //gives control to scene
 	
 	escena.Draw();
-	if(escena.getHayTablero()==1)
+	if(escena.getHayTablero()==1)//Se puede borrar tablero y funcionar con estado if Estado==jugando
 	escena.scene->Draw();
-	//scene.Draw();
 	
-	//escena.Draw();
 	glutSwapBuffers();
 }
 //

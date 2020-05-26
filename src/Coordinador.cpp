@@ -216,7 +216,6 @@ void Coordinador::crearTablero(void)
 		a = new Board(8);
 		//Board* a = new Board(8);
 		scene = new BoardGL(a);
-		scene->Draw();
 		tablero++;
 
 	}
