@@ -9,6 +9,8 @@
 #include <iostream>
 #include "gltools.h"
 #include "glut.h"
+#include "Formas3D.h"
+#include "ColorRGB.h"
 
 using namespace std;
 //Prueba 2 conjunta
@@ -21,18 +23,23 @@ public:
 };
 
 class Piece:public Object{
-public:
 	
 protected:
 	int x;
 	int y;
 	type_t type;
+	Formas3D forma;
+	ColorRGB color;
+	float radio;
 public:
 	
-	Piece():x(-1), y(-1), type(EMPTY_CELL){}// constructor inicial con valores por defecto
+	Piece();// constructor inicial con valores por defecto
+	virtual ~Piece();
 	void setCell(int x, int y, type_t t){this->x=x; this->y=y; this->type=t;}// dar valores a las piezas iniciales
 	virtual void getCellNumber(int&x, int&y){x=this->x; y=this->y;}// conocer los valores en este caso , la posición x e y de la pieza
 	virtual type_t getType(){return type;}
+	virtual void dibuja();
+	void setColor(Byte r, Byte v, Byte a);
 };
 
 #endif

@@ -24,8 +24,8 @@ void Coordinador::KeyDown(unsigned char key)
 		case '1': {
 			
 			////Tablero damas españolas
-			////iniciliza tablero 
-			//scene.init();
+			////iniciliza mundo con tablelo y lista de piezas
+			mundo.inicializa(1);
 			estado = JUGANDO;
 			
 			break;
@@ -33,6 +33,9 @@ void Coordinador::KeyDown(unsigned char key)
 		case '2': {
 			//tablero damas peruanas
 			//a = new Peruanas();
+			mundo.inicializa(2);
+			estado = JUGANDO;
+
 			break;
 		}
 		case'3': {
@@ -75,20 +78,20 @@ void Coordinador::Draw(){
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
 
-		gluLookAt(0, 7.5, 30, // posicion del ojo
+		gluLookAt(0, 7.5, 20, // posicion del ojo
 			0.0, 7.5, 0.0, // hacia que punto mira (0,7.5,0)
 			0.0, 1.0, 0.0); // definimos hacia arriba (eje Y)
 		//Fondo pantala inicig
 		
 		glEnable(GL_TEXTURE_2D);
-		glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("imagenes/tablero.png").id);
+		glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("imagenes/tablero1.png").id);
 		glDisable(GL_LIGHTING);
 		glBegin(GL_POLYGON);
 		glColor3f(1, 1, 1);
-		glTexCoord2d(0, 1); glVertex3f(-10, 0, -0.1);
-		glTexCoord2d(1, 1); glVertex3f(10, 0, -0.1);
-		glTexCoord2d(1, 0); glVertex3f(10, 15, -0.1);
-		glTexCoord2d(0, 0); glVertex3f(-10, 15, -0.1);
+		glTexCoord2d(0, 1); glVertex3f(-20, 0, -0.1);
+		glTexCoord2d(1, 1); glVertex3f(20, 0, -0.1);
+		glTexCoord2d(1, 0); glVertex3f(20, 20, -0.1);
+		glTexCoord2d(0, 0); glVertex3f(-20, 20, -0.1);
 		glEnd();
 		glEnable(GL_LIGHTING);
 		glDisable(GL_TEXTURE_2D);
@@ -119,11 +122,7 @@ void Coordinador::Draw(){
 	}else if (estado == JUGANDO)
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		
-
-		crearTablero();
-
-			
+		mundo.dibuja();
 	}
 	else if (estado == DERROTAB)
 	{
@@ -150,10 +149,8 @@ void Coordinador::init() {
 	glEnable(GL_LIGHTING);
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_COLOR_MATERIAL);
-
 	glMatrixMode(GL_PROJECTION);
 	gluPerspective(40.0, 800 / 600.0f, 0.1, 150);
-
 }
 
 void Coordinador::MouseButton(int x, int y, int button, bool down, bool sKey, bool ctrlKey) {
@@ -217,9 +214,6 @@ void Coordinador::crearTablero(void)
 		//Board* a = new Board(8);
 		scene = new BoardGL(a);
 		tablero++;
-
 	}
-
-
 }
 

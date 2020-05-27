@@ -2,7 +2,7 @@
 
 #include "boardgl.h"
 #include "board.h"
-
+#include "MundoJuego.h"
 
  class Coordinador{
  protected:
@@ -47,6 +47,7 @@ public:
 	
 protected:
 	//visualization	
+	Mundo mundo;
 	float width;
 	double center_x, center_y, center_z;
 	double dist;

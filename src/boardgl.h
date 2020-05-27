@@ -25,10 +25,6 @@ public:
 	}
 	virtual ~BoardGL(){}
 
-	
-	
-
-
 
 		 	
 //Event managers
