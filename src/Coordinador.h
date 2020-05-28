@@ -2,34 +2,32 @@
 
 #include "boardgl.h"
 #include "board.h"
-
+#include "piece.h"
 
  class Coordinador{
  protected:
-	
-	
-public:
-	
+ public:
+
+	~Coordinador();
 	Board* a;     //PUNTERO A PARTE LOGICA SE CREA EN CREAR TABLERO
 	BoardGL* scene;// PUNTERO AL DIBUJADO DEL TABLERO, SE CREA EN CREAR TABLERO
 	 Coordinador():width(0.15), dist(2),center_z(0),tablero(0),estado(INICIO){
 		 a = NULL;
-		 scene = NULL;
-		
-		
+		 scene = NULL;	
+		 dimensiones = 8;
 	};
 	
 	friend void OnMouseClick(int b, int state, int x, int y);
 	int getHayTablero(void) { return tablero; }
 	
 	//Initizalization
-	 void init();						//enable lights
-	 void Draw();
-	 void KeyDown(unsigned char key);
+	void init();						//enable lights
+	void Draw();
+	void KeyDown(unsigned char key);
 	void SpecialKeyDown(unsigned char key);
 	void MouseButton(int x, int y, int button, bool down, bool shiftKey, bool ctrlKey);
-	void crearTablero(void);
-	
+	void crearTablero(int , tipo_juego);
+	void Imagen(const char*);
 	//coord
 	void cell2center(int cell_x, int cell_y, float& glx, float& gly) {
 		//cell_x, cell_y are the board cell coordinates (upper left hand corner is (0,0))
@@ -61,17 +59,12 @@ protected:
 	bool rightButton;
 	bool midButton;
 
-	enum est { INICIO, VARIANTES, JUGANDO, VICTORIAB, DERROTAB, TABLAS };
+	enum est { INICIO, VARIANTES, JUGANDO, VICTORIAB, DERROTAB, TABLAS, TABLERO, PAUSA };
 	est  estado;
 
 	
 	int tablero; //1 SI SE HA CREADO EL TABLERO 0 SI NO SE HA CREADO
-
-	
-
-	
-	
-	
-
+	int dimensiones;
+	tipo_juego tipo_ficha;
 };
 

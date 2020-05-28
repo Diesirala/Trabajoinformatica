@@ -3,9 +3,6 @@
 
 void Board::tablas(int x, int y, int posicionx, int posiciony, int & posDeComer,int& posDeMover)
 {
-
-	
-	
 }
 
 int Board::cambiarPosicion(int x, int y, int posicionx, int posiciony)
