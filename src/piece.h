@@ -42,11 +42,7 @@ public:
 		return true;
 		return false;
 	}
-	bool operator!=(Piece a) {
-		if (x != a.x && y != a.y && type != a.type)
-			return true;
-		return false;
-	}
+	
 	//void dibuja(int n);
 };
 
