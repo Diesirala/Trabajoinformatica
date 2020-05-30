@@ -154,7 +154,6 @@ void Coordinador::Draw(){
 		ETSIDI::printxy("2. PERUANAS", -3, 8);
 		ETSIDI::printxy("3. VERDE", -3, 7);
 		ETSIDI::printxy("4. ROJAS", -3, 6);
-		ETSIDI::printxy("5. AMARILLAS", -3, 6);
 	
 	}
 	else if (estado == TABLERO) {
@@ -174,7 +173,7 @@ void Coordinador::Draw(){
 	else if (estado == JUGANDO)
 	{
 		if (tablero == 0) 
-		crearTablero(dimensiones);
+		crearTablero(dimensiones, variante);
 		if (a->estadoPartida() == DERROTAB) {
 			estado = DERROTAB;
 			tablero = 0;
@@ -299,10 +298,10 @@ void Coordinador::MouseButton(int x, int y, int button, bool down, bool sKey, bo
 
 }
 
-void Coordinador::crearTablero(int n )
+void Coordinador::crearTablero(int n , tipo_juego tip)
 {
 	
-		a = new Board(n);
+		a = new Board(n,tip);
 		//Board* a = new Board(8);
 		scene = new BoardGL(a);
 		tablero++;

@@ -6,14 +6,18 @@
 #include <glut.h>
 #include "ETSIDI.h"
 #include "Formas3D.h"
+#include "Enumeraciones.h"
 #define DEG2RAD M_PI/180.0			//not used
+
 
 enum {
 	WHITE, RED, GREEN,
 	GREEN_DARK, BLUE,
 	MAGENTA, CYAN, YELLOW,
 	ORANGE, PURPLE, PINK, GREY,
-	BLACK, Grey_dark, BLUE_DARK, RED_DARK, GRIS_AZUL, GRIS_AZUL_2
+	BLACK, Grey_dark, BLUE_DARK, RED_DARK,
+	GRIS_AZUL, GRIS_AZUL_2, PINK_dark,
+	WHITEP
 };
 
 
@@ -114,22 +118,11 @@ void BoardGL::Draw(){
 	//Borrado de la pantalla	
 	//glClearColor(1,1,1,1);// blanco del fondo
 	//GLTools::BackgroundColor(gltools::WHITE); // cambiar el color del fondo
-	if (variante == ESPAN) {
-		GLTools::BackgroundColor(gltools::WHITE);
-	}
-	else if (  variante== PERUANA) {
-		GLTools::BackgroundColor(gltools::GREEN);
-	}
-	else if (  variante== RUSA) {
-		GLTools::BackgroundColor(gltools::BLUE);
-	}
-	else if (  variante== INGLESA) {
-		GLTools::BackgroundColor(gltools::RED);
-	}
+	setFondo();
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glMatrixMode(GL_MODELVIEW);	
 	glLoadIdentity();
-
+	
 	//Para definir el punto de vista
 	setOjo(m_board->getSize());
 	glEnable(GL_LIGHTING);
@@ -185,42 +178,50 @@ void BoardGL::setFondo() {
 }
 void BoardGL::dibuja(int n) {
 	if (n == 1) {
-		if ( variante == ESPAN) {
-
-			Formas3D::Cilindro(0.06, 0.05, WHITE, GREY);
-			GLTools::Color(gltools::WHITE, 1.0f);//Cambiamos el color del tableroal poner esta declaración
+		if (variante == ESPAN) {
+			Formas3D::Cilindro(0.06, 0.05,WHITEP,GREY);
+			GLTools::Color(gltools::WHITE, 1.0f);//Cambiamos el color del tablero al poner esta declaración
 		}
-
-		else if ( variante == PERUANA) {
-			Formas3D::Cilindro(0.06, 0.05, BLUE, BLUE_DARK);
+	
+		else if (variante == PERUANA) {
+			Formas3D::Cilindro(0.06, 0.05,BLUE,BLUE_DARK);
 			GLTools::Color(gltools::WHITE, 1.0f);
 		}
-		else if ( variante == INGLESA) {
-			Formas3D::Cilindro(0.06, 0.05, RED, RED_DARK);
+		else if (variante == INGLESA) {
+			Formas3D::Cilindro(0.06, 0.05, RED,RED_DARK);
 			GLTools::Color(gltools::WHITE, 1.0f);//Cambiamos el color del tableroal poner esta declaración
 		}
-		else if ( variante == RUSA) {
-			Formas3D::Cilindro(0.06, 0.05, GRIS_AZUL, GRIS_AZUL_2);
+		else if (variante == RUSA) {
+			Formas3D::Cilindro(0.06, 0.05,GRIS_AZUL,GRIS_AZUL_2 );
 			GLTools::Color(gltools::WHITE, 1.0f);//Cambiamos el color del tableroal poner esta declaración
 		}
 	}
 	else if (n == 2) {
-		Formas3D::Cilindro(0.06, 0.05, 12, 13);
+		Formas3D::Cilindro(0.06, 0.05,Grey_dark, BLACK);
+		GLTools::Color(gltools::WHITE, 1.0f);
 	}
-	else if (n == 3) {
-		if ( variante == ESPAN) {
-			Formas3D::Cilindro(0.06, 0.05, 0, 11);
+
+	else if (n==3) {
+		if (variante == ESPAN) {
+			Formas3D::Cilindro(0.06, 0.05, YELLOW,ORANGE);
+			GLTools::Color(gltools::WHITE, 1.0f);
 		}
-		else if ( variante == PERUANA) {
-			Formas3D::Cilindro(0.06, 0.05, 4, 14);
+		else if (variante == PERUANA) {
+			Formas3D::Cilindro(0.06, 0.05, ORANGE, RED);
+			GLTools::Color(gltools::WHITE, 1.0f);
 		}
-		else if ( variante == INGLESA) {
-			Formas3D::Cilindro(0.06, 0.05, 1, 15);
+		else if (variante == INGLESA) {
+			Formas3D::Cilindro(0.06, 0.05, GREY, Grey_dark);
+			GLTools::Color(gltools::WHITE, 1.0f);
 		}
-		else if ( variante == RUSA) {
-			//Formas3D::Cilindro(0.06, 0.05);
+		else if (variante == RUSA) {
+			Formas3D::Cilindro(0.06, 0.05, GREEN, GREEN_DARK);
+			GLTools::Color(gltools::WHITE, 1.0f);
 		}
 	} // caso reina JUGADOR
 
-	else if (n == 4)Formas3D::Cilindro(0.06, 0.05, 1, 15);//Reina negra
+	else if (n == 4) {
+		Formas3D::Cilindro(0.06, 0.05, PINK, PINK_dark);//Reina negra
+		GLTools::Color(gltools::WHITE, 1.0f);
+	}
 }
