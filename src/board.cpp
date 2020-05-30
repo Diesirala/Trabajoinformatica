@@ -224,7 +224,15 @@ void Board::reina(int posicionx, int posiciony)
 
 void Board::actualizarEstado(void)
 {
-	
+	Piece vacio[20];
+	if (turno == 1) {
+		for (int i = 0; i < 20; i++)
+			PiezasSoplido[0][i] = vacio[i];
+	}
+	if (turno == -1) {
+		for (int i = 0; i < 20; i++)
+			PiezasSoplido[1][i] = vacio[i];
+	}
 	int posDeComer=0;
 	int posDeMover=0;
 	
@@ -294,24 +302,26 @@ int Board::soplido(int x, int y)
 {
 	for (int i = 0; i < 20; i++) {
 		int c, d;
-		if (turno == 1 && (tab[x][y].getType() == Object::QUEEN_BLACK || tab[x][y].getType() == Object::QUEEN_BLACKR)) {
-			PiezasSoplido[1][i].getCellNumber(c, d);
-			if (c == x && d == y)
+		PiezasSoplido[1][i].getCellNumber(c, d);
+		if (turno == 1 && movimientos==1 && (tab[x][y].getType() == Object::QUEEN_BLACK || tab[x][y].getType() == Object::QUEEN_BLACKR)) {
+			
+			if (c == x && d == y) {
 				tab[x][y].setCell(x, y, Object::EMPTY_CELL);
-			return 1;
-
-
+				PiezasSoplido[x][y].setCell(-1, -1, Object::EMPTY_CELL);
+				negras--;
+				return 1;
+			}
+			
 		}
-		
-		if (turno == -1 && (tab[x][y].getType()== Object::QUEEN_GREEN|| tab[x][y].getType() == Object::QUEEN_GREENR)) {
+		if (turno == -1 && movimientos==1 && (tab[x][y].getType()== Object::QUEEN_GREEN|| tab[x][y].getType() == Object::QUEEN_GREENR)) {
 			PiezasSoplido[0][i].getCellNumber(c, d);
-			if (c == x && d == y)
+			if (c == x && d == y) {
 				tab[x][y].setCell(x, y, Object::EMPTY_CELL);
-			return 1;
-
-
+				PiezasSoplido[x][y].setCell(-1, -1, Object::EMPTY_CELL);
+				blancas--;
+				return 1;
+			}
 		}
-
 	}
 	return 0;
 }
