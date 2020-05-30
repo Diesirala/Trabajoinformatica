@@ -28,7 +28,7 @@ protected:
 	
 
 public:
-	Board(int n):turno(1),movimientos(1) ,N(n),estado(JUGANDO),blancas((n / 2) * 3), negras((n / 2) * 3),variante(ESPAN){
+	Board(int n, tipo_juego est):turno(1),movimientos(1) ,N(n),estado(JUGANDO),blancas((n / 2) * 3), negras((n / 2) * 3),variante(est){
 		
 		tab=new Piece*[N];
 		for (int i=0; i<N; i++){

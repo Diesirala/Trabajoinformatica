@@ -51,12 +51,14 @@
 using namespace std;
 
 namespace gltools{
-	enum {WHITE,RED,GREEN,
-        GREEN_DARK,BLUE,
-        MAGENTA,CYAN,YELLOW,
-        ORANGE,PURPLE,PINK,GREY,
-        BLACK,Grey_dark, BLUE_DARK, 
-        RED_DARK, GRIS_AZUL,GRIS_AZUL_2};
+    enum {
+        WHITE, RED, GREEN,
+        GREEN_DARK, BLUE,
+        MAGENTA, CYAN, YELLOW,
+        ORANGE, PURPLE, PINK, GREY,
+        BLACK, Grey_dark, BLUE_DARK,
+        RED_DARK, GRIS_AZUL, GRIS_AZUL_2, PINK_dark, WHITEP
+    };
 };
 
 
