@@ -77,9 +77,14 @@ void Coordinador::KeyDown(unsigned char key)
 		//estado = JUGANDO;
 		switch (key)
 		{
-		case 'e':
+		case 'e': {
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			estado = INICIO;
+			
+			tablero = 0;
+			delete  scene;
+			delete a;
+		}
 			break;
 		case 'p':
 			estado = PAUSA;
@@ -91,9 +96,20 @@ void Coordinador::KeyDown(unsigned char key)
 	}
 	else if (estado == DERROTAB)
 	{
+		tablero = 0;
+		delete  scene;
+		delete a;
+		//estado = JUGANDO;
+		if (key == 'c')
+			estado = INICIO;
 	}
 	else if (estado == VICTORIAB)
 	{
+		tablero = 0;
+		delete  scene;
+		delete a;
+		if (key == 'c')
+			estado = INICIO;
 
 	}
 
@@ -157,12 +173,42 @@ void Coordinador::Draw(){
 
 	else if (estado == JUGANDO)
 	{
-		crearTablero(dimensiones, variante);
+		if (tablero == 0) 
+		crearTablero(dimensiones);
+		if (a->estadoPartida() == DERROTAB) {
+			estado = DERROTAB;
+			tablero = 0;
+		}
+		if (a->estadoPartida() == VICTORIAB) {
+			estado = VICTORIAB;
+			tablero = 0;
+		}
+		switch (estado){
+		case 2:
+			cout << " Estado de la partida Jugando " << endl;
+			break;
+		case 3:
+			cout << " Estado de la partida VictoriaB " << endl;
+			break;
+		case 4:
+			cout << " Estado de la partida DerrotaB  " << endl;
+			break;
+		}
+
 	}
 
 	else if (estado == DERROTAB)
 	{
-		Imagen("Tablero1.png");
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		gluPerspective(40.0, 800 / 600.0f, 0.1, 150);
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
+
+		gluLookAt(0, 7.5, 20, // posicion del ojo
+			0.0, 7.5, 0.0, // hacia que punto mira (0,7.5,0)
+			0.0, 1.0, 0.0); // definimos hacia arriba (eje Y)
+		//Fondo pantala inicig
+		Imagen("imagenes/Tablero1.png");
 		ETSIDI::setTextColor(1, 1, 0);
 		ETSIDI::setFont("fuentes/icecube.ttf", 50);
 		ETSIDI::printxy("GAMEOVER: Has perdido.", -5, 10);
@@ -171,6 +217,15 @@ void Coordinador::Draw(){
 
 	else if (estado == VICTORIAB)
 	{
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		gluPerspective(40.0, 800 / 600.0f, 0.1, 150);
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
+
+		gluLookAt(0, 7.5, 20, // posicion del ojo
+			0.0, 7.5, 0.0, // hacia que punto mira (0,7.5,0)
+			0.0, 1.0, 0.0); // definimos hacia arriba (eje Y)
+		//Fondo pantala inicig
 		//draw
 		ETSIDI::setTextColor(1, 1, 0);
 		ETSIDI::setFont("fuentes/icecube.ttf", 50);
@@ -244,14 +299,15 @@ void Coordinador::MouseButton(int x, int y, int button, bool down, bool sKey, bo
 
 }
 
-void Coordinador::crearTablero(int n ,tipo_juego p)
+void Coordinador::crearTablero(int n )
 {
-	if (tablero == 0) {
+	
 		a = new Board(n);
 		//Board* a = new Board(8);
 		scene = new BoardGL(a);
 		tablero++;
-	}
+	
+	
 
 }
 

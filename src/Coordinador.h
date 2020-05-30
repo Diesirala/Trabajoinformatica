@@ -26,7 +26,7 @@
 	void KeyDown(unsigned char key);
 	void SpecialKeyDown(unsigned char key);
 	void MouseButton(int x, int y, int button, bool down, bool shiftKey, bool ctrlKey);
-	void crearTablero(int , tipo_juego);
+	void crearTablero(int );
 	void Imagen(const char*);
 	//coord
 	void cell2center(int cell_x, int cell_y, float& glx, float& gly) {
@@ -59,7 +59,7 @@ protected:
 	bool rightButton;
 	bool midButton;
 
-	enum est { INICIO, VARIANTES, JUGANDO, VICTORIAB, DERROTAB, TABLAS, TABLERO, PAUSA };
+	
 	est  estado;
 	tipo_juego variante;
 	
