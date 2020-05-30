@@ -1,2 +1,3 @@
-﻿  game.cpp
+﻿  board.cpp
+D:\OneDrive - Universidad Politécnica de Madrid\Documents\Trabajo Informatica\trabajoGit\Trabajoinformatica\src\board.cpp(196): warning C4715: 'Board::comer': no todas las rutas de acceso de control devuelven un valor
   Pang.vcxproj -> D:\OneDrive - Universidad Politécnica de Madrid\Documents\Trabajo Informatica\trabajoGit\Trabajoinformatica\bin\Pang.exe
