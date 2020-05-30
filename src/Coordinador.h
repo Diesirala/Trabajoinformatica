@@ -3,6 +3,7 @@
 #include "boardgl.h"
 #include "board.h"
 #include "piece.h"
+#include "Enumeraciones.h"
 //enum tipo_juego { ESPAN, PERUANA, RUSA, INGLESA };
  class Coordinador{
  protected:
@@ -26,7 +27,7 @@
 	void KeyDown(unsigned char key);
 	void SpecialKeyDown(unsigned char key);
 	void MouseButton(int x, int y, int button, bool down, bool shiftKey, bool ctrlKey);
-	void crearTablero(int );
+	void crearTablero(int , tipo_juego);
 	void Imagen(const char*);
 	//coord
 	void cell2center(int cell_x, int cell_y, float& glx, float& gly) {
