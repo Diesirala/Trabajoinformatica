@@ -15,7 +15,7 @@ void Coordinador::KeyDown(unsigned char key)
 	{
 		if (key == 'e')
 		{
-			ETSIDI::play("sonidos/campana.wav");
+
 			estado = VARIANTES;
 		}
 		if (key == 's')
@@ -25,193 +25,102 @@ void Coordinador::KeyDown(unsigned char key)
 	{
 		switch (key)
 		{
-		case '1':
-			ETSIDI::play("sonidos/campana.wav");
-			variante = INTERNACIONAL;
-			estado = INSTRUCCIONES;
-			break;
-
-		case '2':
-			ETSIDI::play("sonidos/campana.wav");
+		case '1': {
 			variante = ESPAN;
-			estado = INSTRUCCIONES;//españolas
+			estado = TABLERO;
 			break;
-
-
-		case'3':
-			ETSIDI::play("sonidos/campana.wav");
-			//tablero damas inglesas
-			variante = CHECKERS;
-			estado = INSTRUCCIONES;
-			break;
-
-		case'4':
-			ETSIDI::play("sonidos/campana.wav");
-			//tablero damas peruana
+		}
+		case '2': {
 			variante = PERUANA;
-			estado = INSTRUCCIONES;
+			estado = JUGANDO;//LAS DAMAS PERUANAS SOLO TIENEN 8X8
 			break;
-
-		case'5':
-			ETSIDI::play("sonidos/campana.wav");
+		}
+		
+		case'3': {
+			//tablero damas inglesas
+			variante = INGLESA;
+			estado = TABLERO;
+			break;
+		}
+		case'4': {
 			//tablero damas rusas
 			variante = RUSA;
-			estado = INSTRUCCIONES;
+			estado = TABLERO;
 			break;
-
-		case'6':
-			ETSIDI::play("sonidos/campana.wav");
-			//tablero damas turca
-			variante = TURCA;
-			estado = INSTRUCCIONES;
-			break;
-
-		case'7':
-			ETSIDI::play("sonidos/campana.wav");
-			//tablero damas italiana
-			variante = ITALIANA;
-			estado = INSTRUCCIONES;
-			break;
-		case '8':
-			ETSIDI::play("sonidos/campana.wav");
-			//tablero damas italiana
-			variante = CANADIENSE;
-			dimensiones = 12;
-			estado = INSTRUCCIONES;
-			break;
-		default:
-			estado = VARIANTES;
-			break;
-
 		}
 
+		}
+		//estado = JUGANDO;
+		
+		
 	}
-
-
 	else if (estado == TABLERO) {
 		switch (key)
 		{
 		case '1':
-			ETSIDI::play("sonidos/campana.wav");
 			dimensiones = 8;
-			estado = MODO;
+			estado = JUGANDO;
 			break;
 
 		case '2':
-			ETSIDI::play("sonidos/campana.wav");
 			dimensiones = 10;
-			estado = MODO;
+			estado = JUGANDO;
 			break;
-
 		default:
 			estado = TABLERO;
 			break;
 		}
 	}
 
-	else if (estado == MODO) {
-		switch (key)
-		{
-		case '1':
-			ETSIDI::play("sonidos/campana.wav");
-			IA = true;
-			estado = JUGANDO;
-			break;
-
-		case '2':
-			ETSIDI::play("sonidos/campana.wav");
-			IA = false;
-			estado = JUGANDO;
-			break;
-
-		default:
-			estado = MODO;
-			break;
-		}
-
-	}
 	else if (estado == JUGANDO)
-	{
+	{ 
+		//estado = JUGANDO;
 		switch (key)
 		{
 		case 'e': {
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-			ETSIDI::play("sonidos/campana.wav");
 			estado = INICIO;
+			
 			tablero = 0;
 			delete  scene;
 			delete a;
 		}
-				break;
-
-				break;
+			break;
+		case 'p':
+			estado = PAUSA;
 		default:
 			estado = JUGANDO;
 			break;
 		}
 
 	}
-
 	else if (estado == DERROTAB)
 	{
 		tablero = 0;
 		delete  scene;
 		delete a;
-		
+		//estado = JUGANDO;
 		if (key == 'c')
-		{
-			ETSIDI::play("sonidos/campana.wav");
 			estado = INICIO;
-		}
 	}
-
 	else if (estado == VICTORIAB)
 	{
 		tablero = 0;
 		delete  scene;
 		delete a;
 		if (key == 'c')
-		{
-			ETSIDI::play("sonidos/campana.wav");
 			estado = INICIO;
-		}
 
 	}
-
-	else if (estado == TABLAS)
-	{
-
-		tablero = 0;
-		delete  scene;
-		delete a;
-		if (key == 'c')
-		{
-			ETSIDI::play("sonidos/campana.wav");
-			estado = INICIO;
-		}
-	}
-
-	else if (estado == INSTRUCCIONES) {
 
 	
-		if (key == 'c') {
-			ETSIDI::play("sonidos/campana.wav");	
-			if (variante == INTERNACIONAL)estado = TABLERO;
-			else estado = MODO;
-		}
-		else if (key == 'e') {
-			estado = VARIANTES;
-			ETSIDI::play("sonidos/campana.wav");
-		}
-	}
+
 }
-
-
-
 void Coordinador::Draw(){
 	
-	if (estado == INICIO) {
-		
+	if (estado == INICIO ) {
+		//init();
+		//glClearColor(1, 1, 1, 1);// blanco del fondo
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
@@ -220,79 +129,51 @@ void Coordinador::Draw(){
 			0.0, 7.5, 0.0, // hacia que punto mira (0,7.5,0)
 			0.0, 1.0, 0.0); // definimos hacia arriba (eje Y)
 		//Fondo pantala inicig
-		//
+		
 		Imagen("imagenes/tablero1.png"); //cargador de imágenes en pantalla
 
-		ETSIDI::setTextColor(0.20f, 0.75f, 0.60f);
-		ETSIDI::setFont("fuentes/4.ttf", 50);
-		ETSIDI::printxy("|DAMAS|", -4.75, 11);
-		ETSIDI::setTextColor(1,1,1);
-		ETSIDI::setFont("fuentes/bitwise.ttf", 18);
-		ETSIDI::printxy("Pulse la tecla -E- PARA EMPEZAR", -6.5, 7);
-		ETSIDI::printxy("Pulse la tecla -S- PARA SALIR", -6, 6);
+		ETSIDI::setTextColor(0, 1, 1);
+		ETSIDI::setFont("fuentes/1.ttf", 80);
+		ETSIDI::printxy(" /DAMAS/", -5, 9);
+		ETSIDI::setTextColor(1, 1, 1);
+		ETSIDI::setFont("fuentes/2.ttf", 12);
+		ETSIDI::printxy("PULSE LA TECLA -E- PARA EMPEZAR", -5, 7);
+		ETSIDI::printxy("PULSE LA TECLA -S- PARA SALIR", -5, 6);
 		
-	
 	}
 	else if (estado == VARIANTES)
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glMatrixMode(GL_MODELVIEW);
-		glLoadIdentity();
-
-		gluLookAt(0, 7.5, 20, // posicion del ojo
-			0.0, 7.5, 0.0, // hacia que punto mira (0,7.5,0)
-			0.0, 1.0, 0.0); // definimos hacia arriba (eje Y)
-		//Fondo pantala inicig
-
-		Imagen("imagenes/tablero1.png"); //cargador de imágenes en pantalla
-
-		ETSIDI::setTextColor(0.20f, 0.75f, 0.60f);
-		ETSIDI::setFont("fuentes/4.ttf", 50);
-		ETSIDI::printxy("|VARIANTES|", -6, 11);
-		ETSIDI::setTextColor(0.95, 0.95, 0.95);
-		ETSIDI::setFont("fuentes/bitwise.ttf", 18);
-		ETSIDI::printxy("Pulse la tecla -1- INTERNACIONALES", -5, 9);
-		ETSIDI::printxy("Pulse la tecla -2- ESPANOLAS", -5, 8);
-		ETSIDI::printxy("Pulse la tecla -3- CHECKERS", -5, 7);
-		ETSIDI::printxy("Pulse la tecla -4- PERUANAS", -5, 6);
-		ETSIDI::printxy("Pulse la tecla -5- RUSAS", -5, 5);
-		ETSIDI::printxy("Pulse la tecla -6- TURCAS", -5, 4);
-		ETSIDI::printxy("Pulse la tecla -7- ITALIANAS", -5, 3);
-		ETSIDI::printxy("Pulse la tecla -8- CANADIENSES", -5, 2);
-	}
-	else if (estado == MODO) {
-
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		Imagen("imagenes/tablero1.png"); //cargador de imágenes en pantalla
-		ETSIDI::setTextColor(0.20f, 0.75f, 0.60f);
-		ETSIDI::setFont("fuentes/4.ttf", 50);
-		ETSIDI::printxy("|MODO|", -3.75, 11);
-		ETSIDI::setTextColor(0.95, 0.95, 0.95);
-		ETSIDI::setFont("fuentes/bitwise.ttf", 18);
-		ETSIDI::printxy("Pulse la tecla -1- 1 PLAYER", -5, 7);
-		ETSIDI::printxy("Pulse la tecla -2- 2 PLAYERS", -5, 6);
-		
-
+		Imagen("imagenes/tablero1.png");
+		ETSIDI::setTextColor(0, 1, 1);
+		ETSIDI::setFont("fuentes/1.ttf", 40);
+		ETSIDI::printxy("Elige el color de tus damas:", -7, 12);
+		ETSIDI::setTextColor(0, 1, 0);
+		ETSIDI::setFont("fuentes/2.ttf", 12);
+		ETSIDI::printxy("1. CLÁSICAS", -3, 9);
+		ETSIDI::printxy("2. PERUANAS", -3, 8);
+		ETSIDI::printxy("3. VERDE", -3, 7);
+		ETSIDI::printxy("4. ROJAS", -3, 6);
+	
 	}
 	else if (estado == TABLERO) {
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		Imagen("imagenes/tablero1.png"); //cargador de imágenes en pantalla
-		ETSIDI::setTextColor(0.20f, 0.75f, 0.60f);
-		ETSIDI::setFont("fuentes/4.ttf", 50);
-		ETSIDI::printxy("|Elige Tablero|", -6.25, 11);
-		ETSIDI::setTextColor(0.95, 0.95, 0.95);
-		ETSIDI::setFont("fuentes/bitwise.ttf", 18);
-		ETSIDI::printxy("Pulse la tecla -1- (8x8)", -5, 7);
-		ETSIDI::printxy("Pulse la tecla -2- (10x10)", -5, 6);
-	
+		Imagen("imagenes/tablero1.png");
+		ETSIDI::setTextColor(0, 1, 1);
+		ETSIDI::setFont("fuentes/1.ttf", 40);
+		ETSIDI::printxy("Elige el tipo de damas:", -7, 12);
+		ETSIDI::setTextColor(0, 1, 0);
+		ETSIDI::setFont("fuentes/2.ttf", 12);
+		ETSIDI::printxy("1.--- (8x8)", -3, 9);
+		ETSIDI::printxy("2.--- (10x10)", -3, 7);
+		
 	}
-
 
 	else if (estado == JUGANDO)
 	{
 		if (tablero == 0) 
-		crearTablero();
+		crearTablero(dimensiones, variante);
 		if (a->estadoPartida() == DERROTAB) {
 			estado = DERROTAB;
 			tablero = 0;
@@ -301,13 +182,7 @@ void Coordinador::Draw(){
 			estado = VICTORIAB;
 			tablero = 0;
 		}
-		if (a->estadoPartida() == TABLAS)
-		{
-			estado = TABLAS;
-			tablero = 0;
-		}
 		switch (estado){
-
 		case 2:
 			cout << " Estado de la partida Jugando " << endl;
 			break;
@@ -323,231 +198,41 @@ void Coordinador::Draw(){
 
 	else if (estado == DERROTAB)
 	{
-	ETSIDI::play("sonidos/GAMEOVER.wav");
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	gluPerspective(40.0, 800 / 600.0f, 0.1, 150);
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	gluLookAt(0, 7.5, 20, // posicion del ojo
-		0.0, 7.5, 0.0, // hacia que punto mira (0,7.5,0)
-		0.0, 1.0, 0.0); // definimos hacia arriba (eje Y)
-	//Fondo pantala inicig
-	//draw
-	Imagen("imagenes/tablero1.png");
-	ETSIDI::setTextColor(0.95, 0.25, 0.25);
-	ETSIDI::setFont("fuentes/3.ttf", 50);
-	ETSIDI::printxy("The Player Black Win!", -7, 10);
-	ETSIDI::setFont("fuentes/Bitwise.ttf", 20);
-	ETSIDI::setTextColor(0.95, 0.95, 0.95);
-	ETSIDI::printxy("Pulse tecla -C- PARA CONTINUAR", -6, 4);
-	}
-
-	else if (estado == VICTORIAB)
-	{
-	ETSIDI::play("sonidos/win.wav");
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	gluPerspective(40.0, 800 / 600.0f, 0.1, 150);
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	gluLookAt(0, 7.5, 20, // posicion del ojo
-		0.0, 7.5, 0.0, // hacia que punto mira (0,7.5,0)
-		0.0, 1.0, 0.0); // definimos hacia arriba (eje Y)
-	//Fondo pantala inicig
-	//draw
-	Imagen("imagenes/tablero1.png");
-	ETSIDI::setTextColor(0.85, 0.85, 0);
-	ETSIDI::setFont("fuentes/3.ttf", 50);
-	ETSIDI::printxy("The Player White Win!", -7, 10);
-	ETSIDI::setFont("fuentes/Bitwise.ttf", 20);
-	ETSIDI::setTextColor(0.95, 0.95, 0.95);
-	ETSIDI::printxy("Pulse tecla -C- PARA CONTINUAR", -6, 4);
-		
-	}
-
-
-	else if (estado == TABLAS)
-	{
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	gluPerspective(40.0, 800 / 600.0f, 0.1, 150);
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	gluLookAt(0, 7.5, 20, // posicion del ojo
-		0.0, 7.5, 0.0, // hacia que punto mira (0,7.5,0)
-		0.0, 1.0, 0.0); // definimos hacia arriba (eje Y)
-	//Fondo pantala inicig
-	//draw
-	Imagen("imagenes/tablero1.png");
-	ETSIDI::setTextColor(0.20f, 0.75f, 0.60f);
-	ETSIDI::setFont("fuentes/3.ttf", 50);
-	ETSIDI::printxy("DRAW", -3.5, 11);
-	ETSIDI::setFont("fuentes/Bitwise.ttf", 20);
-	ETSIDI::setTextColor(0.95, 0.95, 0.95);
-	ETSIDI::printxy("Pulse tecla -C- PARA CONTINUAR", -6, 5);
-	}
-
-
-	else if (estado == INSTRUCCIONES)
-	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		gluPerspective(40.0, 800 / 600.0f, 0.1, 150);
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
 
 		gluLookAt(0, 7.5, 20, // posicion del ojo
 			0.0, 7.5, 0.0, // hacia que punto mira (0,7.5,0)
 			0.0, 1.0, 0.0); // definimos hacia arriba (eje Y)
-			//Fondo pantala inicig
-
-		Imagen("imagenes/tablero1.png"); //cargador de imágenes en pantalla
-		if (variante == ITALIANA) {
-			ETSIDI::setTextColor(0.20f, 0.75f, 0.60f);
-			ETSIDI::setFont("fuentes/4.ttf", 50);
-			ETSIDI::printxy("INSTRUCCIONES", -6, 11);
-			ETSIDI::setTextColor(1, 1, 1);
-			ETSIDI::setFont("fuentes/Bitwise.ttf", 15);
-			//ETSIDI::setTextColor(1, 1, 1);
-			ETSIDI::printxy("1- LOS PEONES NO PUEDEN CAPTURAR A LAS DAMAS NUNCA", -9, 8.5);
-			ETSIDI::printxy("2  LAS DAMAS SOLO PUEDEN COMER A LAS FICHAS ENEMIGAS  ", -9, 7.5);
-			ETSIDI::printxy("CONTIGUAS TANTO ADELANTE COMO HACIA ATRAS", -8, 6.5);
-			ETSIDI::printxy("3  SI EL JUGADOR NO PUEDE MOVER NI COMER PIERDE  ", -9, 5.5);
-			ETSIDI::printxy("4  EMPIEZAN LAS DORADAS", -9, 4.5);
-			ETSIDI::printxy("5  LOS PEONES SOLO PUEDEN COMER HACIA DELANTE", -9, 3.5);
-			ETSIDI::printxy("6  SE PUEDE REALIZAR SOPLIDO ", -9, 2.5);
-			ETSIDI::setFont("fuentes/Bitwise.ttf", 10);
-			ETSIDI::printxy("Pulse tecla -C- PARA CONTINUAR", -8, 1.5);
-			ETSIDI::printxy("Pulse tecla -E- PARA CAMBIAR DE JUEGO", -1, 1.5);
-		}
-		else if (variante == CHECKERS) {
-			ETSIDI::setTextColor(0.20f, 0.75f, 0.60f);
-			ETSIDI::setFont("fuentes/4.ttf", 50);
-			ETSIDI::printxy("INSTRUCCIONES", -6, 11);
-			ETSIDI::setTextColor(1, 1, 1);
-			ETSIDI::setFont("fuentes/Bitwise.ttf", 15);
-			//ETSIDI::setTextColor(1, 1, 1);
-			ETSIDI::printxy("1- LAS DAMAS SOLO SE PUEDEN MOVER UNA CASILLA HACIA ", -9, 9.5);
-			ETSIDI::printxy("DELANTE Y HACIA ATRAS", -8, 8.5);
-			ETSIDI::printxy("2  LAS DAMAS SOLO PUEDEN COMER A LAS FICHAS ENEMIGAS  ", -9, 7.5);
-			ETSIDI::printxy("CONTIGUAS TANTO ADELANTE COMO HACIA ATRAS", -8, 6.5);
-			ETSIDI::printxy("3  SI EL JUGADOR NO PUEDE MOVER NI COMER PIERDE -AHOGADO-  ", -9, 5.5);
-			ETSIDI::printxy("4  EMPIEZAN LAS ROJAS", -9, 4.5);
-			ETSIDI::printxy("5  LOS PEONES SOLO PUEDEN COMER HACIA DELANTE", -9, 3.5);
-			ETSIDI::printxy("6  SE PUEDE REALIZAR SOPLIDO ", -9, 2.5);
-			ETSIDI::setFont("fuentes/Bitwise.ttf", 10);
-			ETSIDI::printxy("Pulse tecla -C- PARA CONTINUAR", -8, 1.5);
-			ETSIDI::printxy("Pulse tecla -E- PARA CAMBIAR DE JUEGO", -1, 1.5);
-
-		}
-		else if (variante == PERUANA) {
-			ETSIDI::setTextColor(0.20f, 0.75f, 0.60f);
-			ETSIDI::setFont("fuentes/4.ttf", 50);
-			ETSIDI::printxy("INSTRUCCIONES", -6, 11);
-			ETSIDI::setTextColor(1, 1, 1);
-			ETSIDI::setFont("fuentes/Bitwise.ttf", 15);
-			//ETSIDI::setTextColor(1, 1, 1);
-			ETSIDI::printxy("1- PIERDE QUIEN SE QUEDA SIN FICHAS EN EL TABLERO", -9, 8.5);
-			ETSIDI::printxy("2  LAS DAMAS SOLO PUEDEN COMER A LAS FICHAS ENEMIGAS  ", -9, 7.5);
-			ETSIDI::printxy("CONTIGUAS TANTO ADELANTE COMO HACIA ATRAS", -8, 6.5);
-			ETSIDI::printxy("3  SI EL JUGADOR NO PUEDE MOVER NI COMER PIERDE  ", -9, 5.5);
-			ETSIDI::printxy("4  EMPIEZAN LAS AZULES", -9, 4.5);
-			ETSIDI::printxy("5  LA FICHA QUE CAPTURA OCUPA EL LUGAR DE LA FICHA CAPTURADA", -9, 3.5);
-			ETSIDI::printxy("6  SE PUEDE REALIZAR SOPLIDO ", -9, 2.5);
-			ETSIDI::setFont("fuentes/Bitwise.ttf", 10);
-			ETSIDI::printxy("Pulse tecla -C- PARA CONTINUAR", -8, 1.5);
-			ETSIDI::printxy("Pulse tecla -E- PARA CAMBIAR DE JUEGO", -1, 1.5);
-		}
-		else if (variante == RUSA) {
-			ETSIDI::setTextColor(0.20f, 0.75f, 0.60f);
-			ETSIDI::setFont("fuentes/4.ttf", 50);
-			ETSIDI::printxy("INSTRUCCIONES", -6, 11);
-			ETSIDI::setTextColor(1, 1, 1);
-			ETSIDI::setFont("fuentes/Bitwise.ttf", 15);
-			ETSIDI::printxy("1- LAS DAMAS SOLO SE PUEDEN MOVER UNA CASILLA HACIA ", -9, 10);
-			ETSIDI::printxy("DELANTE Y HACIA ATRAS", -8, 9);
-			ETSIDI::printxy("2  LAS DAMAS SOLO PUEDEN COMER A LAS FICHAS ENEMIGAS", -9, 8);
-			ETSIDI::printxy("CONTIGUAS TANTO ADELANTE COMO HACIA ATRAS", -8, 7);
-			ETSIDI::printxy("3  SI EL JUGADOR NO PUEDE MOVER NI COMER PIERDE  ", -9, 6);
-			ETSIDI::printxy("4  EMPIEZAN LAS BLANCAS", -9, 5);
-			ETSIDI::printxy("5  LOS PEONES SOLO PUEDEN COMER HACIA DELANTE", -9, 4);
-			ETSIDI::printxy("6  AL SER DAMA UN PEON NO PIERDE SU TURNO", -9, 3);
-			ETSIDI::printxy("7  SE PUEDE REALIZAR SOPLIDO ", -9, 2);
-			ETSIDI::setFont("fuentes/Bitwise.ttf", 10);
-			ETSIDI::printxy("Pulse tecla -C- PARA CONTINUAR", -8, 1);
-			ETSIDI::printxy("Pulse tecla -E- PARA CAMBIAR DE JUEGO", -1, 1);
-		}
-		else if (variante == ESPAN) {
-			ETSIDI::setTextColor(0.20f, 0.75f, 0.60f);
-			ETSIDI::setFont("fuentes/4.ttf", 50);
-			ETSIDI::printxy("INSTRUCCIONES", -6, 11);
-			ETSIDI::setTextColor(1, 1, 1);
-			ETSIDI::setFont("fuentes/Bitwise.ttf", 15);
-			ETSIDI::printxy("1- EL JUEGO SE DESARROLLA SOBRE LAS CASILLAS BLANCAS ", -9, 9.5);
-			ETSIDI::printxy("2  LOS PEONES SOLO PUEDEN COMER HACIA DELANTE", -9, 8.5);
-			ETSIDI::printxy("3  LAS DAMAS CAPTURAN Y SE DESPLAZAN EN DIAGONAL ", -9, 7.5);
-			ETSIDI::printxy(" TANTO ADELANTE COMO ATRAS CUALQUIER NUMERO DE CASILLAS", -9, 6.5);
-			ETSIDI::printxy("4  SI EL JUGADOR NO PUEDE MOVER ES TABLAS  ", -9, 5.5);
-			ETSIDI::printxy("5  EMPIEZAN LAS BLANCAS", -9, 4.5);
-			ETSIDI::printxy("6  LOS PEONES SOLO PUEDEN COMER HACIA DELANTE", -9, 3.5);
-			ETSIDI::printxy("7  SE PUEDE REALIZAR SOPLIDO ", -9, 2.5);
-			ETSIDI::setFont("fuentes/Bitwise.ttf", 10);
-			ETSIDI::printxy("Pulse tecla -C- PARA CONTINUAR", -8, 1.5);
-			ETSIDI::printxy("Pulse tecla -E- PARA CAMBIAR DE JUEGO", -1, 1.5);
-		}
-		else if (variante == TURCA) {
-			ETSIDI::setTextColor(0.20f, 0.75f, 0.60f);
-			ETSIDI::setFont("fuentes/4.ttf", 50);
-			ETSIDI::printxy("INSTRUCCIONES", -6, 11);
-			ETSIDI::setTextColor(1, 1, 1);
-			ETSIDI::setFont("fuentes/Bitwise.ttf", 15);
-			ETSIDI::printxy("1- CAPTURAN Y SE DESPLAZAN EN LINEA RECTA HACIA ", -9, 9.5);
-			ETSIDI::printxy(" DELANTE O HACIA LOS LADOS", -8, 8.5);
-			ETSIDI::printxy("2  LAS DAMAS CAPTURAN Y SE DESPLAZAN EN LINEA RECTA", -9, 7.5);
-			ETSIDI::printxy(" TANTO ADELANTE COMO ATRAS TODAS LAS CASILLAS QUE QUIERAN  ", -9, 6.5);
-			ETSIDI::printxy("3  SI EL JUGADOR NO PUEDE MOVER NI COMER PIERDE  ", -9, 5.5);
-			ETSIDI::printxy("4  EMPIEZAN LAS BLANCAS", -9, 4.5);
-			ETSIDI::printxy("5  LOS PEONES SOLO PUEDEN COMER HACIA DELANTE", -9, 3.5);
-			ETSIDI::printxy("6  SE PUEDE HACER SOPLIDO ", -9, 2.5);
-			ETSIDI::setFont("fuentes/Bitwise.ttf", 10);
-			ETSIDI::printxy("Pulse tecla -C- PARA CONTINUAR", -8, 1.5);
-			ETSIDI::printxy("Pulse tecla -E- PARA CAMBIAR DE JUEGO", -1, 1.5);
-		}
-		else if (variante == INTERNACIONAL) {
-			ETSIDI::setTextColor(0.20f, 0.75f, 0.60f);
-			ETSIDI::setFont("fuentes/4.ttf", 50);
-			ETSIDI::printxy("INSTRUCCIONES", -6, 11);
-			ETSIDI::setTextColor(1, 1, 1);
-			ETSIDI::setFont("fuentes/Bitwise.ttf", 15);
-			ETSIDI::printxy("1- CAPTURAN EN LINEA DIAGONAL HACIA DELANTE O", -9, 9.5);
-			ETSIDI::printxy("HACIA ATRÁS", -8, 8.5);
-			ETSIDI::printxy("2  LAS DAMAS CAPTURAN Y SE DESPLAZAN EN DIAGONAL ", -9, 7.5);
-			ETSIDI::printxy(" TANTO ADELANTE COMO ATRAS CUALQUIER NUMERO DE CASILLAS", -9, 6.5);
-			ETSIDI::printxy("3  SI EL JUGADOR NO PUEDE MOVER NI COMER ES TABLAS  ", -9, 5.5);
-			ETSIDI::printxy("4  EMPIEZAN LAS BLANCAS", -9, 4.5);
-			ETSIDI::printxy("5  SE PUEDE HACER SOPLIDO ", -9, 3.5);
-			ETSIDI::setFont("fuentes/Bitwise.ttf", 10);
-			ETSIDI::printxy("Pulse tecla -C- PARA CONTINUAR", -8, 1.5);
-			ETSIDI::printxy("Pulse tecla -E- PARA CAMBIAR DE JUEGO", -1, 1.5);
-		}
-		else if (variante == CANADIENSE) {
-		ETSIDI::setTextColor(0.20f, 0.75f, 0.60f);
-		ETSIDI::setFont("fuentes/4.ttf", 50);
-		ETSIDI::printxy("INSTRUCCIONES", -6, 11);
-		ETSIDI::setTextColor(1, 1, 1);
-		ETSIDI::setFont("fuentes/Bitwise.ttf", 15);
-		ETSIDI::printxy("1- CAPTURAN EN LINEA DIAGONAL HACIA DELANTE O", -9, 9.5);
-		ETSIDI::printxy("HACIA ATRÁS", -8, 8.5);
-		ETSIDI::printxy("2  LAS DAMAS CAPTURAN Y SE DESPLAZAN EN DIAGONAL ", -9, 7.5);
-		ETSIDI::printxy(" TANTO ADELANTE COMO ATRAS CUALQUIER NUMERO DE CASILLAS", -9, 6.5);
-		ETSIDI::printxy("3  SI EL JUGADOR NO PUEDE MOVER NI COMER ES TABLAS  ", -9, 5.5);
-		ETSIDI::printxy("4  EMPIEZAN LAS BLANCAS", -9, 4.5);
-		ETSIDI::printxy("5  SE PUEDE HACER SOPLIDO ", -9, 3.5);
-		ETSIDI::printxy("6  EL TABLERO ES DE 12X12 CASILLAS ", -9, 2.5);
-		ETSIDI::setFont("fuentes/Bitwise.ttf", 10);
-		ETSIDI::printxy("Pulse tecla -C- PARA CONTINUAR", -8, 1.5);
-		ETSIDI::printxy("Pulse tecla -E- PARA CAMBIAR DE JUEGO", -1, 1.5);
-		}
+		//Fondo pantala inicig
+		Imagen("imagenes/Tablero1.png");
+		ETSIDI::setTextColor(1, 1, 0);
+		ETSIDI::setFont("fuentes/icecube.ttf", 50);
+		ETSIDI::printxy("GAMEOVER: Has perdido.", -5, 10);
+		ETSIDI::printxy("PULSE LA TECLA -C- PARA CONTINUAR", -5, 8);
 	}
+
+	else if (estado == VICTORIAB)
+	{
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		gluPerspective(40.0, 800 / 600.0f, 0.1, 150);
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
+
+		gluLookAt(0, 7.5, 20, // posicion del ojo
+			0.0, 7.5, 0.0, // hacia que punto mira (0,7.5,0)
+			0.0, 1.0, 0.0); // definimos hacia arriba (eje Y)
+		//Fondo pantala inicig
+		//draw
+		ETSIDI::setTextColor(1, 1, 0);
+		ETSIDI::setFont("fuentes/icecube.ttf", 50);
+		ETSIDI::printxy("ENHORABUENA: ¡Has ganado!.", -5, 10);
+		ETSIDI::printxy("PULSE LA TECLA -C- PARA CONTINUAR", -5, 8);
+	}
+	
 }
-
-
 void Coordinador::init() {
 	glEnable(GL_LIGHT0);
 	glEnable(GL_LIGHTING);
@@ -581,7 +266,6 @@ void Coordinador::MouseButton(int x, int y, int button, bool down, bool sKey, bo
 	gluUnProject(winX, winY, winZ, modelview, projection, viewport, &posX, &posY, &posZ);
 
 	//finally cell coordinates
-
 	world2cell(posX, posY, xcell_sel, ycell_sel);
 
 	///////////////////////////	
@@ -614,111 +298,16 @@ void Coordinador::MouseButton(int x, int y, int button, bool down, bool sKey, bo
 
 }
 
-void Coordinador::crearTablero(void)
+void Coordinador::crearTablero(int n , tipo_juego tip)
 {
-	switch (variante)
-	{
-	case ESPAN:
-		if (IA) {
-			a = new BoardEspañolasIA();
-			//Board* a = new Board(8);
-			tablero++;
-		}
-		else if (!IA) {
-			a = new BoardEspañolas();
-			//Board* a = new Board(8);
-			tablero++;
-		}
-		break;
-	case PERUANA:
-		if (IA) {
-			a = new BoardPeruanasIA();
-			//Board* a = new Board(8);
-			tablero++;
-		}
-		else if (!IA) {
-			a = new BoardPeruanas();
-			//Board* a = new Board(8);
-			tablero++;
-		}
-		break;
-	case RUSA:
-		if (IA) {
-			a = new BoardRusasIA();
-			//Board* a = new Board(8);
-			tablero++;
-		}
-		else if (!IA) {
-			a = new BoardRusas();
-			//Board* a = new Board(8);
-			tablero++;
-		}
-		break;
-	case CHECKERS:
-		if (IA) {
-			a = new BoardCheckersIA();
-			//Board* a = new Board(8);
-			tablero++;
-		}
-		else if (!IA) {
-			a = new BoardCheckers();
-			//Board* a = new Board(8);
-			tablero++;
-		}
-		break;
-	case ITALIANA:
-		if (IA) {
-			a = new BoardItalianasIA();
-			//Board* a = new Board(8);
-			tablero++;
-		}
-		else if (!IA) {
-			a = new BoardItalianas();
-			//Board* a = new Board(8);
-			tablero++;
-		}
-		break;
-	case TURCA:
-		if (IA) {
-			a = new BoardTurcasIA();
-			//Board* a = new Board(8);
-			tablero++;
-		}
-		else if (!IA) {
-			a = new BoardTurcas();
-			//Board* a = new Board(8);
-			tablero++;
-		}
-		break;
-	case INTERNACIONAL:
-		if (IA) {
-			a = new BoardIA(dimensiones);
-			//Board* a = new Board(8);
-			tablero++;
-		}
-		else if (!IA) {
-			a = new Board(dimensiones);
-			//Board* a = new Board(8);
-			tablero++;
-		}
-		break;
-	case CANADIENSE:
-		if (IA) {
-			a = new BoardCanadienseIA();
-			//Board* a = new Board(8);
-			tablero++;
-		}
-		else if (!IA) {
-			a = new BoardCanadiense();
-			//Board* a = new Board(8);
-			tablero++;
-		}
-		break;
-	default:
-		break;
-	}
-	if(tablero)
-	scene = new BoardGL(a);
+	
+		a = new Board(n,tip);
+		//Board* a = new Board(8);
+		scene = new BoardGL(a);
+		tablero++;
+	
+	
+
 }
 
 void Coordinador::Imagen(const char* img) {

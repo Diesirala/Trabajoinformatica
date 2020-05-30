@@ -4,25 +4,6 @@
 #include "board.h"
 #include "piece.h"
 #include "Enumeraciones.h"
-#include "BoardCanadiense.h"
-#include "BoardCanadienseIA.h"
-#include "BoardCheckers.h"
-#include "BoardCheckersIA.h"
-#include "BoardEspañolas.h"
-#include "BoardEspañolasIA.h"
-#include "BoardIA.h"
-#include "BoardItalianas.h"
-#include "BoardItalianasIA.h"
-#include "BoardPeruanas.h"
-#include "BoardPeruanasIA .h"
-#include "BoardRusas.h"
-#include "BoardRusasIA .h"
-#include "BoardTurcas.h"
-#include "BoardTurcasIA.h"
-
-
-
-
 //enum tipo_juego { ESPAN, PERUANA, RUSA, INGLESA };
  class Coordinador{
  protected:
@@ -31,8 +12,7 @@
 	~Coordinador();
 	Board* a;     //PUNTERO A PARTE LOGICA SE CREA EN CREAR TABLERO
 	BoardGL* scene;// PUNTERO AL DIBUJADO DEL TABLERO, SE CREA EN CREAR TABLERO
-	
-	 Coordinador():width(0.15), dist(2),center_z(0),tablero(0),estado(INICIO),variante(NONE){
+	 Coordinador():width(0.15), dist(2),center_z(0),tablero(0),estado(INICIO){
 		 a = NULL;
 		 scene = NULL;	
 		 dimensiones = 8;
@@ -47,21 +27,18 @@
 	void KeyDown(unsigned char key);
 	void SpecialKeyDown(unsigned char key);
 	void MouseButton(int x, int y, int button, bool down, bool shiftKey, bool ctrlKey);
-	void crearTablero(void);
+	void crearTablero(int , tipo_juego);
 	void Imagen(const char*);
-	int getDimensiones() { return dimensiones; }
 	//coord
 	void cell2center(int cell_x, int cell_y, float& glx, float& gly) {
 		//cell_x, cell_y are the board cell coordinates (upper left hand corner is (0,0))
 		//glx, gly refer to the center of the cell(cell_x,cell_y) in world coordinates
-		
 		glx = cell_y * width + width / 2.0f;
 		gly = -cell_x * width - width / 2.0f;
 	}
 
 	void world2cell(double x, double y, int& cell_x, int& cell_y) {
 		//world coordinates to cell
-
 		cell_x = (int)(abs(y / width));
 		cell_y = (int)(x / width);
 	}
@@ -82,7 +59,7 @@ protected:
 	bool leftButton;
 	bool rightButton;
 	bool midButton;
-	bool IA;
+
 	
 	est  estado;
 	tipo_juego variante;

@@ -57,8 +57,7 @@ namespace gltools{
         MAGENTA, CYAN, YELLOW,
         ORANGE, PURPLE, PINK, GREY,
         BLACK, Grey_dark, BLUE_DARK,
-        RED_DARK, GRIS_AZUL, GRIS_AZUL_2, PINK_dark, WHITEP, ORANGE_dark,
-        BLUE_DARK2, RED_DARK2, GREEN_DARK2, Grey_dark2,MARRON, MARRON_DARK
+        RED_DARK, GRIS_AZUL, GRIS_AZUL_2, PINK_dark, WHITEP
     };
 };
 

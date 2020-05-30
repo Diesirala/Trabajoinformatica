@@ -6,36 +6,29 @@
 #include <iostream>
 #include "piece.h"
 #include "Enumeraciones.h"
-#include <stdlib.h>
-#include <time.h>
-#include "ETSIDI.h"
 
 using namespace std;
-//DAMAS INTERNACIONALES
+
 class Board{
 public:
 	
 	//enum tipo_juego { ESPAN, PERUANA, RUSA, INGLESA };
 protected:
-	int cop;
 	const int N;		//NxN board
 	Piece ** tab;
-	Piece   pmovida;
-	Piece   PiezasSoplido[2][20];
 	int turno;
 	int movimientos;
 	est estado;
 	int blancas;
 	int negras;
 	tipo_juego variante;
-	
 
-	virtual void reina(int posicionx, int posiciony);
+
+	void reina(int posicionx, int posiciony);
 	
 
 public:
-	Board(int n):turno(1),movimientos(1) ,N(n),estado(JUGANDO),blancas((n / 2) * 3), negras((n / 2) * 3),variante(INTERNACIONAL),cop(0){
-	
+	Board(int n, tipo_juego est):turno(1),movimientos(1) ,N(n),estado(JUGANDO),blancas((n / 2) * 3), negras((n / 2) * 3),variante(est){
 		
 		tab=new Piece*[N];
 		for (int i=0; i<N; i++){
@@ -44,62 +37,31 @@ public:
 
 		//set initial position
 		for(int j=1; j<N; j+=2){
-			tab[1][j].setCell(1, j, Piece::QUEEN_BLACK);
-			tab[N - 1][j].setCell(N - 1, j, Piece::QUEEN_GREEN);
-			tab[N - 3][j].setCell(N - 3, j, Piece::QUEEN_GREEN);
-			if (N >= 10) {
-				tab[3][j].setCell(3, j, Piece::QUEEN_BLACK);
-			}
-			if (N >= 12) {
-				tab[N - 5][j].setCell(N - 5, j, Piece::QUEEN_GREEN);
-			}
+			tab[0][j].setCell(0,j, Piece::QUEEN_BLACK);
+			tab[N-2][j].setCell(0, j, Piece::QUEEN_GREEN);
+			tab[2][j].setCell(0, j, Piece::QUEEN_BLACK);
 		}
 
 				
 		for(int j=0; j<N; j+=2){
-			tab[0][j].setCell(0, j, Piece::QUEEN_BLACK);
-			tab[N - 2][j].setCell(N - 2, j, Piece::QUEEN_GREEN);
-			tab[2][j].setCell(2, j, Piece::QUEEN_BLACK);
-			if (N >= 10) {
-				tab[N - 4][j].setCell(N-4, j, Piece::QUEEN_GREEN);
-			}
-			if (N >= 12) {
-				tab[ 4][j].setCell( 4, j, Piece::QUEEN_BLACK);
-			}
+			tab[N-1][j].setCell(0,j, Piece::QUEEN_GREEN);
+			tab[1][j].setCell(0, j, Piece::QUEEN_BLACK);
+			tab[N-3][j].setCell(0, j, Piece::QUEEN_GREEN);
 		}
-		Piece vacio[20];
-		
-			for (int i = 0; i < 20; i++)
-				PiezasSoplido[0][i] = vacio[i];
-			for (int i = 0; i < 20; i++)
-				PiezasSoplido[1][i] = vacio[i];
-
-
-
-
 	}
-	virtual ~Board(){
-		//delete[] PiezasSoplido;
+
+	~Board(){
 		for(int i=0; i<N; i++)
 			delete [] tab[i];
 		delete [] tab;
-		
 	}
 
-	Board(Board& a ):turno(a.turno), movimientos(a.movimientos), N(a.N), estado(a.estado), blancas(a.blancas), negras(a.negras),pmovida(a.pmovida),cop(1) {
-
-		for (int i = 0; i < 2; i++) {
-			for (int j = 0; j < 20; j++) {
-				PiezasSoplido[i][j] = a.PiezasSoplido[i][j];
-				}
-			}
-
+	Board(Board& a):turno(a.turno), movimientos(a.movimientos), N(a.N), estado(a.estado), blancas(a.blancas), negras(a.negras) {
 		
 		tab = new Piece * [N];                 //Reservo memoria para la copia
 		for (int i = 0; i < N; i++) {
 			tab[i] = new Piece[N];			
 		}
-		
 
 		for (int i = 0; i < N; i++) {
 			for (int j = 0; j < N; j++) {
@@ -113,18 +75,16 @@ public:
 	}
 
 	
-	virtual void setFicha(tipo_juego p) { this->variante = p; }
-	virtual virtual tipo_juego getTipo() { return variante; }
-	virtual int cambiarPosicion(int x,int y,int posicionx, int posiciony);
-	virtual void pasoTurno(void);
-	virtual int comer(int x, int y, int posicionx, int posiciony);
-	virtual int getSize(){return N;}
-	virtual Piece** getTab(){return tab;}
-	virtual est  estadoPartida(void);
-	virtual void actualizarEstado(void);
-	virtual int soplido(int ,int );
-	virtual void estadSoplido(void);
-	virtual Object::type_t getPieceType(int x, int y) { return tab[x][y].getType(); }
+	void setFicha(tipo_juego p) { this->variante = p; }
+	virtual tipo_juego getTipo() { return variante; }
+	void Board::tablas(int x, int y, int posicionx, int posiciony, int& posDeComer, int& posDeMover);
+	int cambiarPosicion(int x,int y,int posicionx, int posiciony);
+	void pasoTurno(void);
+	int comer(int x, int y, int posicionx, int posiciony);
+	int getSize(){return N;}
+	Piece** getTab(){return tab;}
+	est  estadoPartida(void);
+	void actualizarEstado(void);
 };
 
 #endif
