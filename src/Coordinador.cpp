@@ -182,17 +182,7 @@ void Coordinador::Draw(){
 			estado = VICTORIAB;
 			tablero = 0;
 		}
-		switch (estado){
-		case 2:
-			cout << " Estado de la partida Jugando " << endl;
-			break;
-		case 3:
-			cout << " Estado de la partida VictoriaB " << endl;
-			break;
-		case 4:
-			cout << " Estado de la partida DerrotaB  " << endl;
-			break;
-		}
+	
 
 	}
 
