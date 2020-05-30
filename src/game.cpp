@@ -149,6 +149,8 @@ void OnMouseClick(int b,int state, int x,int y){
 			yactual = escena.ycell_sel;
 			count++;
 			cout << xactual << yactual <<"   actual"<< endl;
+			if (escena.a->soplido(xactual, yactual))
+				escena.a->actualizarEstado();
 		}
 		else {
 			posicionx = escena.xcell_sel;
@@ -156,15 +158,20 @@ void OnMouseClick(int b,int state, int x,int y){
 			count--;
 			cout << posicionx << posiciony << endl;
 
-			escena.a->cambiarPosicion(xactual, yactual, posicionx, posiciony);
-			escena.a->comer(xactual, yactual, posicionx, posiciony);
-			escena.a->actualizarEstado();
+			if(escena.a->cambiarPosicion(xactual, yactual, posicionx, posiciony))
+				escena.a->actualizarEstado();
+			if( escena.a->comer(xactual, yactual, posicionx, posiciony))
+				escena.a->actualizarEstado();
+			if (escena.a->soplido(posicionx, posiciony))
+				escena.a->actualizarEstado();
 		}
 		cout << escena.a->estadoPartida() << endl;
 	}
 	
-	if (button == MOUSE_RIGHT_BUTTON && down)
+	if (button == MOUSE_RIGHT_BUTTON && down) {
 		escena.a->pasoTurno();
+		escena.a->actualizarEstado();
+	}
 	glutPostRedisplay();
 }
 
