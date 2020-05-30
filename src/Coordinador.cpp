@@ -26,25 +26,25 @@ void Coordinador::KeyDown(unsigned char key)
 		switch (key)
 		{
 		case '1': {
-			tipo_ficha = ESPAN;
+			variante = ESPAN;
 			estado = TABLERO;
 			break;
 		}
 		case '2': {
-			tipo_ficha = PERUANA;
+			variante = PERUANA;
 			estado = JUGANDO;//LAS DAMAS PERUANAS SOLO TIENEN 8X8
 			break;
 		}
 		
 		case'3': {
 			//tablero damas inglesas
-			tipo_ficha = INGLESA;
+			variante = INGLESA;
 			estado = TABLERO;
 			break;
 		}
 		case'4': {
 			//tablero damas rusas
-			tipo_ficha = RUSA;
+			variante = RUSA;
 			estado = TABLERO;
 			break;
 		}
@@ -157,7 +157,7 @@ void Coordinador::Draw(){
 
 	else if (estado == JUGANDO)
 	{
-		crearTablero(dimensiones, tipo_ficha);
+		crearTablero(dimensiones, variante);
 	}
 
 	else if (estado == DERROTAB)
@@ -249,7 +249,7 @@ void Coordinador::crearTablero(int n ,tipo_juego p)
 	if (tablero == 0) {
 		a = new Board(n);
 		//Board* a = new Board(8);
-		scene = new BoardGL(a,p);
+		scene = new BoardGL(a);
 		tablero++;
 	}
 

@@ -5,13 +5,14 @@
 
 #include <iostream>
 #include "piece.h"
+#include "Enumeraciones.h"
 
 using namespace std;
 
 class Board{
 public:
-	enum est { JUGANDO=2, VICTORIAB, DERROTAB, TABLAS };
-
+	
+	//enum tipo_juego { ESPAN, PERUANA, RUSA, INGLESA };
 protected:
 	const int N;		//NxN board
 	Piece ** tab;
@@ -20,14 +21,14 @@ protected:
 	est estado;
 	int blancas;
 	int negras;
-
+	tipo_juego variante;
 
 
 	void reina(int posicionx, int posiciony);
 	
 
 public:
-	Board(int n):turno(1),movimientos(1) ,N(n),estado(JUGANDO),blancas((n / 2) * 3), negras((n / 2) * 3) {
+	Board(int n):turno(1),movimientos(1) ,N(n),estado(JUGANDO),blancas((n / 2) * 3), negras((n / 2) * 3),variante(ESPAN){
 		
 		tab=new Piece*[N];
 		for (int i=0; i<N; i++){
@@ -73,8 +74,9 @@ public:
 
 	}
 
-
-
+	
+	void setFicha(tipo_juego p) { this->variante = p; }
+	virtual tipo_juego getTipo() { return variante; }
 	void Board::tablas(int x, int y, int posicionx, int posiciony, int& posDeComer, int& posDeMover);
 	int cambiarPosicion(int x,int y,int posicionx, int posiciony);
 	void pasoTurno(void);

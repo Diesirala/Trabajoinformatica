@@ -18,14 +18,12 @@ using namespace std;
 class BoardGL{
 
 public:
-	Piece pieza;
-	tipo_juego tipoPieza;
-	BoardGL(Board* pb,  tipo_juego m ):m_board(pb), tipoPieza(m){
-		width=0.15;				//width of each cell in the grid// DEFINE EL ANCHO DE CADA CELDA// LA VISTA DEPENDE DE ESTE PARAMETRO
-		N=pb->getSize();	//Grid NxN
-		dist=2;	
-		//distance of viewpoint from center of the board// DISTANCIA A LA QUE VES EL TABLERO
-		pieza.setFicha(tipoPieza);
+	//Piece pieza;
+	
+	BoardGL(Board* pb):m_board(pb),variante(pb->getTipo() ),width(0.15),N(pb->getSize()),dist(2){
+		
+		
+		
 	}
 	virtual ~BoardGL(){}
 
@@ -38,11 +36,11 @@ public:
 	void setFondo();
 	//Funcion friend para poder acceder a las cordenadas pulsadas por el raton y utilizarlas
 	friend void OnMouseClick(int b, int state, int x, int y);
-	
+	void dibuja(int n);
 	//info
 	void setSize(int s){N=s;}
 	int getSize(){return N;}
-	tipo_juego getType() { return tipoPieza; }
+	
 	//coord
 	void cell2center(int cell_x, int cell_y, float& glx, float& gly){
 		
@@ -55,7 +53,7 @@ protected:
 	float width;
 	int N;								 //size 
 	Board* m_board;
-
+	tipo_juego variante;
 //visualization	
 	double center_x,center_y,center_z;
 	double dist;

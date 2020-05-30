@@ -3,7 +3,7 @@
 #include "boardgl.h"
 #include "board.h"
 #include "piece.h"
-
+//enum tipo_juego { ESPAN, PERUANA, RUSA, INGLESA };
  class Coordinador{
  protected:
  public:
@@ -61,10 +61,10 @@ protected:
 
 	enum est { INICIO, VARIANTES, JUGANDO, VICTORIAB, DERROTAB, TABLAS, TABLERO, PAUSA };
 	est  estado;
-
+	tipo_juego variante;
 	
 	int tablero; //1 SI SE HA CREADO EL TABLERO 0 SI NO SE HA CREADO
 	int dimensiones;
-	tipo_juego tipo_ficha;
+	//tipo_juego variante;
 };
 

@@ -8,7 +8,13 @@
 #include "Formas3D.h"
 #define DEG2RAD M_PI/180.0			//not used
 
-
+enum {
+	WHITE, RED, GREEN,
+	GREEN_DARK, BLUE,
+	MAGENTA, CYAN, YELLOW,
+	ORANGE, PURPLE, PINK, GREY,
+	BLACK, Grey_dark, BLUE_DARK, RED_DARK, GRIS_AZUL, GRIS_AZUL_2
+};
 
 
 
@@ -54,7 +60,7 @@ void BoardGL::DrawCell(int i,int j){
 		cell2center(i, j, glx, gly);
 		glDisable(GL_LIGHTING);
 		glTranslatef(glx,gly,0);
-		pieza.dibuja(1);
+		dibuja(1);
 		glTranslatef(-glx,-gly,0);
 		glEnable(GL_LIGHTING);
 
@@ -64,7 +70,7 @@ void BoardGL::DrawCell(int i,int j){
 		cell2center(i, j, glx, gly);
 		glDisable(GL_LIGHTING);
 		glTranslatef(glx, gly, 0);
-		pieza.dibuja(2);
+		dibuja(2);
 		glTranslatef(-glx, -gly, 0);
 		glEnable(GL_LIGHTING);
 
@@ -75,7 +81,7 @@ void BoardGL::DrawCell(int i,int j){
 		glDisable(GL_LIGHTING);
 		GLTools::Color(gltools::RED);//color de las esferas solidas
 		glTranslatef(glx, gly, 0);
-		pieza.dibuja(3);//dibujamos la reina
+		dibuja(3);//dibujamos la reina
 		glTranslatef(-glx, -gly, 0);
 		glEnable(GL_LIGHTING);
 
@@ -86,7 +92,7 @@ void BoardGL::DrawCell(int i,int j){
 		glDisable(GL_LIGHTING);
 		GLTools::Color(gltools::GREY);
 		glTranslatef(glx, gly, 0);
-		pieza.dibuja(4);//dibujamos la reina
+		dibuja(4);//dibujamos la reina
 		glTranslatef(-glx, -gly, 0);
 		glEnable(GL_LIGHTING);
 
@@ -108,16 +114,16 @@ void BoardGL::Draw(){
 	//Borrado de la pantalla	
 	//glClearColor(1,1,1,1);// blanco del fondo
 	//GLTools::BackgroundColor(gltools::WHITE); // cambiar el color del fondo
-	if (tipoPieza == ESPAN) {
+	if (variante == ESPAN) {
 		GLTools::BackgroundColor(gltools::WHITE);
 	}
-	else if (pieza.getTipo() == PERUANA) {
+	else if (  variante== PERUANA) {
 		GLTools::BackgroundColor(gltools::GREEN);
 	}
-	else if (pieza.getTipo() == RUSA) {
+	else if (  variante== RUSA) {
 		GLTools::BackgroundColor(gltools::BLUE);
 	}
-	else if (pieza.getTipo() == INGLESA) {
+	else if (  variante== INGLESA) {
 		GLTools::BackgroundColor(gltools::RED);
 	}
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -162,18 +168,59 @@ void BoardGL::setOjo(int m) {// se encarga de camviar la vista según dimension d
 }
 
 void BoardGL::setFondo() {
-	if (tipoPieza == ESPAN) {
+	if (variante == ESPAN) {
 		GLTools::BackgroundColor(gltools::WHITE);
 	}
-	else if (tipoPieza == PERUANA) {
+	else if (variante == PERUANA) {
 		GLTools::BackgroundColor(gltools::GREEN);
 	}
-	else if (tipoPieza == RUSA) {
+	else if (variante == RUSA) {
 		GLTools::BackgroundColor(gltools::BLUE);
 	}
-	else if (tipoPieza == INGLESA) {
+	else if (variante == INGLESA) {
 		GLTools::BackgroundColor(gltools::RED);
 	}
 	
 
+}
+void BoardGL::dibuja(int n) {
+	if (n == 1) {
+		if ( variante == ESPAN) {
+
+			Formas3D::Cilindro(0.06, 0.05, WHITE, GREY);
+			GLTools::Color(gltools::WHITE, 1.0f);//Cambiamos el color del tableroal poner esta declaración
+		}
+
+		else if ( variante == PERUANA) {
+			Formas3D::Cilindro(0.06, 0.05, BLUE, BLUE_DARK);
+			GLTools::Color(gltools::WHITE, 1.0f);
+		}
+		else if ( variante == INGLESA) {
+			Formas3D::Cilindro(0.06, 0.05, RED, RED_DARK);
+			GLTools::Color(gltools::WHITE, 1.0f);//Cambiamos el color del tableroal poner esta declaración
+		}
+		else if ( variante == RUSA) {
+			Formas3D::Cilindro(0.06, 0.05, GRIS_AZUL, GRIS_AZUL_2);
+			GLTools::Color(gltools::WHITE, 1.0f);//Cambiamos el color del tableroal poner esta declaración
+		}
+	}
+	else if (n == 2) {
+		Formas3D::Cilindro(0.06, 0.05, 12, 13);
+	}
+	else if (n == 3) {
+		if ( variante == ESPAN) {
+			Formas3D::Cilindro(0.06, 0.05, 0, 11);
+		}
+		else if ( variante == PERUANA) {
+			Formas3D::Cilindro(0.06, 0.05, 4, 14);
+		}
+		else if ( variante == INGLESA) {
+			Formas3D::Cilindro(0.06, 0.05, 1, 15);
+		}
+		else if ( variante == RUSA) {
+			//Formas3D::Cilindro(0.06, 0.05);
+		}
+	} // caso reina JUGADOR
+
+	else if (n == 4)Formas3D::Cilindro(0.06, 0.05, 1, 15);//Reina negra
 }

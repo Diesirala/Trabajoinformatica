@@ -190,7 +190,7 @@ int Board::comer(int x, int y, int posicionx, int posiciony)
 	
 }
 
-Board::est Board::estadoPartida(void) {
+est Board::estadoPartida(void) {
 
 	return estado;
 
