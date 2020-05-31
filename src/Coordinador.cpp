@@ -162,7 +162,7 @@ void Coordinador::Draw(){
 		Imagen("imagenes/tablero1.png");
 		ETSIDI::setTextColor(0, 1, 1);
 		ETSIDI::setFont("fuentes/1.ttf", 40);
-		ETSIDI::printxy("Elige el tipo de damas:", -7, 12);
+		ETSIDI::printxy("Elige el tipo de tablero:", -7, 12);
 		ETSIDI::setTextColor(0, 1, 0);
 		ETSIDI::setFont("fuentes/2.ttf", 12);
 		ETSIDI::printxy("1.--- (8x8)", -3, 9);
@@ -182,7 +182,17 @@ void Coordinador::Draw(){
 			estado = VICTORIAB;
 			tablero = 0;
 		}
-	
+		switch (estado){
+		case 2:
+			cout << " Estado de la partida Jugando " << endl;
+			break;
+		case 3:
+			cout << " Estado de la partida VictoriaB " << endl;
+			break;
+		case 4:
+			cout << " Estado de la partida DerrotaB  " << endl;
+			break;
+		}
 
 	}
 
@@ -199,9 +209,9 @@ void Coordinador::Draw(){
 		//Fondo pantala inicig
 		Imagen("imagenes/Tablero1.png");
 		ETSIDI::setTextColor(1, 1, 0);
-		ETSIDI::setFont("fuentes/icecube.ttf", 50);
-		ETSIDI::printxy("GAMEOVER: Has perdido.", -5, 10);
-		ETSIDI::printxy("PULSE LA TECLA -C- PARA CONTINUAR", -5, 8);
+		ETSIDI::setFont("fuentes/icecube.ttf", 400);
+		ETSIDI::printxy("GAMEOVER: Has perdido.", -8, 10);
+		ETSIDI::printxy("PULSE LA TECLA -C- PARA CONTINUAR", -8, 8);
 	}
 
 	else if (estado == VICTORIAB)

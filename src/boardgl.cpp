@@ -17,7 +17,8 @@ enum {
 	ORANGE, PURPLE, PINK, GREY,
 	BLACK, Grey_dark, BLUE_DARK, RED_DARK,
 	GRIS_AZUL, GRIS_AZUL_2, PINK_dark,
-	WHITEP
+	WHITEP, ORANGE_Dark,BLUE_DARK2,
+	RED_DARK2, GREEN_DARK2, Grey_dark2
 };
 
 
@@ -180,7 +181,7 @@ void BoardGL::dibuja(int n) {
 	if (n == 1) {
 		if (variante == ESPAN) {
 			Formas3D::Cilindro(0.06, 0.05,WHITEP,GREY);
-			GLTools::Color(gltools::WHITE, 1.0f);//Cambiamos el color del tablero al poner esta declaración
+			GLTools::Color(gltools::WHITE, 1.0f);//Cambiamos el color del tablero
 		}
 	
 		else if (variante == PERUANA) {
@@ -189,11 +190,11 @@ void BoardGL::dibuja(int n) {
 		}
 		else if (variante == INGLESA) {
 			Formas3D::Cilindro(0.06, 0.05, RED,RED_DARK);
-			GLTools::Color(gltools::WHITE, 1.0f);//Cambiamos el color del tableroal poner esta declaración
+			GLTools::Color(gltools::WHITE, 1.0f);//Cambiamos el color del tablero
 		}
 		else if (variante == RUSA) {
 			Formas3D::Cilindro(0.06, 0.05,GRIS_AZUL,GRIS_AZUL_2 );
-			GLTools::Color(gltools::WHITE, 1.0f);//Cambiamos el color del tableroal poner esta declaración
+			GLTools::Color(gltools::WHITE, 1.0f);//Cambiamos el color del tablero
 		}
 	}
 	else if (n == 2) {
@@ -203,25 +204,25 @@ void BoardGL::dibuja(int n) {
 
 	else if (n==3) {
 		if (variante == ESPAN) {
-			Formas3D::Cilindro(0.06, 0.05, YELLOW,ORANGE);
+			Formas3D::Reina(WHITE,WHITEP,GREY);
 			GLTools::Color(gltools::WHITE, 1.0f);
 		}
 		else if (variante == PERUANA) {
-			Formas3D::Cilindro(0.06, 0.05, ORANGE, RED);
+			Formas3D::Reina(BLUE, BLUE_DARK, BLUE_DARK2);
 			GLTools::Color(gltools::WHITE, 1.0f);
 		}
 		else if (variante == INGLESA) {
-			Formas3D::Cilindro(0.06, 0.05, GREY, Grey_dark);
+			Formas3D::Reina(RED,RED_DARK,RED_DARK2);
 			GLTools::Color(gltools::WHITE, 1.0f);
 		}
 		else if (variante == RUSA) {
-			Formas3D::Cilindro(0.06, 0.05, GREEN, GREEN_DARK);
+			Formas3D::Reina(GREEN, GREEN_DARK,GREEN_DARK2);
 			GLTools::Color(gltools::WHITE, 1.0f);
 		}
 	} // caso reina JUGADOR
 
 	else if (n == 4) {
-		Formas3D::Cilindro(0.06, 0.05, PINK, PINK_dark);//Reina negra
+		Formas3D::Reina(YELLOW, ORANGE, ORANGE_Dark);//Reina negra
 		GLTools::Color(gltools::WHITE, 1.0f);
 	}
 }

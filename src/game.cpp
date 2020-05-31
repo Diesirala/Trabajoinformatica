@@ -13,7 +13,6 @@
 
 /////////////////////////////////
 //call back declarations: will be called by glut when registered
-
 void OnDraw(void); 
 void OnKeyboardDown(unsigned char key, int x, int y); 
 void OnMouseClick(int button,int state, int x,int y);
@@ -150,32 +149,22 @@ void OnMouseClick(int b,int state, int x,int y){
 			yactual = escena.ycell_sel;
 			count++;
 			cout << xactual << yactual <<"   actual"<< endl;
-			if (escena.a->soplido(xactual, yactual)) {
-				escena.a->actualizarEstado();
-				count--;
-			}
-			if (escena.a->getPieceType(xactual,yactual) == Object::EMPTY_CELL)
-				count--;
-			//escena.a->soplido(xactual, yactual);
 		}
 		else {
 			posicionx = escena.xcell_sel;
 			posiciony = escena.ycell_sel;
 			count--;
 			cout << posicionx << posiciony << endl;
-			if(escena.a->cambiarPosicion(xactual, yactual, posicionx, posiciony))
-				escena.a->actualizarEstado();
-			if( escena.a->comer(xactual, yactual, posicionx, posiciony))
-				escena.a->actualizarEstado();
-			
-			//escena.a->soplido(posicionx, posiciony);
+
+			escena.a->cambiarPosicion(xactual, yactual, posicionx, posiciony);
+			escena.a->comer(xactual, yactual, posicionx, posiciony);
+			escena.a->actualizarEstado();
 		}
 		cout << escena.a->estadoPartida() << endl;
 	}
 	
-	if (button == MOUSE_RIGHT_BUTTON && down) {
+	if (button == MOUSE_RIGHT_BUTTON && down)
 		escena.a->pasoTurno();
-	}
 	glutPostRedisplay();
 }
 
