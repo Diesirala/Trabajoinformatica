@@ -49,23 +49,28 @@ void GLTools::Color(int i,float transparency)
 	if (i == BLACK)		glColor4f(0, 0, 0, transparency);
 	else if (i == WHITEP)glColor4f(0.86f, 0.86f, 0.86f, transparency);
 	else if (i == WHITE)	glColor4f(1.0f, 1.0f, 1.0f, transparency);
-	else if (i == RED)		glColor4f(0.3f, 0, 0, transparency);
-	else if (i == RED_DARK)glColor4f(0.23, 0.0f, 0, transparency);
+	else if (i == RED)		glColor4f(0.5f, 0, 0, transparency);
+	else if (i == RED_DARK)glColor4f(0.30, 0.0f, 0, transparency);
+	else if (i == RED_DARK2)glColor4f(0.15, 0.0f, 0, transparency);
 	else if (i == GREEN)	glColor4f(0.25, 0.4f, 0.1, transparency);
 	else if (i == BLUE)	glColor4f(0.2, 0.2, 0.85f, transparency);
 	else if (i == BLUE_DARK) glColor4f(0.2f, 0.2f, 0.7f, transparency);
+	else if (i == BLUE_DARK2) glColor4f(0.12f, 0.12f, 0.7f, transparency);
 	else if (i == MAGENTA)	glColor4f(1.0f, 0, 1.0f, transparency);
 	else if (i == CYAN)	glColor4f(0.0f, 1.0f, 1.0f, transparency);
 	else if (i == GREY)	glColor4f(0.83f, 0.83f, 0.83f, transparency);
 	else if (i == GRIS_AZUL)	glColor4f(0.85f, 0.9f, 0.85f, transparency);
 	else if (i == GRIS_AZUL_2)	glColor4f(0.60f, 0.9f, 0.60f, transparency);
 	else if (i == GREEN_DARK) glColor4f(0.25, 0.7f, 0.1, transparency);
+	else if (i == GREEN_DARK2) glColor4f(0.25, 0.25f, 0.1, transparency);
 	else if (i == YELLOW)  glColor4f(0.75f, 0.75f, 0.25f, transparency);
 	else if (i == ORANGE)  glColor4f(0.68f, 0.68f, 0.25f, transparency);
+	else if (i == ORANGE_dark)  glColor4f(0.60f, 0.60f, 0.25f, transparency);
 	else if (i == PURPLE)  glColor4f(0.3, 0.3, 1.0f, transparency);
 	else if (i == PINK) 	glColor4f(0.0f, 0.3, 0.3f, transparency);
 	else if (i == PINK_dark) 	glColor4f(0.8f, 0.3, 0.3f, transparency);
 	else if (i == Grey_dark) glColor4f(0.15f, 0.15f, 0.15f, transparency);
+	else if (i == Grey_dark2) glColor4f(0.08f, 0.08f, 0.08f, transparency);
 	//if(i==VERDE)glColor3ub(0,255,0);
 /*	if(i==VERDE)glColor3ub(155,75,70);//naranja
 	if(i==AZUL)	glColor3ub(0,0,255);//magenta
