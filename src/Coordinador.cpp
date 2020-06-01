@@ -15,7 +15,7 @@ void Coordinador::KeyDown(unsigned char key)
 	{
 		if (key == 'e')
 		{
-
+			ETSIDI::play("sonidos/campana.wav");
 			estado = VARIANTES;
 		}
 		if (key == 's')
@@ -26,23 +26,27 @@ void Coordinador::KeyDown(unsigned char key)
 		switch (key)
 		{
 		case '1': {
+			ETSIDI::play("sonidos/campana.wav");
 			variante = ESPAN;
 			estado = TABLERO;
 			break;
 		}
 		case '2': {
+			ETSIDI::play("sonidos/campana.wav");
 			variante = PERUANA;
 			estado = JUGANDO;//LAS DAMAS PERUANAS SOLO TIENEN 8X8
 			break;
 		}
 		
 		case'3': {
+			ETSIDI::play("sonidos/campana.wav");
 			//tablero damas inglesas
 			variante = INGLESA;
 			estado = JUGANDO;
 			break;
 		}
 		case'4': {
+			ETSIDI::play("sonidos/campana.wav");
 			//tablero damas rusas
 			variante = RUSA;
 			estado = JUGANDO;
@@ -62,15 +66,18 @@ void Coordinador::KeyDown(unsigned char key)
 		switch (key)
 		{
 		case '1':
+			ETSIDI::play("sonidos/campana.wav");
 			dimensiones = 8;
 			estado = MODO;
 			break;
 
 		case '2':
+			ETSIDI::play("sonidos/campana.wav");
 			dimensiones = 10;
 			estado = MODO;
 			break;
 		default:
+			ETSIDI::play("sonidos/campana.wav");
 			estado = TABLERO;
 			break;
 		}
@@ -79,10 +86,12 @@ void Coordinador::KeyDown(unsigned char key)
 		switch (key)
 		{
 		case '1':
+			ETSIDI::play("sonidos/campana.wav");
 			IA = true;
 			estado = JUGANDO;
 			break;
 		case '2':
+			ETSIDI::play("sonidos/campana.wav");
 			IA = false;
 			estado = JUGANDO;
 			break;
@@ -99,15 +108,16 @@ void Coordinador::KeyDown(unsigned char key)
 		switch (key)
 		{
 		case 'e': {
+			
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			estado = INICIO;
-			
 			tablero = 0;
 			delete  scene;
 			delete a;
 		}
 			break;
 		case 'p':
+
 			estado = PAUSA;
 		default:
 			estado = JUGANDO;
@@ -122,6 +132,7 @@ void Coordinador::KeyDown(unsigned char key)
 		delete a;
 		//estado = JUGANDO;
 		if (key == 'c')
+			ETSIDI::play("sonidos/campana.wav");
 			estado = INICIO;
 	}
 	else if (estado == VICTORIAB)
@@ -130,15 +141,18 @@ void Coordinador::KeyDown(unsigned char key)
 		delete  scene;
 		delete a;
 		if (key == 'c')
+			ETSIDI::play("sonidos/campana.wav");
 			estado = INICIO;
 
 	}
 	else if (estado == TABLAS)
 	{
+		
 		tablero = 0;
 		delete  scene;
 		delete a;
 		if (key == 'c')
+			ETSIDI::play("sonidos/campana.wav");
 			estado = INICIO;
 	}
 
@@ -148,8 +162,7 @@ void Coordinador::KeyDown(unsigned char key)
 void Coordinador::Draw(){
 	
 	if (estado == INICIO) {
-		//init();
-		glClearColor(1, 1, 1, 1);// blanco del fondo
+		
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
@@ -164,7 +177,7 @@ void Coordinador::Draw(){
 		ETSIDI::setTextColor(0.20f, 0.75f, 0.60f);
 		ETSIDI::setFont("fuentes/4.ttf", 50);
 		ETSIDI::printxy("|DAMAS|", -4.75, 11);
-		ETSIDI::setTextColor(0.95, 0.95, 0.95);
+		ETSIDI::setTextColor(1,1,1);
 		ETSIDI::setFont("fuentes/bitwise.ttf", 18);
 		ETSIDI::printxy("Pulse la tecla -E- PARA EMPEZAR", -6.5, 7);
 		ETSIDI::printxy("Pulse la tecla -S- PARA SALIR", -6, 6);
@@ -288,7 +301,7 @@ void Coordinador::Draw(){
 	Imagen("imagenes/tablero1.png");
 	ETSIDI::setTextColor(0.85, 0.85, 0);
 	ETSIDI::setFont("fuentes/3.ttf", 50);
-	ETSIDI::printxy("YOU WIN!", -5, 10);
+	ETSIDI::printxy("YOU Win!", -5, 10);
 	ETSIDI::setFont("fuentes/Bitwise.ttf", 20);
 	ETSIDI::setTextColor(0.95, 0.95, 0.95);
 	ETSIDI::printxy("Pulse techa -C- PARA CONTINUAR", -6, 4);
