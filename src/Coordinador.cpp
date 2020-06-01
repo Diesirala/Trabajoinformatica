@@ -39,13 +39,13 @@ void Coordinador::KeyDown(unsigned char key)
 		case'3': {
 			//tablero damas inglesas
 			variante = INGLESA;
-			estado = TABLERO;
+			estado = JUGANDO;
 			break;
 		}
 		case'4': {
 			//tablero damas rusas
 			variante = RUSA;
-			estado = TABLERO;
+			estado = JUGANDO;
 			break;
 		}
 
@@ -133,15 +133,23 @@ void Coordinador::KeyDown(unsigned char key)
 			estado = INICIO;
 
 	}
+	else if (estado == TABLAS)
+	{
+		tablero = 0;
+		delete  scene;
+		delete a;
+		if (key == 'c')
+			estado = INICIO;
+	}
 
 	
 
 }
 void Coordinador::Draw(){
 	
-	if (estado == INICIO ) {
+	if (estado == INICIO) {
 		//init();
-		//glClearColor(1, 1, 1, 1);// blanco del fondo
+		glClearColor(1, 1, 1, 1);// blanco del fondo
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
@@ -150,58 +158,67 @@ void Coordinador::Draw(){
 			0.0, 7.5, 0.0, // hacia que punto mira (0,7.5,0)
 			0.0, 1.0, 0.0); // definimos hacia arriba (eje Y)
 		//Fondo pantala inicig
-		
+		//
 		Imagen("imagenes/tablero1.png"); //cargador de imágenes en pantalla
 
-		ETSIDI::setTextColor(0, 1, 1);
-		ETSIDI::setFont("fuentes/1.ttf", 80);
-		ETSIDI::printxy(" /DAMAS/", -5, 9);
-		ETSIDI::setTextColor(1, 1, 1);
-		ETSIDI::setFont("fuentes/2.ttf", 12);
-		ETSIDI::printxy("PULSE LA TECLA -E- PARA EMPEZAR", -5, 7);
-		ETSIDI::printxy("PULSE LA TECLA -S- PARA SALIR", -5, 6);
+		ETSIDI::setTextColor(0.20f, 0.75f, 0.60f);
+		ETSIDI::setFont("fuentes/4.ttf", 50);
+		ETSIDI::printxy("|DAMAS|", -4.75, 11);
+		ETSIDI::setTextColor(0.95, 0.95, 0.95);
+		ETSIDI::setFont("fuentes/bitwise.ttf", 18);
+		ETSIDI::printxy("Pulse la tecla -E- PARA EMPEZAR", -6.5, 7);
+		ETSIDI::printxy("Pulse la tecla -S- PARA SALIR", -6, 6);
 		
+	
 	}
 	else if (estado == VARIANTES)
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		Imagen("imagenes/tablero1.png");
-		ETSIDI::setTextColor(0, 1, 1);
-		ETSIDI::setFont("fuentes/1.ttf", 40);
-		ETSIDI::printxy("Elige el color de tus damas:", -7, 12);
-		ETSIDI::setTextColor(0, 1, 0);
-		ETSIDI::setFont("fuentes/2.ttf", 12);
-		ETSIDI::printxy("1. CLÁSICAS", -3, 9);
-		ETSIDI::printxy("2. PERUANAS", -3, 8);
-		ETSIDI::printxy("3. VERDE", -3, 7);
-		ETSIDI::printxy("4. ROJAS", -3, 6);
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
+
+		gluLookAt(0, 7.5, 20, // posicion del ojo
+			0.0, 7.5, 0.0, // hacia que punto mira (0,7.5,0)
+			0.0, 1.0, 0.0); // definimos hacia arriba (eje Y)
+		//Fondo pantala inicig
+
+		Imagen("imagenes/tablero1.png"); //cargador de imágenes en pantalla
+
+		ETSIDI::setTextColor(0.20f, 0.75f, 0.60f);
+		ETSIDI::setFont("fuentes/4.ttf", 50);
+		ETSIDI::printxy("|VARIANTES|", -6, 11);
+		ETSIDI::setTextColor(0.95, 0.95, 0.95);
+		ETSIDI::setFont("fuentes/bitwise.ttf", 18);
+		ETSIDI::printxy("Pulse la tecla -1- ESPANOLA", -5, 7);
+		ETSIDI::printxy("Pulse la tecla -2- PERUANA", -5, 6);
+		ETSIDI::printxy("Pulse la tecla -3- INGLESA", -5, 5);
+		ETSIDI::printxy("Pulse la tecla -4- RUSA", -5, 4);
 	
 	}
 	else if (estado == MODO) {
-
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		Imagen("imagenes/tablero1.png");
-		ETSIDI::setTextColor(0, 1, 1);
-		ETSIDI::setFont("fuentes/1.ttf", 40);
-		ETSIDI::printxy("Elige el tipo de tablero:", -7, 12);
-		ETSIDI::setTextColor(0, 1, 0);
-		ETSIDI::setFont("fuentes/2.ttf", 12);
-		ETSIDI::printxy("1.--- 1-PLAYER", -3, 9);
-		ETSIDI::printxy("2.--- 2-PLAYERS", -3, 7);
-
+		Imagen("imagenes/tablero1.png"); //cargador de imágenes en pantalla
+		ETSIDI::setTextColor(0.20f, 0.75f, 0.60f);
+		ETSIDI::setFont("fuentes/4.ttf", 50);
+		ETSIDI::printxy("|MODO|", -3.75, 11);
+		ETSIDI::setTextColor(0.95, 0.95, 0.95);
+		ETSIDI::setFont("fuentes/bitwise.ttf", 18);
+		ETSIDI::printxy("Pulse la tecla -1- 1 PLAYER", -5, 7);
+		ETSIDI::printxy("Pulse la tecla -2- 2 PLAYERS", -5, 6);
+		
 
 	}
 	else if (estado == TABLERO) {
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		Imagen("imagenes/tablero1.png");
-		ETSIDI::setTextColor(0, 1, 1);
-		ETSIDI::setFont("fuentes/1.ttf", 40);
-		ETSIDI::printxy("Elige el tipo de tablero:", -7, 12);
-		ETSIDI::setTextColor(0, 1, 0);
-		ETSIDI::setFont("fuentes/2.ttf", 12);
-		ETSIDI::printxy("1.--- (8x8)", -3, 9);
-		ETSIDI::printxy("2.--- (10x10)", -3, 7);
+		Imagen("imagenes/tablero1.png"); //cargador de imágenes en pantalla
+		ETSIDI::setTextColor(0.20f, 0.75f, 0.60f);
+		ETSIDI::setFont("fuentes/4.ttf", 50);
+		ETSIDI::printxy("|Elige Tablero|", -6.25, 11);
+		ETSIDI::setTextColor(0.95, 0.95, 0.95);
+		ETSIDI::setFont("fuentes/bitwise.ttf", 18);
+		ETSIDI::printxy("Pulse la tecla -1- (8x8)", -5, 7);
+		ETSIDI::printxy("Pulse la tecla -2- (10x10)", -5, 6);
 		
 	}
 
@@ -216,6 +233,11 @@ void Coordinador::Draw(){
 		}
 		if (a->estadoPartida() == VICTORIAB) {
 			estado = VICTORIAB;
+			tablero = 0;
+		}
+		if (a->estadoPartida() == TABLAS)
+		{
+			estado = TABLAS;
 			tablero = 0;
 		}
 		switch (estado){
@@ -234,38 +256,62 @@ void Coordinador::Draw(){
 
 	else if (estado == DERROTAB)
 	{
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		gluPerspective(40.0, 800 / 600.0f, 0.1, 150);
-		glMatrixMode(GL_MODELVIEW);
-		glLoadIdentity();
-
-		gluLookAt(0, 7.5, 20, // posicion del ojo
-			0.0, 7.5, 0.0, // hacia que punto mira (0,7.5,0)
-			0.0, 1.0, 0.0); // definimos hacia arriba (eje Y)
-		//Fondo pantala inicig
-		Imagen("imagenes/Tablero1.png");
-		ETSIDI::setTextColor(1, 1, 0);
-		ETSIDI::setFont("fuentes/icecube.ttf", 400);
-		ETSIDI::printxy("GAMEOVER: Has perdido.", -8, 10);
-		ETSIDI::printxy("PULSE LA TECLA -C- PARA CONTINUAR", -8, 8);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	gluPerspective(40.0, 800 / 600.0f, 0.1, 150);
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	gluLookAt(0, 7.5, 20, // posicion del ojo
+		0.0, 7.5, 0.0, // hacia que punto mira (0,7.5,0)
+		0.0, 1.0, 0.0); // definimos hacia arriba (eje Y)
+	//Fondo pantala inicig
+	//draw
+	Imagen("imagenes/tablero1.png");
+	ETSIDI::setTextColor(0.95, 0.25, 0.25);
+	ETSIDI::setFont("fuentes/3.ttf", 50);
+	ETSIDI::printxy("GAME OVER", -5.5, 11);
+	ETSIDI::setFont("fuentes/Bitwise.ttf", 20);
+	ETSIDI::setTextColor(0.95, 0.95, 0.95);
+	ETSIDI::printxy("Pulse techa -C- PARA CONTINUAR", -6, 4);
 	}
 
 	else if (estado == VICTORIAB)
 	{
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		gluPerspective(40.0, 800 / 600.0f, 0.1, 150);
-		glMatrixMode(GL_MODELVIEW);
-		glLoadIdentity();
-
-		gluLookAt(0, 7.5, 20, // posicion del ojo
-			0.0, 7.5, 0.0, // hacia que punto mira (0,7.5,0)
-			0.0, 1.0, 0.0); // definimos hacia arriba (eje Y)
-		//Fondo pantala inicig
-		//draw
-		ETSIDI::setTextColor(1, 1, 0);
-		ETSIDI::setFont("fuentes/icecube.ttf", 50);
-		ETSIDI::printxy("ENHORABUENA: ¡Has ganado!.", -5, 10);
-		ETSIDI::printxy("PULSE LA TECLA -C- PARA CONTINUAR", -5, 8);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	gluPerspective(40.0, 800 / 600.0f, 0.1, 150);
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	gluLookAt(0, 7.5, 20, // posicion del ojo
+		0.0, 7.5, 0.0, // hacia que punto mira (0,7.5,0)
+		0.0, 1.0, 0.0); // definimos hacia arriba (eje Y)
+	//Fondo pantala inicig
+	//draw
+	Imagen("imagenes/tablero1.png");
+	ETSIDI::setTextColor(0.85, 0.85, 0);
+	ETSIDI::setFont("fuentes/3.ttf", 50);
+	ETSIDI::printxy("YOU WIN!", -5, 10);
+	ETSIDI::setFont("fuentes/Bitwise.ttf", 20);
+	ETSIDI::setTextColor(0.95, 0.95, 0.95);
+	ETSIDI::printxy("Pulse techa -C- PARA CONTINUAR", -6, 4);
+		
+	}
+	else if (estado == TABLAS)
+	{
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	gluPerspective(40.0, 800 / 600.0f, 0.1, 150);
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	gluLookAt(0, 7.5, 20, // posicion del ojo
+		0.0, 7.5, 0.0, // hacia que punto mira (0,7.5,0)
+		0.0, 1.0, 0.0); // definimos hacia arriba (eje Y)
+	//Fondo pantala inicig
+	//draw
+	Imagen("imagenes/tablero1.png");
+	ETSIDI::setTextColor(0.20f, 0.75f, 0.60f);
+	ETSIDI::setFont("fuentes/3.ttf", 50);
+	ETSIDI::printxy("DRAW", -3.5, 11);
+	ETSIDI::setFont("fuentes/Bitwise.ttf", 20);
+	ETSIDI::setTextColor(0.95, 0.95, 0.95);
+	ETSIDI::printxy("Pulse techa -C- PARA CONTINUAR", -6, 5);
 	}
 	
 }
