@@ -199,7 +199,7 @@ void BoardGL::dibuja(int n) {
 	}
 	else if (n == 2) {
 		Formas3D::Cilindro(0.06, 0.05,Grey_dark, BLACK);
-		GLTools::Color(gltools::WHITE, 1.0f);
+		GLTools::Color(gltools::WHITEP, 1.0f);
 	}
 
 	else if (n==3) {

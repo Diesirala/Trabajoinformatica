@@ -1,6 +1,6 @@
 #include "board.h"
 #include <math.h>
-
+#include "ETSIDI.h"
 
 
 int Board::cambiarPosicion(int x, int y, int posicionx, int posiciony)
@@ -16,6 +16,7 @@ int Board::cambiarPosicion(int x, int y, int posicionx, int posiciony)
 					PiezasSoplido[0][i].setCell(posicionx, posiciony, Object::QUEEN_GREEN);
 
 			}
+			ETSIDI::play("sonidos/mover.wav");
 			tab[posicionx][posiciony].setCell(posicionx, posiciony, Object::QUEEN_GREEN);
 			tab[x][y].setCell(-1, -1, Object::EMPTY_CELL);
 			movimientos = 0;
@@ -35,6 +36,7 @@ int Board::cambiarPosicion(int x, int y, int posicionx, int posiciony)
 					PiezasSoplido[1][i].setCell(posicionx, posiciony, Object::QUEEN_BLACK);
 
 			}
+			ETSIDI::play("sonidos/mover.wav");
 			tab[posicionx][posiciony].setCell(posicionx, posiciony, Object::QUEEN_BLACK);
 			tab[x][y].setCell(-1, -1, Object::EMPTY_CELL);
 			movimientos = 0;
@@ -73,6 +75,7 @@ int Board::cambiarPosicion(int x, int y, int posicionx, int posiciony)
 							PiezasSoplido[0][i].setCell(posicionx, posiciony, Object::QUEEN_GREENR);
 
 					}
+					ETSIDI::play("sonidos/mover.wav");
 					tab[posicionx][posiciony].setCell(posicionx, posiciony, Object::QUEEN_GREENR);
 					movimientos = 0;
 					pasoTurno();
@@ -87,6 +90,7 @@ int Board::cambiarPosicion(int x, int y, int posicionx, int posiciony)
 							PiezasSoplido[1][i].setCell(posicionx, posiciony, Object::QUEEN_BLACK);
 
 					}
+					ETSIDI::play("sonidos/mover.wav");
 					tab[posicionx][posiciony].setCell(posicionx, posiciony, Object::QUEEN_BLACKR);
 					movimientos = 0;
 					pasoTurno();
@@ -119,6 +123,7 @@ int Board::comer(int x, int y, int posicionx, int posiciony)
 				if (tab[pmediox][pmedioy].getType() == Object::QUEEN_BLACK || tab[pmediox][pmedioy].getType() == Object::QUEEN_BLACKR)
 				{
 
+					ETSIDI::play("sonidos/comer.wav");
 					tab[posicionx][posiciony].setCell(posicionx, posiciony, Object::QUEEN_GREEN);
 					tab[x][y].setCell(-1, -1, Object::EMPTY_CELL);
 					tab[pmediox][pmedioy].setCell(-1, -1, Object::EMPTY_CELL);
@@ -145,7 +150,7 @@ int Board::comer(int x, int y, int posicionx, int posiciony)
 				pmedioy = (posiciony + y) / 2;
 				if (tab[pmediox][pmedioy].getType() == Object::QUEEN_GREEN || tab[pmediox][pmedioy].getType() == Object::QUEEN_GREENR)
 				{
-
+					ETSIDI::play("sonidos/comer.wav");
 					tab[posicionx][posiciony].setCell(posicionx, posiciony, Object::QUEEN_BLACK);
 					tab[x][y].setCell(-1, -1, Object::EMPTY_CELL);
 					tab[pmediox][pmedioy].setCell(-1, -1, Object::EMPTY_CELL);
@@ -187,6 +192,7 @@ int Board::comer(int x, int y, int posicionx, int posiciony)
 					if ((cont + 2) == (abs(posicionx - x)))
 					{
 						if (tab[x][y].getType() == Object::QUEEN_GREENR && turno == 1) {
+							ETSIDI::play("sonidos/comer.wav");
 							tab[posicionx][posiciony].setCell(posicionx, posiciony, Object::QUEEN_GREENR);
 							tab[posicionx - u][posiciony - k].setCell(-1, -1, Object::EMPTY_CELL);
 							tab[x][y].setCell(-1, -1, Object::EMPTY_CELL);
@@ -199,6 +205,7 @@ int Board::comer(int x, int y, int posicionx, int posiciony)
 						}
 						if (tab[x][y].getType() == Object::QUEEN_BLACKR && turno == -1)
 						{
+							ETSIDI::play("sonidos/comer.wav");
 							tab[posicionx][posiciony].setCell(posicionx, posiciony, Object::QUEEN_BLACKR);
 							tab[posicionx - u][posiciony - k].setCell(-1, -1, Object::EMPTY_CELL);
 							tab[x][y].setCell(-1, -1, Object::EMPTY_CELL);
@@ -313,10 +320,12 @@ void Board::estadSoplido(void)
 		if (turno == 1) {
 			for (int i = 0; i < 20; i++)
 				PiezasSoplido[0][i] = vacio[i];
+			
 		}
 		if (turno == -1) {
 			for (int i = 0; i < 20; i++)
 				PiezasSoplido[1][i] = vacio[i];
+
 		}
 		int aux0=0,aux1=0;
 		int posDeComer = 0;
