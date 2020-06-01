@@ -54,24 +54,45 @@ void Coordinador::KeyDown(unsigned char key)
 		
 		
 	}
+	
+
+
+
 	else if (estado == TABLERO) {
 		switch (key)
 		{
 		case '1':
 			dimensiones = 8;
-			estado = JUGANDO;
+			estado = MODO;
 			break;
 
 		case '2':
 			dimensiones = 10;
-			estado = JUGANDO;
+			estado = MODO;
 			break;
 		default:
 			estado = TABLERO;
 			break;
 		}
 	}
+	else if (estado == MODO) {
+		switch (key)
+		{
+		case '1':
+			IA = true;
+			estado = JUGANDO;
+			break;
+		case '2':
+			IA = false;
+			estado = JUGANDO;
+			break;
 
+		default:
+			estado = MODO;
+			break;
+		}
+
+	}
 	else if (estado == JUGANDO)
 	{ 
 		//estado = JUGANDO;
@@ -156,6 +177,20 @@ void Coordinador::Draw(){
 		ETSIDI::printxy("4. ROJAS", -3, 6);
 	
 	}
+	else if (estado == MODO) {
+
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		Imagen("imagenes/tablero1.png");
+		ETSIDI::setTextColor(0, 1, 1);
+		ETSIDI::setFont("fuentes/1.ttf", 40);
+		ETSIDI::printxy("Elige el tipo de tablero:", -7, 12);
+		ETSIDI::setTextColor(0, 1, 0);
+		ETSIDI::setFont("fuentes/2.ttf", 12);
+		ETSIDI::printxy("1.--- 1-PLAYER", -3, 9);
+		ETSIDI::printxy("2.--- 2-PLAYERS", -3, 7);
+
+
+	}
 	else if (estado == TABLERO) {
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -169,6 +204,7 @@ void Coordinador::Draw(){
 		ETSIDI::printxy("2.--- (10x10)", -3, 7);
 		
 	}
+
 
 	else if (estado == JUGANDO)
 	{
@@ -256,6 +292,7 @@ void Coordinador::MouseButton(int x, int y, int button, bool down, bool sKey, bo
 	gluUnProject(winX, winY, winZ, modelview, projection, viewport, &posX, &posY, &posZ);
 
 	//finally cell coordinates
+
 	world2cell(posX, posY, xcell_sel, ycell_sel);
 
 	///////////////////////////	
@@ -290,14 +327,17 @@ void Coordinador::MouseButton(int x, int y, int button, bool down, bool sKey, bo
 
 void Coordinador::crearTablero(int n , tipo_juego tip)
 {
-	
-		a = new Board(n,tip);
+	if (IA) {
+		a = new BoardIA(n, tip);
 		//Board* a = new Board(8);
-		scene = new BoardGL(a);
 		tablero++;
-	
-	
-
+	}
+	if (!IA) {
+		a = new Board(n, tip);
+		//Board* a = new Board(8);
+		tablero++;
+	}
+	scene = new BoardGL(a);
 }
 
 void Coordinador::Imagen(const char* img) {

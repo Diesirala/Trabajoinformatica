@@ -144,35 +144,37 @@ void OnMouseClick(int b,int state, int x,int y){
 	bool ctrlKey= (specialKey & GLUT_ACTIVE_CTRL)? true:false ;
 	bool sKey= specialKey & GLUT_ACTIVE_SHIFT ;
 	escena.MouseButton(x,y,b,down,sKey,ctrlKey);
-	if (button == MOUSE_LEFT_BUTTON && down && escena.getHayTablero() == 1) {
-		if (count == 0) {
-			xactual = escena.xcell_sel;
-			yactual = escena.ycell_sel;
-			count++;
-			cout << xactual << yactual <<"   actual"<< endl;
-			if (escena.a->soplido(xactual, yactual)) {
+	if ((escena.xcell_sel < escena.dimensiones && escena.xcell_sel >= 0) && (escena.ycell_sel < escena.dimensiones && escena.ycell_sel >= 0)) {
+		if (button == MOUSE_LEFT_BUTTON && down && escena.getHayTablero() == 1) {
+			if (count == 0) {
+				xactual = escena.xcell_sel;
+				yactual = escena.ycell_sel;
+				count++;
+				cout << xactual << yactual << "   actual" << endl;
+				if (escena.a->soplido(xactual, yactual)) {
+					//escena.a->actualizarEstado();
+					count--;
+				}
+				if (escena.a->getPieceType(xactual, yactual) == Object::EMPTY_CELL)
+					count--;
 				escena.a->actualizarEstado();
-				count--;
+				//escena.a->soplido(xactual, yactual);
 			}
-			if (escena.a->getPieceType(xactual,yactual) == Object::EMPTY_CELL)
+			else {
+				posicionx = escena.xcell_sel;
+				posiciony = escena.ycell_sel;
 				count--;
-			//escena.a->soplido(xactual, yactual);
-		}
-		else {
-			posicionx = escena.xcell_sel;
-			posiciony = escena.ycell_sel;
-			count--;
-			cout << posicionx << posiciony << endl;
-			if(escena.a->cambiarPosicion(xactual, yactual, posicionx, posiciony))
+				cout << posicionx << posiciony << endl;
+				escena.a->cambiarPosicion(xactual, yactual, posicionx, posiciony);
+				//escena.a->actualizarEstado();
+				escena.a->comer(xactual, yactual, posicionx, posiciony);
+				//escena.a->actualizarEstado();
 				escena.a->actualizarEstado();
-			if( escena.a->comer(xactual, yactual, posicionx, posiciony))
-				escena.a->actualizarEstado();
-			
-			//escena.a->soplido(posicionx, posiciony);
+				//escena.a->soplido(posicionx, posiciony);
+			}
+			//cout << escena.a->estadoPartida() << endl;
 		}
-		cout << escena.a->estadoPartida() << endl;
 	}
-	
 	if (button == MOUSE_RIGHT_BUTTON && down) {
 		escena.a->pasoTurno();
 	}
