@@ -148,9 +148,9 @@ void BoardGL::Draw(){
 	glEnable(GL_LIGHTING);
 }
 
-void BoardGL::setOjo(int m) {// se encarga de camviar la vista según dimension del tablero
+void BoardGL::setOjo(int m) {// se encarga de cambiar la vista según dimension del tablero
 	if (m == 8) {
-		gluLookAt(0.57, -2, -1.2, // posicion del ojo
+		gluLookAt(0.57, -2, -1.5, // posicion del ojo
 		0.57, 0.2, 1, // hacia que punto mira (0,7.5,0)
 		0.0, 1.0, 0.0); // definimos hacia arriba (eje Y)
 	}
@@ -166,13 +166,13 @@ void BoardGL::setFondo() {
 		GLTools::BackgroundColor(gltools::WHITE);
 	}
 	else if (variante == PERUANA) {
-		GLTools::BackgroundColor(gltools::GREEN);
+		GLTools::BackgroundColor(gltools::WHITE);
 	}
 	else if (variante == RUSA) {
-		GLTools::BackgroundColor(gltools::BLUE);
+		GLTools::BackgroundColor(gltools::WHITE);
 	}
 	else if (variante == INGLESA) {
-		GLTools::BackgroundColor(gltools::RED);
+		GLTools::BackgroundColor(gltools::WHITE);
 	}
 	
 
@@ -185,7 +185,7 @@ void BoardGL::dibuja(int n) {
 		}
 	
 		else if (variante == PERUANA) {
-			Formas3D::Cilindro(0.06, 0.05,BLUE,BLUE_DARK);
+			Formas3D::Cilindro(0.06, 0.05,GRIS_AZUL, GRIS_AZUL_2);
 			GLTools::Color(gltools::WHITE, 1.0f);
 		}
 		else if (variante == INGLESA) {
@@ -193,7 +193,7 @@ void BoardGL::dibuja(int n) {
 			GLTools::Color(gltools::WHITE, 1.0f);//Cambiamos el color del tablero
 		}
 		else if (variante == RUSA) {
-			Formas3D::Cilindro(0.06, 0.05,GRIS_AZUL,GRIS_AZUL_2 );
+			Formas3D::Cilindro(0.06, 0.05 , BLUE, BLUE_DARK);
 			GLTools::Color(gltools::WHITE, 1.0f);//Cambiamos el color del tablero
 		}
 	}
@@ -204,19 +204,19 @@ void BoardGL::dibuja(int n) {
 
 	else if (n==3) {
 		if (variante == ESPAN) {
-			Formas3D::Reina(WHITE,WHITEP,GREY);
+			Formas3D::Cilindro(0.06, 0.15, WHITEP, GREY);
 			GLTools::Color(gltools::WHITE, 1.0f);
 		}
 		else if (variante == PERUANA) {
-			Formas3D::Reina(BLUE, BLUE_DARK, BLUE_DARK2);
+			Formas3D::Cilindro(0.06, 0.15, GRIS_AZUL, GRIS_AZUL_2);
 			GLTools::Color(gltools::WHITE, 1.0f);
 		}
 		else if (variante == INGLESA) {
-			Formas3D::Reina(RED,RED_DARK,RED_DARK2);
+			Formas3D::Cilindro(0.06, 0.15, RED, RED_DARK);
 			GLTools::Color(gltools::WHITE, 1.0f);
 		}
 		else if (variante == RUSA) {
-			Formas3D::Reina(GREEN, GREEN_DARK,GREEN_DARK2);
+			Formas3D::Cilindro(0.06, 0.15, BLUE, BLUE_DARK);
 			GLTools::Color(gltools::WHITE, 1.0f);
 		}
 	} // caso reina JUGADOR
