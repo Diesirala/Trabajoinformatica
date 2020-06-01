@@ -269,6 +269,7 @@ void Board::pasoTurno(void) {
 	
 		movimientos = 1;
 		turno = -turno;
+		actualizarEstado();
 		//estadSoplido();
 	}
 	

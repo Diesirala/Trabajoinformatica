@@ -29,16 +29,19 @@
 	void MouseButton(int x, int y, int button, bool down, bool shiftKey, bool ctrlKey);
 	void crearTablero(int , tipo_juego);
 	void Imagen(const char*);
+	int getDimensiones() { return dimensiones; }
 	//coord
 	void cell2center(int cell_x, int cell_y, float& glx, float& gly) {
 		//cell_x, cell_y are the board cell coordinates (upper left hand corner is (0,0))
 		//glx, gly refer to the center of the cell(cell_x,cell_y) in world coordinates
+		
 		glx = cell_y * width + width / 2.0f;
 		gly = -cell_x * width - width / 2.0f;
 	}
 
 	void world2cell(double x, double y, int& cell_x, int& cell_y) {
 		//world coordinates to cell
+
 		cell_x = (int)(abs(y / width));
 		cell_y = (int)(x / width);
 	}
@@ -59,7 +62,7 @@ protected:
 	bool leftButton;
 	bool rightButton;
 	bool midButton;
-
+	bool IA;
 	
 	est  estado;
 	tipo_juego variante;
