@@ -328,12 +328,12 @@ void Coordinador::MouseButton(int x, int y, int button, bool down, bool sKey, bo
 void Coordinador::crearTablero(int n , tipo_juego tip)
 {
 	if (IA) {
-		a = new BoardIA(n, tip);
+		a = new BoardPeruanasIA(n, tip);
 		//Board* a = new Board(8);
 		tablero++;
 	}
 	if (!IA) {
-		a = new Board(n, tip);
+		a = new BoardPeruanas(n, tip);
 		//Board* a = new Board(8);
 		tablero++;
 	}
