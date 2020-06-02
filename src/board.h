@@ -11,7 +11,7 @@
 
 
 using namespace std;
-
+//DAMAS INTERNACIONALES
 class Board{
 public:
 	
@@ -30,7 +30,7 @@ protected:
 	tipo_juego variante;
 	
 
-	void reina(int posicionx, int posiciony);
+	virtual void reina(int posicionx, int posiciony);
 	
 
 public:
@@ -44,16 +44,23 @@ public:
 
 		//set initial position
 		for(int j=1; j<N; j+=2){
-			tab[0][j].setCell(0,j, Piece::QUEEN_BLACK);
-			tab[N-2][j].setCell(N-2, j, Piece::QUEEN_GREEN);
-			tab[2][j].setCell(2, j, Piece::QUEEN_BLACK);
+			tab[1][j].setCell(1, j, Piece::QUEEN_BLACK);
+			tab[N - 1][j].setCell(N - 1, j, Piece::QUEEN_GREEN);
+			tab[N - 3][j].setCell(N - 3, j, Piece::QUEEN_GREEN);
+			if (N >= 10) {
+				tab[N-7][j].setCell(N-7, j, Piece::QUEEN_BLACK);
+			}
 		}
 
 				
 		for(int j=0; j<N; j+=2){
-			tab[N-1][j].setCell(N-1,j, Piece::QUEEN_GREEN);
-			tab[1][j].setCell(1, j, Piece::QUEEN_BLACK);
-			tab[N-3][j].setCell(N-3, j, Piece::QUEEN_GREEN);
+			tab[0][j].setCell(0, j, Piece::QUEEN_BLACK);
+			tab[N - 2][j].setCell(N - 2, j, Piece::QUEEN_GREEN);
+			tab[2][j].setCell(2, j, Piece::QUEEN_BLACK);
+			if (N >= 10) {
+				tab[N - 4][j].setCell(N-4, j, Piece::QUEEN_GREEN);
+			}
+			
 		}
 		Piece vacio[20];
 		
@@ -66,7 +73,6 @@ public:
 
 
 	}
-
 	virtual ~Board(){
 		//delete[] PiezasSoplido;
 		for(int i=0; i<N; i++)
@@ -289,10 +295,11 @@ public:
 
 
 	}
+	
 	virtual int cambiarPosicion(int x, int y, int posicionx, int posiciony);
 	virtual int comer(int x, int y, int posicionx, int posiciony);
 	virtual void actualizarEstado(void);
-
+	virtual void estadSoplido(void);
 };
 
 
@@ -460,7 +467,8 @@ public:
 		turno = 1;
 	}
 	virtual int comer(int x, int y, int posicionx, int posiciony);
-
+	virtual void actualizarEstado(void);
+	virtual void estadSoplido(void);
 
 };
 class BoardItalianasIA : public BoardItalianas {
@@ -602,6 +610,8 @@ public:
 	}
 	virtual ~BoardPeruanas() {};
 	virtual int comer(int x, int y, int posicionx, int posiciony);
+	virtual void actualizarEstado(void);
+	virtual void estadSoplido(void);
 
 
 };
@@ -611,10 +621,117 @@ public:
 	}
 
 		virtual int comer(int x, int y, int posicionx, int posiciony);
+		virtual void actualizarEstado(void);
+		virtual void estadSoplido(void);
+};
+
+class BoardRusas : public Board {
+protected: 
+	virtual void reina(int posicionx, int posiciony);
+
+public:
+	BoardRusas(int a, tipo_juego b) :Board(a, b) {
+	}
+
+	
+
+
+
+};
+class BoardRusasIA : public BoardIA {
+protected:
+	virtual void reina(int posicionx, int posiciony);
+
+public:
+	BoardRusasIA(int a, tipo_juego b) :BoardIA(a, b) {
+	}
+
+
+
+
 
 };
 
 
+class BoardEspañolas : public Board {
+public:
+	BoardEspañolas(int n, tipo_juego b) :Board(n, b) {
+		for (int i = 0; i < N; i++) {
+			for (int j = 0; j < N; j++) {
+				tab[i][j].setCell(-1, -1, Object::EMPTY_CELL);
 
+			}
+
+		}
+		for (int j = 1; j < N; j += 2) {
+			tab[0][j].setCell(0, j, Piece::QUEEN_BLACK);
+			tab[N - 2][j].setCell(N - 2, j, Piece::QUEEN_GREEN);
+			tab[2][j].setCell(2, j, Piece::QUEEN_BLACK);
+
+		}
+
+
+		for (int j = 0; j < N; j += 2) {
+
+			tab[1][j].setCell(1, j, Piece::QUEEN_BLACK);
+			tab[N - 1][j].setCell(N - 1, j, Piece::QUEEN_GREEN);
+			tab[N - 3][j].setCell(N - 3, j, Piece::QUEEN_GREEN);
+
+		}
+
+
+
+	}
+
+	virtual int comer(int x, int y, int posicionx, int posiciony);
+	virtual void actualizarEstado(void);
+	virtual void estadSoplido(void);
+
+
+
+
+
+
+
+};
+
+class BoardEspañolasIA:public BoardIA{
+public:
+	BoardEspañolasIA(int a, tipo_juego b) :BoardIA(a, b) {
+		for (int i = 0; i < N; i++) {
+			for (int j = 0; j < N; j++) {
+				tab[i][j].setCell(-1, -1, Object::EMPTY_CELL);
+
+			}
+
+		}
+		for (int j = 1; j < N; j += 2) {
+			tab[0][j].setCell(0, j, Piece::QUEEN_BLACK);
+			tab[N - 2][j].setCell(N - 2, j, Piece::QUEEN_GREEN);
+			tab[2][j].setCell(2, j, Piece::QUEEN_BLACK);
+		}
+		for (int j = 0; j < N; j += 2) {
+			tab[1][j].setCell(1, j, Piece::QUEEN_BLACK);
+			tab[N - 1][j].setCell(N - 1, j, Piece::QUEEN_GREEN);
+			tab[N - 3][j].setCell(N - 3, j, Piece::QUEEN_GREEN);
+		}
+	}
+
+	virtual int comer(int x, int y, int posicionx, int posiciony);
+	virtual void actualizarEstado(void);
+	virtual void estadSoplido(void);
+};
+class BoardTurcas: public Board {
+public:
+	BoardTurcas(int a, tipo_juego b) :Board(a, b) {}
+	//BoardTurcas(BoardTurcas& a):Board(a){}
+	virtual int comer(int x, int y, int posicionx, int posiciony);
+	virtual int cambiarPosicion(int x, int y, int posicionx, int posiciony);
+	virtual void estadSoplido(void);
+	
+
+
+
+};
 
 #endif

@@ -15,7 +15,7 @@ void Coordinador::KeyDown(unsigned char key)
 	{
 		if (key == 'e')
 		{
-
+			ETSIDI::play("sonidos/campana.wav");
 			estado = VARIANTES;
 		}
 		if (key == 's')
@@ -25,64 +25,96 @@ void Coordinador::KeyDown(unsigned char key)
 	{
 		switch (key)
 		{
-		case '1': {
+		case '1':
+			ETSIDI::play("sonidos/campana.wav");
+			variante = INTERNACIONAL;
+			estado = TABLERO;
+			break;
+
+		case '2':
+			ETSIDI::play("sonidos/campana.wav");
 			variante = ESPAN;
-			estado = TABLERO;
+			estado = MODO;//españolas
 			break;
-		}
-		case '2': {
-			variante = PERUANA;
-			estado = JUGANDO;//LAS DAMAS PERUANAS SOLO TIENEN 8X8
-			break;
-		}
-		
-		case'3': {
+
+
+		case'3':
+			ETSIDI::play("sonidos/campana.wav");
 			//tablero damas inglesas
-			variante = INGLESA;
-			estado = TABLERO;
+			variante = CHECKERS;
+			estado = MODO;
 			break;
-		}
-		case'4': {
+
+		case'4':
+			ETSIDI::play("sonidos/campana.wav");
+			//tablero damas peruana
+			variante = PERUANA;
+			estado = MODO;
+			break;
+
+		case'5':
+			ETSIDI::play("sonidos/campana.wav");
 			//tablero damas rusas
 			variante = RUSA;
-			estado = TABLERO;
+			estado = MODO;
 			break;
-		}
+
+		case'6':
+			ETSIDI::play("sonidos/campana.wav");
+			//tablero damas turca
+			variante = TURCA;
+			estado = JUGANDO;
+			break;
+
+		case'7':
+			ETSIDI::play("sonidos/campana.wav");
+			//tablero damas italiana
+			variante = ITALIANA;
+			estado = MODO;
+			break;
+
+		default:
+			estado = VARIANTES;
+			break;
 
 		}
-		//estado = JUGANDO;
-		
 		
 	}
 	
-
-
 
 	else if (estado == TABLERO) {
 		switch (key)
 		{
 		case '1':
+			ETSIDI::play("sonidos/campana.wav");
 			dimensiones = 8;
 			estado = MODO;
 			break;
 
 		case '2':
+			ETSIDI::play("sonidos/campana.wav");
 			dimensiones = 10;
 			estado = MODO;
 			break;
+
 		default:
+			ETSIDI::play("sonidos/campana.wav");
 			estado = TABLERO;
 			break;
 		}
 	}
+
 	else if (estado == MODO) {
 		switch (key)
 		{
 		case '1':
+			ETSIDI::play("sonidos/campana.wav");
 			IA = true;
 			estado = JUGANDO;
 			break;
+
 		case '2':
+			ETSIDI::play("sonidos/campana.wav");
 			IA = false;
 			estado = JUGANDO;
 			break;
@@ -94,35 +126,39 @@ void Coordinador::KeyDown(unsigned char key)
 
 	}
 	else if (estado == JUGANDO)
-	{ 
-		//estado = JUGANDO;
+	{
 		switch (key)
 		{
 		case 'e': {
+			
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			estado = INICIO;
-			
 			tablero = 0;
 			delete  scene;
 			delete a;
 		}
 			break;
-		case 'p':
+		case 'p'://Juan aqui meter pantalla de instrucciones. cuando le des a la tecla i
 			estado = PAUSA;
+
 		default:
 			estado = JUGANDO;
 			break;
 		}
 
 	}
+
 	else if (estado == DERROTAB)
 	{
 		tablero = 0;
 		delete  scene;
 		delete a;
-		//estado = JUGANDO;
+
 		if (key == 'c')
+		{
+			ETSIDI::play("sonidos/campana.wav");
 			estado = INICIO;
+		}
 	}
 	else if (estado == VICTORIAB)
 	{
@@ -130,8 +166,23 @@ void Coordinador::KeyDown(unsigned char key)
 		delete  scene;
 		delete a;
 		if (key == 'c')
+		{
+			ETSIDI::play("sonidos/campana.wav");
 			estado = INICIO;
+		}
 
+	}
+	else if (estado == TABLAS)
+	{
+		
+		tablero = 0;
+		delete  scene;
+		delete a;
+		if (key == 'c') 
+		{
+			ETSIDI::play("sonidos/campana.wav");
+			estado = INICIO;
+		}
 	}
 
 	
@@ -139,9 +190,8 @@ void Coordinador::KeyDown(unsigned char key)
 }
 void Coordinador::Draw(){
 	
-	if (estado == INICIO ) {
-		//init();
-		//glClearColor(1, 1, 1, 1);// blanco del fondo
+	if (estado == INICIO) {
+		
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
@@ -150,58 +200,70 @@ void Coordinador::Draw(){
 			0.0, 7.5, 0.0, // hacia que punto mira (0,7.5,0)
 			0.0, 1.0, 0.0); // definimos hacia arriba (eje Y)
 		//Fondo pantala inicig
-		
+		//
 		Imagen("imagenes/tablero1.png"); //cargador de imágenes en pantalla
 
-		ETSIDI::setTextColor(0, 1, 1);
-		ETSIDI::setFont("fuentes/1.ttf", 80);
-		ETSIDI::printxy(" /DAMAS/", -5, 9);
-		ETSIDI::setTextColor(1, 1, 1);
-		ETSIDI::setFont("fuentes/2.ttf", 12);
-		ETSIDI::printxy("PULSE LA TECLA -E- PARA EMPEZAR", -5, 7);
-		ETSIDI::printxy("PULSE LA TECLA -S- PARA SALIR", -5, 6);
+		ETSIDI::setTextColor(0.20f, 0.75f, 0.60f);
+		ETSIDI::setFont("fuentes/4.ttf", 50);
+		ETSIDI::printxy("|DAMAS|", -4.75, 11);
+		ETSIDI::setTextColor(1,1,1);
+		ETSIDI::setFont("fuentes/bitwise.ttf", 18);
+		ETSIDI::printxy("Pulse la tecla -E- PARA EMPEZAR", -6.5, 7);
+		ETSIDI::printxy("Pulse la tecla -S- PARA SALIR", -6, 6);
 		
+	
 	}
 	else if (estado == VARIANTES)
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		Imagen("imagenes/tablero1.png");
-		ETSIDI::setTextColor(0, 1, 1);
-		ETSIDI::setFont("fuentes/1.ttf", 40);
-		ETSIDI::printxy("Elige el color de tus damas:", -7, 12);
-		ETSIDI::setTextColor(0, 1, 0);
-		ETSIDI::setFont("fuentes/2.ttf", 12);
-		ETSIDI::printxy("1. CLÁSICAS", -3, 9);
-		ETSIDI::printxy("2. PERUANAS", -3, 8);
-		ETSIDI::printxy("3. VERDE", -3, 7);
-		ETSIDI::printxy("4. ROJAS", -3, 6);
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
+
+		gluLookAt(0, 7.5, 20, // posicion del ojo
+			0.0, 7.5, 0.0, // hacia que punto mira (0,7.5,0)
+			0.0, 1.0, 0.0); // definimos hacia arriba (eje Y)
+		//Fondo pantala inicig
+
+		Imagen("imagenes/tablero1.png"); //cargador de imágenes en pantalla
+
+		ETSIDI::setTextColor(0.20f, 0.75f, 0.60f);
+		ETSIDI::setFont("fuentes/4.ttf", 50);
+		ETSIDI::printxy("|VARIANTES|", -6, 11);
+		ETSIDI::setTextColor(0.95, 0.95, 0.95);
+		ETSIDI::setFont("fuentes/bitwise.ttf", 18);
+		ETSIDI::printxy("Pulse la tecla -1- INTERNACIONALES", -5, 7);
+		ETSIDI::printxy("Pulse la tecla -2- ESPANOLAS", -5, 6);
+		ETSIDI::printxy("Pulse la tecla -3- CHECKERS", -5, 5);
+		ETSIDI::printxy("Pulse la tecla -4- PERUANAS", -5, 4);
+		ETSIDI::printxy("Pulse la tecla -5- RUSAS", -5, 3);
+		ETSIDI::printxy("Pulse la tecla -6- TURCAS", -5, 2);
+		ETSIDI::printxy("Pulse la tecla -7- ITALIANAS", -5, 1);
 	
 	}
 	else if (estado == MODO) {
-
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		Imagen("imagenes/tablero1.png");
-		ETSIDI::setTextColor(0, 1, 1);
-		ETSIDI::setFont("fuentes/1.ttf", 40);
-		ETSIDI::printxy("Elige el tipo de tablero:", -7, 12);
-		ETSIDI::setTextColor(0, 1, 0);
-		ETSIDI::setFont("fuentes/2.ttf", 12);
-		ETSIDI::printxy("1.--- 1-PLAYER", -3, 9);
-		ETSIDI::printxy("2.--- 2-PLAYERS", -3, 7);
-
+		Imagen("imagenes/tablero1.png"); //cargador de imágenes en pantalla
+		ETSIDI::setTextColor(0.20f, 0.75f, 0.60f);
+		ETSIDI::setFont("fuentes/4.ttf", 50);
+		ETSIDI::printxy("|MODO|", -3.75, 11);
+		ETSIDI::setTextColor(0.95, 0.95, 0.95);
+		ETSIDI::setFont("fuentes/bitwise.ttf", 18);
+		ETSIDI::printxy("Pulse la tecla -1- 1 PLAYER", -5, 7);
+		ETSIDI::printxy("Pulse la tecla -2- 2 PLAYERS", -5, 6);
+		
 
 	}
 	else if (estado == TABLERO) {
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		Imagen("imagenes/tablero1.png");
-		ETSIDI::setTextColor(0, 1, 1);
-		ETSIDI::setFont("fuentes/1.ttf", 40);
-		ETSIDI::printxy("Elige el tipo de damas:", -7, 12);
-		ETSIDI::setTextColor(0, 1, 0);
-		ETSIDI::setFont("fuentes/2.ttf", 12);
-		ETSIDI::printxy("1.--- (8x8)", -3, 9);
-		ETSIDI::printxy("2.--- (10x10)", -3, 7);
+		Imagen("imagenes/tablero1.png"); //cargador de imágenes en pantalla
+		ETSIDI::setTextColor(0.20f, 0.75f, 0.60f);
+		ETSIDI::setFont("fuentes/4.ttf", 50);
+		ETSIDI::printxy("|Elige Tablero|", -6.25, 11);
+		ETSIDI::setTextColor(0.95, 0.95, 0.95);
+		ETSIDI::setFont("fuentes/bitwise.ttf", 18);
+		ETSIDI::printxy("Pulse la tecla -1- (8x8)", -5, 7);
+		ETSIDI::printxy("Pulse la tecla -2- (10x10)", -5, 6);
 		
 	}
 
@@ -218,44 +280,83 @@ void Coordinador::Draw(){
 			estado = VICTORIAB;
 			tablero = 0;
 		}
-	
+		if (a->estadoPartida() == TABLAS)
+		{
+			estado = TABLAS;
+			tablero = 0;
+		}
+		switch (estado){
+		case 2:
+			cout << " Estado de la partida Jugando " << endl;
+			break;
+		case 3:
+			cout << " Estado de la partida VictoriaB " << endl;
+			break;
+		case 4:
+			cout << " Estado de la partida DerrotaB  " << endl;
+			break;
+		}
 
 	}
 
 	else if (estado == DERROTAB)
 	{
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		gluPerspective(40.0, 800 / 600.0f, 0.1, 150);
-		glMatrixMode(GL_MODELVIEW);
-		glLoadIdentity();
-
-		gluLookAt(0, 7.5, 20, // posicion del ojo
-			0.0, 7.5, 0.0, // hacia que punto mira (0,7.5,0)
-			0.0, 1.0, 0.0); // definimos hacia arriba (eje Y)
-		//Fondo pantala inicig
-		Imagen("imagenes/Tablero1.png");
-		ETSIDI::setTextColor(1, 1, 0);
-		ETSIDI::setFont("fuentes/icecube.ttf", 50);
-		ETSIDI::printxy("GAMEOVER: Has perdido.", -5, 10);
-		ETSIDI::printxy("PULSE LA TECLA -C- PARA CONTINUAR", -5, 8);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	gluPerspective(40.0, 800 / 600.0f, 0.1, 150);
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	gluLookAt(0, 7.5, 20, // posicion del ojo
+		0.0, 7.5, 0.0, // hacia que punto mira (0,7.5,0)
+		0.0, 1.0, 0.0); // definimos hacia arriba (eje Y)
+	//Fondo pantala inicig
+	//draw
+	Imagen("imagenes/tablero1.png");
+	ETSIDI::setTextColor(0.95, 0.25, 0.25);
+	ETSIDI::setFont("fuentes/3.ttf", 50);
+	ETSIDI::printxy("The Player Black Win!", -7, 10);
+	ETSIDI::setFont("fuentes/Bitwise.ttf", 20);
+	ETSIDI::setTextColor(0.95, 0.95, 0.95);
+	ETSIDI::printxy("Pulse techa -C- PARA CONTINUAR", -6, 4);
 	}
 
 	else if (estado == VICTORIAB)
 	{
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		gluPerspective(40.0, 800 / 600.0f, 0.1, 150);
-		glMatrixMode(GL_MODELVIEW);
-		glLoadIdentity();
-
-		gluLookAt(0, 7.5, 20, // posicion del ojo
-			0.0, 7.5, 0.0, // hacia que punto mira (0,7.5,0)
-			0.0, 1.0, 0.0); // definimos hacia arriba (eje Y)
-		//Fondo pantala inicig
-		//draw
-		ETSIDI::setTextColor(1, 1, 0);
-		ETSIDI::setFont("fuentes/icecube.ttf", 50);
-		ETSIDI::printxy("ENHORABUENA: ¡Has ganado!.", -5, 10);
-		ETSIDI::printxy("PULSE LA TECLA -C- PARA CONTINUAR", -5, 8);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	gluPerspective(40.0, 800 / 600.0f, 0.1, 150);
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	gluLookAt(0, 7.5, 20, // posicion del ojo
+		0.0, 7.5, 0.0, // hacia que punto mira (0,7.5,0)
+		0.0, 1.0, 0.0); // definimos hacia arriba (eje Y)
+	//Fondo pantala inicig
+	//draw
+	Imagen("imagenes/tablero1.png");
+	ETSIDI::setTextColor(0.85, 0.85, 0);
+	ETSIDI::setFont("fuentes/3.ttf", 50);
+	ETSIDI::printxy("The Player White Win!", -7, 10);
+	ETSIDI::setFont("fuentes/Bitwise.ttf", 20);
+	ETSIDI::setTextColor(0.95, 0.95, 0.95);
+	ETSIDI::printxy("Pulse techa -C- PARA CONTINUAR", -6, 4);
+		
+	}
+	else if (estado == TABLAS)
+	{
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	gluPerspective(40.0, 800 / 600.0f, 0.1, 150);
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	gluLookAt(0, 7.5, 20, // posicion del ojo
+		0.0, 7.5, 0.0, // hacia que punto mira (0,7.5,0)
+		0.0, 1.0, 0.0); // definimos hacia arriba (eje Y)
+	//Fondo pantala inicig
+	//draw
+	Imagen("imagenes/tablero1.png");
+	ETSIDI::setTextColor(0.20f, 0.75f, 0.60f);
+	ETSIDI::setFont("fuentes/3.ttf", 50);
+	ETSIDI::printxy("DRAW", -3.5, 11);
+	ETSIDI::setFont("fuentes/Bitwise.ttf", 20);
+	ETSIDI::setTextColor(0.95, 0.95, 0.95);
+	ETSIDI::printxy("Pulse techa -C- PARA CONTINUAR", -6, 5);
 	}
 	
 }
@@ -327,16 +428,88 @@ void Coordinador::MouseButton(int x, int y, int button, bool down, bool sKey, bo
 
 void Coordinador::crearTablero(int n , tipo_juego tip)
 {
-	if (IA) {
-		a = new BoardPeruanasIA(n, tip);
-		//Board* a = new Board(8);
-		tablero++;
+	switch (tip)
+	{
+	case ESPAN:
+		if (IA) {
+			a = new BoardEspañolasIA(8, tip);
+			//Board* a = new Board(8);
+			tablero++;
+		}
+		if (!IA) {
+			a = new BoardEspañolas(8, tip);
+			//Board* a = new Board(8);
+			tablero++;
+		}
+		break;
+	case PERUANA:
+		if (IA) {
+			a = new BoardPeruanasIA(8, tip);
+			//Board* a = new Board(8);
+			tablero++;
+		}
+		if (!IA) {
+			a = new BoardPeruanas(8, tip);
+			//Board* a = new Board(8);
+			tablero++;
+		}
+		break;
+	case RUSA:
+		if (IA) {
+			a = new BoardRusasIA(8, tip);
+			//Board* a = new Board(8);
+			tablero++;
+		}
+		if (!IA) {
+			a = new BoardRusas(8, tip);
+			//Board* a = new Board(8);
+			tablero++;
+		}
+		break;
+	case CHECKERS:
+		if (IA) {
+			a = new BoardCheckersIA(8, tip);
+			//Board* a = new Board(8);
+			tablero++;
+		}
+		if (!IA) {
+			a = new BoardCheckers(8, tip);
+			//Board* a = new Board(8);
+			tablero++;
+		}
+		break;
+	case ITALIANA:
+		if (IA) {
+			a = new BoardItalianasIA(8, tip);
+			//Board* a = new Board(8);
+			tablero++;
+		}
+		if (!IA) {
+			a = new BoardItalianas(8, tip);
+			//Board* a = new Board(8);
+			tablero++;
+		}
+		break;
+	case TURCA:
+				 a = new BoardTurcas(8, tip);
+				 tablero++;
+		break;
+	case INTERNACIONAL:
+		if (IA) {
+			a = new BoardIA(n, tip);
+			//Board* a = new Board(8);
+			tablero++;
+		}
+		if (!IA) {
+			a = new Board(n, tip);
+			//Board* a = new Board(8);
+			tablero++;
+		}
+		break;
+	default:
+		break;
 	}
-	if (!IA) {
-		a = new BoardPeruanas(n, tip);
-		//Board* a = new Board(8);
-		tablero++;
-	}
+	if(tablero)
 	scene = new BoardGL(a);
 }
 
