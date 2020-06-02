@@ -157,7 +157,7 @@ void OnMouseClick(int b,int state, int x,int y){
 				}
 				if (escena.a->getPieceType(xactual, yactual) == Object::EMPTY_CELL)
 					count--;
-				escena.a->actualizarEstado();
+				//escena.a->actualizarEstado();
 				//escena.a->soplido(xactual, yactual);
 			}
 			else {
@@ -169,7 +169,7 @@ void OnMouseClick(int b,int state, int x,int y){
 				//escena.a->actualizarEstado();
 				escena.a->comer(xactual, yactual, posicionx, posiciony);
 				//escena.a->actualizarEstado();
-				escena.a->actualizarEstado();
+				//escena.a->actualizarEstado();
 				//escena.a->soplido(posicionx, posiciony);
 			}
 			//cout << escena.a->estadoPartida() << endl;
