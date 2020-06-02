@@ -260,13 +260,42 @@ void Board::reina(int posicionx, int posiciony)
 
 void Board::actualizarEstado(void)
 {
+	
+	if (cop == 0) {
+		int posDeComer = 0;
+		int posDeMover = 0;
 
-	
-	
-	if (blancas == 0) //GANAN NEGRAS
-		estado = DERROTAB;
-	if (negras == 0)  //GANAN BLANCAS
-		estado = VICTORIAB;
+		if (blancas == 0) //GANAN NEGRAS
+			estado = DERROTAB;
+		if (negras == 0)  //GANAN BLANCAS
+			estado = VICTORIAB;
+
+		for (int i = 0; i < N; i++) {
+			for (int j = 0; j < N; j++) {
+				for (int k = 0; k < N; k++) {
+					for (int l = 0; l < N; l++) {
+
+						Board copia(*this);
+						if (copia.comer(i, j, k, l) == 1)
+							posDeComer++;
+						if (copia.cambiarPosicion(i, j, k, l) == 1)
+							posDeMover++;
+
+
+					}
+				}
+
+			}
+
+
+		}
+		if (posDeComer == 0 && posDeMover == 0 && movimientos == 1)
+			estado = TABLAS;
+
+
+		cout << "Las posibilidades de comer son: " << posDeComer << endl;
+		cout << "Las posibilidades de moverse son: " << posDeMover << endl;
+	}
 	
 }
 
@@ -382,21 +411,9 @@ void Board::estadSoplido(void)
 			cout << "Piezas que pueden soplar las negras: " << e << f << endl;
 
 		}
-
-
-		if (posDeComer == 0 && posDeMover == 0 && movimientos == 1)
-			tablas(); 
-		cout << "Las posibilidades de comer son: " << posDeComer << endl;
-		cout << "Las posibilidades de moverse son: " << posDeMover << endl;
 	}
-
-
-
-
 }
-void Board::tablas(){
-	estado = TABLAS;
-}
+
 
 
 
@@ -622,7 +639,47 @@ int BoardCheckers::comer(int x, int y, int posicionx, int posiciony)
 	}
 	return 0;
 }
+void BoardCheckers::actualizarEstado(void)
+{
 
+	if (cop == 0) {
+		int posDeComer = 0;
+		int posDeMover = 0;
+
+		if (blancas == 0) //GANAN NEGRAS
+			estado = DERROTAB;
+		if (negras == 0)  //GANAN BLANCAS
+			estado = VICTORIAB;
+
+		for (int i = 0; i < N; i++) {
+			for (int j = 0; j < N; j++) {
+				for (int k = 0; k < N; k++) {
+					for (int l = 0; l < N; l++) {
+
+						Board copia(*this);
+						if (copia.comer(i, j, k, l) == 1)
+							posDeComer++;
+						if (copia.cambiarPosicion(i, j, k, l) == 1)
+							posDeMover++;
+
+
+					}
+				}
+
+			}
+
+
+		}
+		if (posDeComer == 0 && posDeMover == 0 && movimientos == 1 && turno==1)
+			estado = DERROTAB;
+		if (posDeComer == 0 && posDeMover == 0 && movimientos == 1 && turno == -1)
+			estado = VICTORIAB;
+
+		cout << "Las posibilidades de comer son: " << posDeComer << endl;
+		cout << "Las posibilidades de moverse son: " << posDeMover << endl;
+	}
+
+}
 
 
 //Prueba 3 de GITHUB
