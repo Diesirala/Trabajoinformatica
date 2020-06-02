@@ -151,12 +151,12 @@ void OnMouseClick(int b,int state, int x,int y){
 				yactual = escena.ycell_sel;
 				count++;
 				cout << xactual << yactual << "   actual" << endl;
-				if (escena.a->soplido(xactual, yactual)) {
+				if (escena.a->soplido(xactual, yactual) || escena.a->getPieceType(xactual, yactual) == Object::EMPTY_CELL) {
 					//escena.a->actualizarEstado();
 					count--;
 				}
-				if (escena.a->getPieceType(xactual, yactual) == Object::EMPTY_CELL)
-					count--;
+				/*if (escena.a->getPieceType(xactual, yactual) == Object::EMPTY_CELL)
+					count--;*/
 				//escena.a->actualizarEstado();
 				//escena.a->soplido(xactual, yactual);
 			}

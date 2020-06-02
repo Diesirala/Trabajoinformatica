@@ -25,42 +25,62 @@ void Coordinador::KeyDown(unsigned char key)
 	{
 		switch (key)
 		{
-		case '1': {
+		case '1':
 			ETSIDI::play("sonidos/campana.wav");
-			variante = ESPAN;
+			variante = INTERNACIONAL;
 			estado = TABLERO;
 			break;
-		}
-		case '2': {
+
+		case '2':
 			ETSIDI::play("sonidos/campana.wav");
-			variante = PERUANA;
-			estado = JUGANDO;//LAS DAMAS PERUANAS SOLO TIENEN 8X8
+			variante = ESPAN;
+			estado = MODO;//españolas
 			break;
-		}
-		
-		case'3': {
+
+
+		case'3':
 			ETSIDI::play("sonidos/campana.wav");
 			//tablero damas inglesas
-			variante = INGLESA;
-			estado = JUGANDO;
+			variante = CHECKERS;
+			estado = MODO;
 			break;
-		}
-		case'4': {
+
+		case'4':
+			ETSIDI::play("sonidos/campana.wav");
+			//tablero damas peruana
+			variante = PERUANA;
+			estado = MODO;
+			break;
+
+		case'5':
 			ETSIDI::play("sonidos/campana.wav");
 			//tablero damas rusas
 			variante = RUSA;
+			estado = MODO;
+			break;
+
+		case'6':
+			ETSIDI::play("sonidos/campana.wav");
+			//tablero damas turca
+			variante = TURCA;
 			estado = JUGANDO;
 			break;
-		}
+
+		case'7':
+			ETSIDI::play("sonidos/campana.wav");
+			//tablero damas italiana
+			variante = ITALIANA;
+			estado = MODO;
+			break;
+
+		default:
+			estado = VARIANTES;
+			break;
 
 		}
-		//estado = JUGANDO;
-		
 		
 	}
 	
-
-
 
 	else if (estado == TABLERO) {
 		switch (key)
@@ -76,12 +96,14 @@ void Coordinador::KeyDown(unsigned char key)
 			dimensiones = 10;
 			estado = MODO;
 			break;
+
 		default:
 			ETSIDI::play("sonidos/campana.wav");
 			estado = TABLERO;
 			break;
 		}
 	}
+
 	else if (estado == MODO) {
 		switch (key)
 		{
@@ -90,6 +112,7 @@ void Coordinador::KeyDown(unsigned char key)
 			IA = true;
 			estado = JUGANDO;
 			break;
+
 		case '2':
 			ETSIDI::play("sonidos/campana.wav");
 			IA = false;
@@ -103,8 +126,7 @@ void Coordinador::KeyDown(unsigned char key)
 
 	}
 	else if (estado == JUGANDO)
-	{ 
-		//estado = JUGANDO;
+	{
 		switch (key)
 		{
 		case 'e': {
@@ -116,24 +138,27 @@ void Coordinador::KeyDown(unsigned char key)
 			delete a;
 		}
 			break;
-		case 'p':
-
+		case 'p'://Juan aqui meter pantalla de instrucciones. cuando le des a la tecla i
 			estado = PAUSA;
+
 		default:
 			estado = JUGANDO;
 			break;
 		}
 
 	}
+
 	else if (estado == DERROTAB)
 	{
 		tablero = 0;
 		delete  scene;
 		delete a;
-		//estado = JUGANDO;
+
 		if (key == 'c')
+		{
 			ETSIDI::play("sonidos/campana.wav");
 			estado = INICIO;
+		}
 	}
 	else if (estado == VICTORIAB)
 	{
@@ -141,8 +166,10 @@ void Coordinador::KeyDown(unsigned char key)
 		delete  scene;
 		delete a;
 		if (key == 'c')
+		{
 			ETSIDI::play("sonidos/campana.wav");
 			estado = INICIO;
+		}
 
 	}
 	else if (estado == TABLAS)
@@ -151,9 +178,11 @@ void Coordinador::KeyDown(unsigned char key)
 		tablero = 0;
 		delete  scene;
 		delete a;
-		if (key == 'c')
+		if (key == 'c') 
+		{
 			ETSIDI::play("sonidos/campana.wav");
 			estado = INICIO;
+		}
 	}
 
 	
@@ -202,10 +231,13 @@ void Coordinador::Draw(){
 		ETSIDI::printxy("|VARIANTES|", -6, 11);
 		ETSIDI::setTextColor(0.95, 0.95, 0.95);
 		ETSIDI::setFont("fuentes/bitwise.ttf", 18);
-		ETSIDI::printxy("Pulse la tecla -1- ESPANOLA", -5, 7);
-		ETSIDI::printxy("Pulse la tecla -2- PERUANA", -5, 6);
-		ETSIDI::printxy("Pulse la tecla -3- INGLESA", -5, 5);
-		ETSIDI::printxy("Pulse la tecla -4- RUSA", -5, 4);
+		ETSIDI::printxy("Pulse la tecla -1- INTERNACIONALES", -5, 7);
+		ETSIDI::printxy("Pulse la tecla -2- ESPANOLAS", -5, 6);
+		ETSIDI::printxy("Pulse la tecla -3- CHECKERS", -5, 5);
+		ETSIDI::printxy("Pulse la tecla -4- PERUANAS", -5, 4);
+		ETSIDI::printxy("Pulse la tecla -5- RUSAS", -5, 3);
+		ETSIDI::printxy("Pulse la tecla -6- TURCAS", -5, 2);
+		ETSIDI::printxy("Pulse la tecla -7- ITALIANAS", -5, 1);
 	
 	}
 	else if (estado == MODO) {
@@ -281,7 +313,7 @@ void Coordinador::Draw(){
 	Imagen("imagenes/tablero1.png");
 	ETSIDI::setTextColor(0.95, 0.25, 0.25);
 	ETSIDI::setFont("fuentes/3.ttf", 50);
-	ETSIDI::printxy("GAME OVER", -5.5, 11);
+	ETSIDI::printxy("The Player Black Win!", -7, 10);
 	ETSIDI::setFont("fuentes/Bitwise.ttf", 20);
 	ETSIDI::setTextColor(0.95, 0.95, 0.95);
 	ETSIDI::printxy("Pulse techa -C- PARA CONTINUAR", -6, 4);
@@ -301,7 +333,7 @@ void Coordinador::Draw(){
 	Imagen("imagenes/tablero1.png");
 	ETSIDI::setTextColor(0.85, 0.85, 0);
 	ETSIDI::setFont("fuentes/3.ttf", 50);
-	ETSIDI::printxy("YOU Win!", -5, 10);
+	ETSIDI::printxy("The Player White Win!", -7, 10);
 	ETSIDI::setFont("fuentes/Bitwise.ttf", 20);
 	ETSIDI::setTextColor(0.95, 0.95, 0.95);
 	ETSIDI::printxy("Pulse techa -C- PARA CONTINUAR", -6, 4);
@@ -396,16 +428,88 @@ void Coordinador::MouseButton(int x, int y, int button, bool down, bool sKey, bo
 
 void Coordinador::crearTablero(int n , tipo_juego tip)
 {
-	if (IA) {
-		a = new BoardPeruanasIA(n, tip);
-		//Board* a = new Board(8);
-		tablero++;
+	switch (tip)
+	{
+	case ESPAN:
+		if (IA) {
+			a = new BoardEspañolasIA(8, tip);
+			//Board* a = new Board(8);
+			tablero++;
+		}
+		if (!IA) {
+			a = new BoardEspañolas(8, tip);
+			//Board* a = new Board(8);
+			tablero++;
+		}
+		break;
+	case PERUANA:
+		if (IA) {
+			a = new BoardPeruanasIA(8, tip);
+			//Board* a = new Board(8);
+			tablero++;
+		}
+		if (!IA) {
+			a = new BoardPeruanas(8, tip);
+			//Board* a = new Board(8);
+			tablero++;
+		}
+		break;
+	case RUSA:
+		if (IA) {
+			a = new BoardRusasIA(8, tip);
+			//Board* a = new Board(8);
+			tablero++;
+		}
+		if (!IA) {
+			a = new BoardRusas(8, tip);
+			//Board* a = new Board(8);
+			tablero++;
+		}
+		break;
+	case CHECKERS:
+		if (IA) {
+			a = new BoardCheckersIA(8, tip);
+			//Board* a = new Board(8);
+			tablero++;
+		}
+		if (!IA) {
+			a = new BoardCheckers(8, tip);
+			//Board* a = new Board(8);
+			tablero++;
+		}
+		break;
+	case ITALIANA:
+		if (IA) {
+			a = new BoardItalianasIA(8, tip);
+			//Board* a = new Board(8);
+			tablero++;
+		}
+		if (!IA) {
+			a = new BoardItalianas(8, tip);
+			//Board* a = new Board(8);
+			tablero++;
+		}
+		break;
+	case TURCA:
+				 a = new BoardTurcas(8, tip);
+				 tablero++;
+		break;
+	case INTERNACIONAL:
+		if (IA) {
+			a = new BoardIA(n, tip);
+			//Board* a = new Board(8);
+			tablero++;
+		}
+		if (!IA) {
+			a = new Board(n, tip);
+			//Board* a = new Board(8);
+			tablero++;
+		}
+		break;
+	default:
+		break;
 	}
-	if (!IA) {
-		a = new BoardPeruanas(n, tip);
-		//Board* a = new Board(8);
-		tablero++;
-	}
+	if(tablero)
 	scene = new BoardGL(a);
 }
 
