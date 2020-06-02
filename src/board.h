@@ -272,6 +272,7 @@ public:
 
 			movimientos = 1;
 			turno = -turno;
+			actualizarEstado();
 			//estadSoplido();
 		}
 		if (turno == -1)
@@ -281,16 +282,31 @@ public:
 
 
 };
-
-
-class BoardCheckersIA :public BoardIA {
+class BoardCheckers : public Board {
 public:
-	BoardCheckersIA(int a, tipo_juego b):BoardIA(a,b) {
+	BoardCheckers(int a, tipo_juego b) :Board(a, b) {
 		turno = -1;
 
 
 	}
-	BoardCheckersIA(BoardCheckersIA& a) :BoardIA(a) {
+	virtual int cambiarPosicion(int x, int y, int posicionx, int posiciony);
+	virtual int comer(int x, int y, int posicionx, int posiciony);
+	virtual void actualizarEstado(void);
+
+};
+
+
+
+
+class BoardCheckersIA :public BoardCheckers {
+protected:
+	//int IA;
+	Piece posiblesMovimientos[20];
+	int posDeMover;
+public:
+	BoardCheckersIA(int a, tipo_juego b):BoardCheckers(a,b) {
+			}
+	BoardCheckersIA(BoardCheckersIA& a) :BoardCheckers(a) {
 	}
 
 	virtual void moverIA(void) {
@@ -384,7 +400,7 @@ public:
 					for (int k = 0; k < N; k++) {
 						for (int l = 0; l < N; l++) {
 
-							BoardIA copia(*this);
+							BoardCheckersIA copia(*this);
 
 							if (copia.cambiarPosicion(i, j, k, l) == 1) {
 
@@ -423,6 +439,7 @@ public:
 
 			movimientos = 1;
 			turno = -turno;
+			actualizarEstado();
 			//estadSoplido();
 		}
 		if (turno == 1)
@@ -437,19 +454,165 @@ public:
 
 
 };
-class BoardCheckers : public Board {
+class BoardItalianas : public BoardCheckers {
 public:
-	BoardCheckers(int a, tipo_juego b) :Board(a, b) {
-		turno = -1;
-
-
+	BoardItalianas(int a, tipo_juego b) :BoardCheckers(a, b) {
+		turno = 1;
 	}
-	int cambiarPosicion(int x, int y, int posicionx, int posiciony);
-	int comer(int x, int y, int posicionx, int posiciony);
-	 void actualizarEstado(void);
+	virtual int comer(int x, int y, int posicionx, int posiciony);
+
 
 };
+class BoardItalianasIA : public BoardItalianas {
+	protected:
+		//int IA;
+		Piece posiblesMovimientos[20];
+		int posDeMover;
+	public:
+		BoardItalianasIA(int a, tipo_juego b) :BoardItalianas(a, b) {
+		}
+		BoardItalianasIA(BoardItalianasIA& a) :BoardItalianas(a) {
+		}
 
+		virtual void moverIA(void) {
+			if (turno == -1) {
+				for (int i = 0; i < 20; i++) {
+					int a, b;
+					if (PiezasSoplido[1][i].getType() != Object::EMPTY_CELL) {
+						PiezasSoplido[1][i].getCellNumber(a, b);
+						soplido(a, b);
+					}
+
+				}
+
+				int comida;
+				do {
+					comida = 0;
+					for (int i = 0; i < N; i++) {
+						for (int j = 0; j < N; j++) {
+							for (int k = 0; k < N; k++) {
+								for (int l = 0; l < N; l++) {
+									if (comer(i, j, k, l))
+										comida++;
+
+								}
+							}
+						}
+					}
+
+				} while (comida > 0);
+
+				if (movimientos == 1) {
+					Movimientos();
+					int a, b;
+					srand(time(NULL));
+					if (posDeMover) {
+						int aleatorio = 0;
+						if (posDeMover > 1)
+							aleatorio = rand() % (posDeMover - 1);
+
+						int izqder = rand() % (2);
+						posiblesMovimientos[aleatorio].getCellNumber(a, b);
+						if (posiblesMovimientos[aleatorio].getType() != Object::EMPTY_CELL)
+						{
+
+							for (int i = 0; i < N; i++) {
+								if (izqder)
+									for (int j = (N - 1); j >= 0; j--) {
+										cambiarPosicion(a, b, i, j);
+
+									}
+								if (izqder == 0)
+									for (int j = 0; j < N; j++) {
+										cambiarPosicion(a, b, i, j);
+
+									}
+
+							}
+						}
+					}
+				}
+				if (movimientos == 0)
+					pasoTurno();
+			}
+		}
+
+		virtual void Movimientos(void) {
+			if (cop == 0) {
+				Piece vacio[20];
+				if (turno == -1) {
+					for (int i = 0; i < 20; i++)
+						posiblesMovimientos[i] = vacio[i];
+				}
+				int aux = 0;
+				posDeMover = 0;
+				for (int i = 0; i < N; i++) {
+					for (int j = 0; j < N; j++) {
+						for (int k = 0; k < N; k++) {
+							for (int l = 0; l < N; l++) {
+
+								BoardItalianasIA copia(*this);
+
+								if (copia.cambiarPosicion(i, j, k, l) == 1) {
+
+									if ((turno == -1 && posDeMover > 0) && posiblesMovimientos[posDeMover - 1] == tab[i][j]) {
+										posDeMover++;
+										aux++;
+										continue;
+									}
+									if (turno == -1)
+										posiblesMovimientos[posDeMover - aux] = tab[i][j];
+									posDeMover++;
+
+
+
+
+								}
+
+
+							}
+						}
+
+					}
+
+
+				}
+
+			}
+
+		}
+		virtual void pasoTurno(void) {
+
+			if (movimientos == 0) {
+
+				movimientos = 1;
+				turno = -turno;
+				actualizarEstado();
+				//estadSoplido();
+			}
+			if (turno == -1)
+				moverIA();
+
+		}
+};
+
+class BoardPeruanas : public Board {
+public:
+	BoardPeruanas(int a, tipo_juego b) :Board(a, b) {
+	}
+	virtual ~BoardPeruanas() {};
+	virtual int comer(int x, int y, int posicionx, int posiciony);
+
+
+};
+class BoardPeruanasIA : public BoardIA {
+public:
+	BoardPeruanasIA(int a, tipo_juego b) :BoardIA(a, b) {
+	}
+
+		virtual int comer(int x, int y, int posicionx, int posiciony);
+
+};
 
 
 
