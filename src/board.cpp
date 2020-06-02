@@ -385,7 +385,7 @@ void Board::estadSoplido(void)
 
 
 		if (posDeComer == 0 && posDeMover == 0 && movimientos == 1)
-			estado = TABLAS;
+			tablas(); 
 		cout << "Las posibilidades de comer son: " << posDeComer << endl;
 		cout << "Las posibilidades de moverse son: " << posDeMover << endl;
 	}
@@ -394,7 +394,234 @@ void Board::estadSoplido(void)
 
 
 }
+void Board::tablas(){
+	estado = TABLAS;
+}
 
+
+
+
+
+//FUNCIONES SOBRECARGADAS DE LAS CHECKERS
+//////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
+
+
+ int BoardCheckers::cambiarPosicion(int x, int y, int posicionx, int posiciony)
+{
+	switch (tab[x][y].getType() * movimientos * turno)// Enumeracion por el turno
+	{
+	case 1://Turno de las blancas, tienes un movimiento y has selecionado una blanca
+		if (tab[posicionx][posiciony].getType() == Object::EMPTY_CELL && posicionx == (x - 1) && (posiciony == (y - 1) || posiciony == (y + 1)))
+		{
+			estadSoplido();
+			for (int i = 0; i < 20; i++) {
+				if (PiezasSoplido[0][i] == tab[x][y])
+					PiezasSoplido[0][i].setCell(posicionx, posiciony, Object::QUEEN_GREEN);
+
+			}
+			ETSIDI::play("sonidos/mover.wav");
+			tab[posicionx][posiciony].setCell(posicionx, posiciony, Object::QUEEN_GREEN);
+			tab[x][y].setCell(-1, -1, Object::EMPTY_CELL);
+			movimientos = 0;
+			pasoTurno();
+			if (posicionx == 0)
+				reina(posicionx, posiciony);
+			return 1;
+		}
+		else return 0;
+		break;
+	case -2://turno de las negras tienes un movimiento y la pieza seleccionada es una negra
+		if (tab[posicionx][posiciony].getType() == Object::EMPTY_CELL && posicionx == (x + 1) && (posiciony == (y - 1) || posiciony == (y + 1)))
+		{
+			estadSoplido();
+			for (int i = 0; i < 20; i++) {
+				if (PiezasSoplido[1][i] == tab[x][y])
+					PiezasSoplido[1][i].setCell(posicionx, posiciony, Object::QUEEN_BLACK);
+
+			}
+			ETSIDI::play("sonidos/mover.wav");
+			tab[posicionx][posiciony].setCell(posicionx, posiciony, Object::QUEEN_BLACK);
+			tab[x][y].setCell(-1, -1, Object::EMPTY_CELL);
+			movimientos = 0;
+			pasoTurno();
+			if (posicionx == (N - 1))
+				reina(posicionx, posiciony);
+			return 1;
+		}
+		else return 0;
+		break;
+	case 0:
+		return 0;
+		break;
+
+	default: // vamos a utilizarlo para las reinas que se mueven las dos igual
+		if (tab[posicionx][posiciony].getType() == Object::EMPTY_CELL && abs(posicionx - x) == abs(posiciony - y)&& abs(posicionx - x)==1)
+		{
+			
+		
+		
+				if (tab[x][y].getType() == Object::QUEEN_GREENR && turno == 1 && movimientos == 1) {
+					estadSoplido();
+					for (int i = 0; i < 20; i++) {
+						if (PiezasSoplido[0][i] == tab[x][y])
+							PiezasSoplido[0][i].setCell(posicionx, posiciony, Object::QUEEN_GREENR);
+
+					}
+					ETSIDI::play("sonidos/mover.wav");
+					tab[posicionx][posiciony].setCell(posicionx, posiciony, Object::QUEEN_GREENR);
+					movimientos = 0;
+					pasoTurno();
+					tab[x][y].setCell(-1, -1, Object::EMPTY_CELL);
+					return 1;
+				}
+				if (tab[x][y].getType() == Object::QUEEN_BLACKR && turno == -1 && movimientos == 1)
+				{
+					estadSoplido();
+					for (int i = 0; i < 20; i++) {
+						if (PiezasSoplido[1][i] == tab[x][y])
+							PiezasSoplido[1][i].setCell(posicionx, posiciony, Object::QUEEN_BLACK);
+
+					}
+					ETSIDI::play("sonidos/mover.wav");
+					tab[posicionx][posiciony].setCell(posicionx, posiciony, Object::QUEEN_BLACKR);
+					movimientos = 0;
+					pasoTurno();
+					tab[x][y].setCell(-1, -1, Object::EMPTY_CELL);
+					return 1;
+				}
+				else return 0;
+
+			}
+			else return 0;
+		
+		break;
+	}
+
+}
+
+int BoardCheckers::comer(int x, int y, int posicionx, int posiciony)
+{
+
+	if (movimientos == 1 || pmovida == tab[x][y]) {
+		switch (tab[x][y].getType() * turno)
+		{
+		case 1:
+			if (tab[posicionx][posiciony].getType() == Object::EMPTY_CELL && posicionx == (x - 2)  && (posiciony == (y - 2) || posiciony == (y + 2)))
+			{
+				int pmediox, pmedioy;
+				pmediox = (posicionx + x) / 2;
+				pmedioy = (posiciony + y) / 2;
+				if (tab[pmediox][pmedioy].getType() == Object::QUEEN_BLACK || tab[pmediox][pmedioy].getType() == Object::QUEEN_BLACKR)
+				{
+
+					ETSIDI::play("sonidos/comer.wav");
+					tab[posicionx][posiciony].setCell(posicionx, posiciony, Object::QUEEN_GREEN);
+					tab[x][y].setCell(-1, -1, Object::EMPTY_CELL);
+					tab[pmediox][pmedioy].setCell(-1, -1, Object::EMPTY_CELL);
+					pmovida = tab[posicionx][posiciony];
+					movimientos = 0;
+					negras--;
+					estadSoplido();
+					if (posicionx == 0) {
+						reina(posicionx, posiciony);
+						pasoTurno();
+					}
+
+					return 1;
+				}
+				else return 0;
+			}
+			else return 0;
+			break;
+		case -2:
+			if (tab[posicionx][posiciony].getType() == Object::EMPTY_CELL && posicionx == (x + 2) && (posiciony == (y - 2) || posiciony == (y + 2)))
+			{
+				int pmediox, pmedioy;
+				pmediox = (posicionx + x) / 2;
+				pmedioy = (posiciony + y) / 2;
+				if (tab[pmediox][pmedioy].getType() == Object::QUEEN_GREEN || tab[pmediox][pmedioy].getType() == Object::QUEEN_GREENR)
+				{
+					ETSIDI::play("sonidos/comer.wav");
+					tab[posicionx][posiciony].setCell(posicionx, posiciony, Object::QUEEN_BLACK);
+					tab[x][y].setCell(-1, -1, Object::EMPTY_CELL);
+					tab[pmediox][pmedioy].setCell(-1, -1, Object::EMPTY_CELL);
+					pmovida = tab[posicionx][posiciony];
+					movimientos = 0;
+					blancas--;
+					estadSoplido();
+					if (posicionx == (N - 1)) {
+						reina(posicionx, posiciony);
+						pasoTurno();
+					}
+
+					return 1;
+				}
+				else return 0;
+			}
+			else return 0;
+			break;
+		case 0:
+			return 0;
+			break;
+		default:// vamos a utilizarlo para las reinas que se mueven las dos igual
+			if (tab[posicionx][posiciony].getType() == Object::EMPTY_CELL && (posicionx == (x - 2) || posicionx == (x + 2)) && (posiciony == (y - 2) || posiciony == (y + 2)))
+			{
+				int pmediox, pmedioy;
+				pmediox = (posicionx + x) / 2;
+				pmedioy = (posiciony + y) / 2;
+				if (tab[x][y].getType() == Object::QUEEN_GREENR && turno == 1)
+				{
+					if (tab[pmediox][pmedioy].getType() == Object::QUEEN_BLACK || tab[pmediox][pmedioy].getType() == Object::QUEEN_BLACKR)
+					{
+						ETSIDI::play("sonidos/comer.wav");
+						tab[posicionx][posiciony].setCell(posicionx, posiciony, Object::QUEEN_GREENR);
+						tab[x][y].setCell(-1, -1, Object::EMPTY_CELL);
+						tab[pmediox][pmedioy].setCell(-1, -1, Object::EMPTY_CELL);
+						pmovida = tab[posicionx][posiciony];
+						movimientos = 0;
+						blancas--;
+						estadSoplido();
+						if (posicionx == (N - 1)) {
+							reina(posicionx, posiciony);
+							pasoTurno();
+						}
+
+						return 1;
+					}
+					else return 0;
+
+				}
+				if (tab[x][y].getType() == Object::QUEEN_BLACKR && turno == -1)
+						{
+							if (tab[pmediox][pmedioy].getType() == Object::QUEEN_GREEN || tab[pmediox][pmedioy].getType() == Object::QUEEN_GREENR)
+							{
+								ETSIDI::play("sonidos/comer.wav");
+								tab[posicionx][posiciony].setCell(posicionx, posiciony, Object::QUEEN_BLACKR);
+								tab[x][y].setCell(-1, -1, Object::EMPTY_CELL);
+								tab[pmediox][pmedioy].setCell(-1, -1, Object::EMPTY_CELL);
+								pmovida = tab[posicionx][posiciony];
+								movimientos = 0;
+								blancas--;
+								estadSoplido();
+								if (posicionx == (N - 1)) {
+									reina(posicionx, posiciony);
+									pasoTurno();
+								}
+
+								return 1;
+							}
+							else return 0;
+						}
+				else return 0;
+			}
+			else return 0;
+			break;
+		}
+		return 0;
+	}
+	return 0;
+}
 
 
 
