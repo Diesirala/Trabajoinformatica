@@ -104,7 +104,6 @@ public:
 	
 	virtual void setFicha(tipo_juego p) { this->variante = p; }
 	virtual virtual tipo_juego getTipo() { return variante; }
-	virtual void Board::tablas(void);
 	virtual int cambiarPosicion(int x,int y,int posicionx, int posiciony);
 	virtual void pasoTurno(void);
 	virtual int comer(int x, int y, int posicionx, int posiciony);
@@ -447,9 +446,10 @@ public:
 	}
 	int cambiarPosicion(int x, int y, int posicionx, int posiciony);
 	int comer(int x, int y, int posicionx, int posiciony);
-
+	 void actualizarEstado(void);
 
 };
+
 
 
 
