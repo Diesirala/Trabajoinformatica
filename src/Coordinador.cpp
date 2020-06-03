@@ -644,8 +644,16 @@ void Coordinador::crearTablero(int n , tipo_juego tip)
 		}
 		break;
 	case TURCA:
-				 a = new BoardTurcas(8, tip);
-				 tablero++;
+		if (IA) {
+			a = new BoardTurcasIA(n, tip);
+			//Board* a = new Board(8);
+			tablero++;
+		}
+		else if (!IA) {
+			a = new BoardTurcas(n, tip);
+			//Board* a = new Board(8);
+			tablero++;
+		}
 		break;
 	case INTERNACIONAL:
 		if (IA) {
