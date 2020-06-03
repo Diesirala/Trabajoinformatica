@@ -12,7 +12,8 @@
 	~Coordinador();
 	Board* a;     //PUNTERO A PARTE LOGICA SE CREA EN CREAR TABLERO
 	BoardGL* scene;// PUNTERO AL DIBUJADO DEL TABLERO, SE CREA EN CREAR TABLERO
-	 Coordinador():width(0.15), dist(2),center_z(0),tablero(0),estado(INICIO){
+	
+	 Coordinador():width(0.15), dist(2),center_z(0),tablero(0),estado(INICIO),variante(NONE){
 		 a = NULL;
 		 scene = NULL;	
 		 dimensiones = 8;
