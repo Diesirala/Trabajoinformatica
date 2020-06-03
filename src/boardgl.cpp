@@ -270,8 +270,6 @@ void BoardGL::dibuja(int n) {
 			Formas3D::Cilindro(0.06, 0.15, RED, RED_DARK);
 			GLTools::Color(gltools::MARRON, 1.0f);
 		}
-
-		}
 		else if (variante == RUSA) {
 			Formas3D::Cilindro(0.06, 0.15, WHITEP, GREY);
 			GLTools::Color(gltools::GRIS_AZUL, 1.0f);
