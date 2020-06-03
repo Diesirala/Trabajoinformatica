@@ -300,6 +300,7 @@ void Coordinador::Draw(){
 			tablero = 0;
 		}
 		switch (estado){
+
 		case 2:
 			cout << " Estado de la partida Jugando " << endl;
 			break;
