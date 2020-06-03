@@ -741,10 +741,7 @@ void BoardCheckers::estadSoplido(void)
 	}
 
 }
-//FUNCIONES SOBRECARGADAS DAMAS ITALIANAS
-////////////////LOS PEONES NO PUEDEN CAPTURAR A LAS DAMAS NUNCA, TODAS LAS REGLAS ANTERIORES DE LAS CHECKERS EXCEPTO QUE COMIENZAN LAS BLANCAS
-/////////////////////////////////////
-////////////////////////
+
 int BoardItalianas::comer(int x, int y, int posicionx, int posiciony)
 {
 
