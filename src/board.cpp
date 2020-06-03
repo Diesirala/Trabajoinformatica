@@ -288,6 +288,10 @@ void Board::actualizarEstado(void)
 		if (posDeComer == 0 && posDeMover == 0 && movimientos == 1)
 			estado = TABLAS;
 
+		if (blancas == 0) //GANAN NEGRAS
+			estado = DERROTAB;
+		if (negras == 0)  //GANAN BLANCAS
+			estado = VICTORIAB;
 
 		cout << "Las posibilidades de comer son: " << posDeComer << endl;
 		cout << "Las posibilidades de moverse son: " << posDeMover << endl;
@@ -301,6 +305,7 @@ void Board::pasoTurno(void) {
 	
 		movimientos = 1;
 		turno = -turno;
+		
 		actualizarEstado();
 		//estadSoplido();
 	}
@@ -635,10 +640,6 @@ void BoardCheckers::actualizarEstado(void)
 		int posDeComer = 0;
 		int posDeMover = 0;
 
-		if (blancas == 0) //GANAN NEGRAS
-			estado = DERROTAB;
-		if (negras == 0)  //GANAN BLANCAS
-			estado = VICTORIAB;
 
 		for (int i = 0; i < N; i++) {
 			for (int j = 0; j < N; j++) {
@@ -662,6 +663,11 @@ void BoardCheckers::actualizarEstado(void)
 		if (posDeComer == 0 && posDeMover == 0 && movimientos == 1 && turno==1)
 			estado = DERROTAB;
 		if (posDeComer == 0 && posDeMover == 0 && movimientos == 1 && turno == -1)
+			estado = VICTORIAB;
+
+		if (blancas == 0) //GANAN NEGRAS
+			estado = DERROTAB;
+		if (negras == 0)  //GANAN BLANCAS
 			estado = VICTORIAB;
 
 		cout << "Las posibilidades de comer son: " << posDeComer << endl;
@@ -765,9 +771,10 @@ int BoardItalianas::comer(int x, int y, int posicionx, int posiciony)
 					movimientos = 0;
 					negras--;
 					estadSoplido();
-					if (posicionx == 0) 
+					if (posicionx == 0) {
 						reina(posicionx, posiciony);
-					else pasoTurno();
+
+					}
 
 					return 1;
 				}
@@ -791,9 +798,10 @@ int BoardItalianas::comer(int x, int y, int posicionx, int posiciony)
 					movimientos = 0;
 					blancas--;
 					estadSoplido();
-					if (posicionx == (N - 1))
+					if (posicionx == (N - 1)) {
 						reina(posicionx, posiciony);
-					else pasoTurno();
+
+					}
 
 					return 1;
 				}
@@ -931,10 +939,6 @@ void BoardItalianas::actualizarEstado(void)
 		int posDeComer = 0;
 		int posDeMover = 0;
 
-		if (blancas == 0) //GANAN NEGRAS
-			estado = DERROTAB;
-		if (negras == 0)  //GANAN BLANCAS
-			estado = VICTORIAB;
 
 		for (int i = 0; i < N; i++) {
 			for (int j = 0; j < N; j++) {
@@ -958,6 +962,10 @@ void BoardItalianas::actualizarEstado(void)
 		if (posDeComer == 0 && posDeMover == 0 && movimientos == 1)
 			estado = TABLAS;
 
+		if (blancas == 0) //GANAN NEGRAS
+			estado = DERROTAB;
+		if (negras == 0)  //GANAN BLANCAS
+			estado = VICTORIAB;
 
 		cout << "Las posibilidades de comer son: " << posDeComer << endl;
 		cout << "Las posibilidades de moverse son: " << posDeMover << endl;
@@ -993,7 +1001,7 @@ int BoardPeruanas::comer(int x, int y, int posicionx, int posiciony)
 					estadSoplido();
 					if (posicionx == 0)
 						reina(posicionx, posiciony);
-					else pasoTurno();
+					
 
 					return 1;
 				}
@@ -1019,7 +1027,7 @@ int BoardPeruanas::comer(int x, int y, int posicionx, int posiciony)
 					estadSoplido();
 					if (posicionx == (N - 1))
 						reina(posicionx, posiciony);
-					else pasoTurno();
+					
 					return 1;
 				}
 				else return 0;
@@ -1166,10 +1174,7 @@ void BoardPeruanas::actualizarEstado(void)
 		int posDeComer = 0;
 		int posDeMover = 0;
 
-		if (blancas == 0) //GANAN NEGRAS
-			estado = DERROTAB;
-		if (negras == 0)  //GANAN BLANCAS
-			estado = VICTORIAB;
+	
 
 		for (int i = 0; i < N; i++) {
 			for (int j = 0; j < N; j++) {
@@ -1192,7 +1197,10 @@ void BoardPeruanas::actualizarEstado(void)
 		}
 		if (posDeComer == 0 && posDeMover == 0 && movimientos == 1)
 			estado = TABLAS;
-
+		if (blancas == 0) //GANAN NEGRAS
+			estado = DERROTAB;
+		if (negras == 0)  //GANAN BLANCAS
+			estado = VICTORIAB;
 
 		cout << "Las posibilidades de comer son: " << posDeComer << endl;
 		cout << "Las posibilidades de moverse son: " << posDeMover << endl;
@@ -1224,8 +1232,7 @@ int BoardPeruanasIA::comer(int x, int y, int posicionx, int posiciony)
 					estadSoplido();
 					if (posicionx == 0)
 						reina(posicionx, posiciony);
-					else pasoTurno();
-
+					
 					return 1;
 				}
 				else return 0;
@@ -1250,7 +1257,7 @@ int BoardPeruanasIA::comer(int x, int y, int posicionx, int posiciony)
 					estadSoplido();
 					if (posicionx == (N - 1))
 						reina(posicionx, posiciony);
-					else pasoTurno();
+				
 					return 1;
 				}
 				else return 0;
@@ -1397,10 +1404,7 @@ void BoardPeruanasIA::actualizarEstado(void)
 		int posDeComer = 0;
 		int posDeMover = 0;
 
-		if (blancas == 0) //GANAN NEGRAS
-			estado = DERROTAB;
-		if (negras == 0)  //GANAN BLANCAS
-			estado = VICTORIAB;
+		
 
 		for (int i = 0; i < N; i++) {
 			for (int j = 0; j < N; j++) {
@@ -1423,7 +1427,10 @@ void BoardPeruanasIA::actualizarEstado(void)
 		}
 		if (posDeComer == 0 && posDeMover == 0 && movimientos == 1)
 			estado = TABLAS;
-
+		if (blancas == 0) //GANAN NEGRAS
+			estado = DERROTAB;
+		if (negras == 0)  //GANAN BLANCAS
+			estado = VICTORIAB;
 
 		cout << "Las posibilidades de comer son: " << posDeComer << endl;
 		cout << "Las posibilidades de moverse son: " << posDeMover << endl;
@@ -1677,10 +1684,7 @@ void BoardEspañolas::actualizarEstado(void)
 		int posDeComer = 0;
 		int posDeMover = 0;
 
-		if (blancas == 0) //GANAN NEGRAS
-			estado = DERROTAB;
-		if (negras == 0)  //GANAN BLANCAS
-			estado = VICTORIAB;
+	
 
 		for (int i = 0; i < N; i++) {
 			for (int j = 0; j < N; j++) {
@@ -1703,7 +1707,10 @@ void BoardEspañolas::actualizarEstado(void)
 		}
 		if (posDeComer == 0 && posDeMover == 0 && movimientos == 1)
 			estado = TABLAS;
-
+		if (blancas == 0) //GANAN NEGRAS
+			estado = DERROTAB;
+		if (negras == 0)  //GANAN BLANCAS
+			estado = VICTORIAB;
 
 		cout << "Las posibilidades de comer son: " << posDeComer << endl;
 		cout << "Las posibilidades de moverse son: " << posDeMover << endl;
@@ -1911,10 +1918,6 @@ void BoardEspañolasIA::actualizarEstado(void)
 		int posDeComer = 0;
 		int posDeMover = 0;
 
-		if (blancas == 0) //GANAN NEGRAS
-			estado = DERROTAB;
-		if (negras == 0)  //GANAN BLANCAS
-			estado = VICTORIAB;
 
 		for (int i = 0; i < N; i++) {
 			for (int j = 0; j < N; j++) {
@@ -1938,6 +1941,10 @@ void BoardEspañolasIA::actualizarEstado(void)
 		if (posDeComer == 0 && posDeMover == 0 && movimientos == 1)
 			estado = TABLAS;
 
+		if (blancas == 0) //GANAN NEGRAS
+			estado = DERROTAB;
+		if (negras == 0)  //GANAN BLANCAS
+			estado = VICTORIAB;
 
 		cout << "Las posibilidades de comer son: " << posDeComer << endl;
 		cout << "Las posibilidades de moverse son: " << posDeMover << endl;
