@@ -149,7 +149,7 @@ public:
 
 
 	virtual void moverIA(void) {
-		if (turno == -1) {
+		
 			for (int i = 0; i < 20; i++) {
 				int a, b;
 				if (PiezasSoplido[0][i].getType() != Object::EMPTY_CELL) {
@@ -207,14 +207,14 @@ public:
 					}
 				}
 			}
-			if (movimientos == 0)
+			if (movimientos == 0 && turno==-1)
 				pasoTurno();
 
 			
 			
 
 
-		}
+		
 
 
 
@@ -313,11 +313,11 @@ protected:
 public:
 	BoardCheckersIA(int a, tipo_juego b):BoardCheckers(a,b) {
 			}
-	BoardCheckersIA(BoardCheckersIA& a) :BoardCheckers(a) {
-	}
+	/*BoardCheckersIA(BoardCheckersIA& a) :BoardCheckers(a) {
+	}*/
 
 	virtual void moverIA(void) {
-		if (turno == 1) {
+	
 			for (int i = 0; i < 20; i++) {
 				int a, b;
 				if (PiezasSoplido[1][i].getType() != Object::EMPTY_CELL) {
@@ -375,14 +375,14 @@ public:
 					}
 				}
 			}
-			if (movimientos == 0)
+			if (movimientos == 0 && turno==1)
 				pasoTurno();
 
 
 
 
 
-		}
+		
 
 
 
@@ -479,15 +479,15 @@ class BoardItalianasIA : public BoardItalianas {
 	public:
 		BoardItalianasIA(int a, tipo_juego b) :BoardItalianas(a, b) {
 		}
-		BoardItalianasIA(BoardItalianasIA& a) :BoardItalianas(a) {
-		}
+		/*BoardItalianasIA(BoardItalianasIA& a) :BoardItalianas(a) {
+		}*/
 
 		virtual void moverIA(void) {
-			if (turno == -1) {
+			
 				for (int i = 0; i < 20; i++) {
 					int a, b;
-					if (PiezasSoplido[1][i].getType() != Object::EMPTY_CELL) {
-						PiezasSoplido[1][i].getCellNumber(a, b);
+					if (PiezasSoplido[0][i].getType() != Object::EMPTY_CELL) {
+						PiezasSoplido[0][i].getCellNumber(a, b);
 						soplido(a, b);
 					}
 
@@ -540,9 +540,9 @@ class BoardItalianasIA : public BoardItalianas {
 						}
 					}
 				}
-				if (movimientos == 0)
+				if (movimientos == 0 && turno==-1)
 					pasoTurno();
-			}
+			
 		}
 
 		virtual void Movimientos(void) {
@@ -623,6 +623,20 @@ public:
 		virtual int comer(int x, int y, int posicionx, int posiciony);
 		virtual void actualizarEstado(void);
 		virtual void estadSoplido(void);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 };
 
 class BoardRusas : public Board {
