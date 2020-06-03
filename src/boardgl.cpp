@@ -187,20 +187,20 @@ void BoardGL::setFondo() {
 }
 void BoardGL::dibuja(int n) {
 	if (n == 1) {
-		if (variante == CHECKERS||variante == ITALIANA) {
+		if (variante == CHECKERS || variante == ITALIANA) {
 			Formas3D::Cilindro(0.06, 0.05, ORANGE, ORANGE_Dark);
 			GLTools::Color(gltools::WHITEP, 1.0f);//Cambiamos el color del tablero
 		}
 		else if (variante == PERUANA) {
-			Formas3D::Cilindro(0.06, 0.05,BLUE, BLUE_DARK);
+			Formas3D::Cilindro(0.06, 0.05, BLUE, BLUE_DARK);
 			GLTools::Color(gltools::WHITE, 1.0f);
 		}
-		else if (variante == ESPAN||variante == TURCA||variante==INTERNACIONAL) {
-			Formas3D::Cilindro(0.06, 0.05, WHITEP,GREY);
+		else if (variante == ESPAN || variante == TURCA || variante == INTERNACIONAL) {
+			Formas3D::Cilindro(0.06, 0.05, WHITEP, GREY);
 			GLTools::Color(gltools::MARRON, 1.0f);//Cambiamos el color del tablero
 		}
 		else if (variante == RUSA) {
-			Formas3D::Cilindro(0.06, 0.05 , RED, RED_DARK);
+			Formas3D::Cilindro(0.06, 0.05, RED, RED_DARK);
 			GLTools::Color(gltools::GRIS_AZUL, 1.0f);//Cambiamos el color del tablero
 		}
 	}
@@ -213,12 +213,12 @@ void BoardGL::dibuja(int n) {
 			Formas3D::Cilindro(0.06, 0.05, RED, RED_DARK);
 			GLTools::Color(gltools::WHITE, 1.0f);//Cambiamos el color del tablero
 		}
-		else if (variante == ESPAN ) {
+		else if (variante == ESPAN) {
 			Formas3D::Cilindro(0.06, 0.05, RED, RED_DARK);
 			GLTools::Color(gltools::MARRON, 1.0f);//Cambiamos el color del tablero
 		}
 		else if (variante == RUSA) {
-			Formas3D::Cilindro(0.06, 0.05, WHITEP,GREY);
+			Formas3D::Cilindro(0.06, 0.05, WHITEP, GREY);
 			GLTools::Color(gltools::GRIS_AZUL, 1.0f);//Cambiamos el color del tablero
 		}
 		else if (variante == TURCA) {
@@ -229,26 +229,26 @@ void BoardGL::dibuja(int n) {
 			Formas3D::Cilindro(0.06, 0.05, Grey_dark2, BLACK);
 			GLTools::Color(gltools::MARRON, 1.0f);
 		}
-		else if (variante == ITALIANA ) {
+		else if (variante == ITALIANA) {
 			Formas3D::Cilindro(0.06, 0.05, Grey_dark2, BLACK);
 			GLTools::Color(gltools::WHITEP, 1.0f);
 		}
 	}
-	else if (n==3) {
+	else if (n == 3) {
 		if (variante == CHECKERS || variante == ITALIANA) {
 			Formas3D::Cilindro(0.06, 0.15, ORANGE, ORANGE_Dark);
 			GLTools::Color(gltools::WHITEP, 1.0f);//Cambiamos el color del tablero
 		}
 		else if (variante == PERUANA) {
-			Formas3D::Cilindro(0.06, 0.15, BLUE, BLUE_DARK );
+			Formas3D::Cilindro(0.06, 0.15, BLUE, BLUE_DARK);
 			GLTools::Color(gltools::WHITE, 1.0f);
 		}
-		else if (variante == ESPAN || variante == TURCA ) {
+		else if (variante == ESPAN || variante == TURCA) {
 			Formas3D::Cilindro(0.06, 0.15, WHITEP, GREY);
 			GLTools::Color(gltools::MARRON, 1.0f);//Cambiamos el color del tablero
 		}
 		else if (variante == RUSA) {
-			Formas3D::Cilindro(0.06, 0.15,RED, RED_DARK);
+			Formas3D::Cilindro(0.06, 0.15, RED, RED_DARK);
 			GLTools::Color(gltools::GRIS_AZUL, 1.0f);//Cambiamos el color del tablero
 		}
 		else if (variante == INTERNACIONAL) {
@@ -262,7 +262,7 @@ void BoardGL::dibuja(int n) {
 			Formas3D::Cilindro(0.06, 0.15, RED, RED_DARK);
 			GLTools::Color(gltools::WHITEP, 1.0f);//Cambiamos el color del tablero
 		}
-		else if ( variante == PERUANA) {
+		else if (variante == PERUANA) {
 			Formas3D::Cilindro(0.06, 0.15, RED, RED_DARK);
 			GLTools::Color(gltools::WHITE, 1.0f);
 		}
@@ -283,7 +283,8 @@ void BoardGL::dibuja(int n) {
 			GLTools::Color(gltools::WHITEP, 1.0f);
 		}
 		else if (variante == INTERNACIONAL) {
-		Formas3D::Cilindro(0.06, 0.15, Grey_dark2, BLACK);
-		GLTools::Color(gltools::MARRON, 1.0f);
+			Formas3D::Cilindro(0.06, 0.15, Grey_dark2, BLACK);
+			GLTools::Color(gltools::MARRON, 1.0f);
+		}
 	}
-	}	
+}
