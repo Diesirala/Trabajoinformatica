@@ -48,7 +48,10 @@ public:
 			tab[N - 1][j].setCell(N - 1, j, Piece::QUEEN_GREEN);
 			tab[N - 3][j].setCell(N - 3, j, Piece::QUEEN_GREEN);
 			if (N >= 10) {
-				tab[N-7][j].setCell(N-7, j, Piece::QUEEN_BLACK);
+				tab[3][j].setCell(3, j, Piece::QUEEN_BLACK);
+			}
+			if (N >= 12) {
+				tab[N - 5][j].setCell(N - 5, j, Piece::QUEEN_GREEN);
 			}
 		}
 
@@ -60,7 +63,9 @@ public:
 			if (N >= 10) {
 				tab[N - 4][j].setCell(N-4, j, Piece::QUEEN_GREEN);
 			}
-			
+			if (N >= 12) {
+				tab[ 4][j].setCell( 4, j, Piece::QUEEN_BLACK);
+			}
 		}
 		Piece vacio[20];
 		
@@ -903,6 +908,27 @@ public:
 		}
 		if (turno == -1)
 			moverIA();
+
+	}
+
+
+
+
+};
+class BoardCanadiense:public Board {
+public:
+	BoardCanadiense() :Board(12) {
+		variante = CANADIENSE;
+	}
+
+
+
+};
+class BoardCanadienseIA : public BoardIA {
+public:
+	BoardCanadienseIA() :BoardIA(12) {
+		variante = CANADIENSE;
+
 
 	}
 
