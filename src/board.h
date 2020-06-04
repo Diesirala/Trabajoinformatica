@@ -34,7 +34,7 @@ protected:
 	
 
 public:
-	Board(int n, tipo_juego est):turno(1),movimientos(1) ,N(n),estado(JUGANDO),blancas((n / 2) * 3), negras((n / 2) * 3),variante(est),cop(0){
+	Board(int n):turno(1),movimientos(1) ,N(n),estado(JUGANDO),blancas((n / 2) * 3), negras((n / 2) * 3),variante(INTERNACIONAL),cop(0){
 	
 		
 		tab=new Piece*[N];
@@ -127,7 +127,7 @@ protected:
 	Piece posiblesMovimientos[20];
 	int posDeMover;
 public:
-	BoardIA(int a, tipo_juego b) :Board(a, b) {
+	BoardIA(int a) :Board(a) {
 		Piece vacio[20];
 
 		for (int i = 0; i < 20; i++)
@@ -290,9 +290,9 @@ public:
 };
 class BoardCheckers : public Board {
 public:
-	BoardCheckers(int a, tipo_juego b) :Board(a, b) {
+	BoardCheckers() :Board(8) {
 		turno = -1;
-
+		variante = CHECKERS;
 
 	}
 	
@@ -311,7 +311,7 @@ protected:
 	Piece posiblesMovimientos[20];
 	int posDeMover;
 public:
-	BoardCheckersIA(int a, tipo_juego b):BoardCheckers(a,b) {
+	BoardCheckersIA():BoardCheckers() {
 			}
 	/*BoardCheckersIA(BoardCheckersIA& a) :BoardCheckers(a) {
 	}*/
@@ -463,8 +463,9 @@ public:
 };
 class BoardItalianas : public BoardCheckers {
 public:
-	BoardItalianas(int a, tipo_juego b) :BoardCheckers(a, b) {
+	BoardItalianas() :BoardCheckers() {
 		turno = 1;
+		variante = ITALIANA;
 	}
 	virtual int comer(int x, int y, int posicionx, int posiciony);
 	virtual void actualizarEstado(void);
@@ -477,7 +478,7 @@ class BoardItalianasIA : public BoardItalianas {
 		Piece posiblesMovimientos[20];
 		int posDeMover;
 	public:
-		BoardItalianasIA(int a, tipo_juego b) :BoardItalianas(a, b) {
+		BoardItalianasIA() :BoardItalianas() {
 		}
 		/*BoardItalianasIA(BoardItalianasIA& a) :BoardItalianas(a) {
 		}*/
@@ -606,7 +607,8 @@ class BoardItalianasIA : public BoardItalianas {
 
 class BoardPeruanas : public Board {
 public:
-	BoardPeruanas(int a, tipo_juego b) :Board(a, b) {
+	BoardPeruanas() :Board(8) {
+		variante = PERUANA;
 	}
 	virtual ~BoardPeruanas() {};
 	virtual int comer(int x, int y, int posicionx, int posiciony);
@@ -617,7 +619,8 @@ public:
 };
 class BoardPeruanasIA : public BoardIA {
 public:
-	BoardPeruanasIA(int a, tipo_juego b) :BoardIA(a, b) {
+	BoardPeruanasIA() :BoardIA(8) {
+		variante = PERUANA;
 	}
 
 		virtual int comer(int x, int y, int posicionx, int posiciony);
@@ -644,7 +647,8 @@ protected:
 	virtual void reina(int posicionx, int posiciony);
 
 public:
-	BoardRusas(int a, tipo_juego b) :Board(a, b) {
+	BoardRusas() :Board(8) {
+		variante = RUSA;
 	}
 
 	
@@ -657,7 +661,8 @@ protected:
 	virtual void reina(int posicionx, int posiciony);
 
 public:
-	BoardRusasIA(int a, tipo_juego b) :BoardIA(a, b) {
+	BoardRusasIA() :BoardIA(8) {
+		variante = RUSA;
 	}
 
 
@@ -669,7 +674,8 @@ public:
 
 class BoardEspañolas : public Board {
 public:
-	BoardEspañolas(int n, tipo_juego b) :Board(n, b) {
+	BoardEspañolas() :Board(8) {
+		variante = ESPAN;
 		for (int i = 0; i < N; i++) {
 			for (int j = 0; j < N; j++) {
 				tab[i][j].setCell(-1, -1, Object::EMPTY_CELL);
@@ -711,7 +717,8 @@ public:
 
 class BoardEspañolasIA:public BoardIA{
 public:
-	BoardEspañolasIA(int a, tipo_juego b) :BoardIA(a, b) {
+	BoardEspañolasIA() :BoardIA(8) {
+		variante = ESPAN;
 		for (int i = 0; i < N; i++) {
 			for (int j = 0; j < N; j++) {
 				tab[i][j].setCell(-1, -1, Object::EMPTY_CELL);
@@ -737,7 +744,9 @@ public:
 };
 class BoardTurcas: public Board {
 public:
-	BoardTurcas(int a, tipo_juego b) :Board(a, b) {}
+	BoardTurcas() :Board(8) {
+		variante = TURCA;
+	}
 	//BoardTurcas(BoardTurcas& a):Board(a){}
 	virtual int comer(int x, int y, int posicionx, int posiciony);
 	virtual int cambiarPosicion(int x, int y, int posicionx, int posiciony);
@@ -753,7 +762,7 @@ protected:
 	Piece posiblesMovimientos[50];
 	int posDeMover;
 public:
-	BoardTurcasIA(int a, tipo_juego b) :BoardTurcas(a, b) {
+	BoardTurcasIA() :BoardTurcas() {
 		Piece vacio[50];
 
 		for (int i = 0; i < 50; i++)
