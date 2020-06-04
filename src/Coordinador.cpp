@@ -285,7 +285,7 @@ void Coordinador::Draw(){
 		ETSIDI::setFont("fuentes/bitwise.ttf", 18);
 		ETSIDI::printxy("Pulse la tecla -1- (8x8)", -5, 7);
 		ETSIDI::printxy("Pulse la tecla -2- (10x10)", -5, 6);
-		
+	
 	}
 
 
