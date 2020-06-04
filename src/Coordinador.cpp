@@ -72,7 +72,13 @@ void Coordinador::KeyDown(unsigned char key)
 			variante = ITALIANA;
 			estado = INSTRUCCIONES;
 			break;
-
+		case '8':
+			ETSIDI::play("sonidos/campana.wav");
+			//tablero damas italiana
+			variante = CANADIENSE;
+			dimensiones = 12;
+			estado = INSTRUCCIONES;
+			break;
 		default:
 			estado = VARIANTES;
 			break;
@@ -251,7 +257,7 @@ void Coordinador::Draw(){
 		ETSIDI::printxy("Pulse la tecla -5- RUSAS", -5, 5);
 		ETSIDI::printxy("Pulse la tecla -6- TURCAS", -5, 4);
 		ETSIDI::printxy("Pulse la tecla -7- ITALIANAS", -5, 3);
-	
+		ETSIDI::printxy("Pulse la tecla -8- CANADIENSES", -5, 2);
 	}
 	else if (estado == MODO) {
 
@@ -385,130 +391,146 @@ void Coordinador::Draw(){
 		glLoadIdentity();
 
 		gluLookAt(0, 7.5, 20, // posicion del ojo
-		0.0, 7.5, 0.0, // hacia que punto mira (0,7.5,0)
-		0.0, 1.0, 0.0); // definimos hacia arriba (eje Y)
-		//Fondo pantala inicig
+			0.0, 7.5, 0.0, // hacia que punto mira (0,7.5,0)
+			0.0, 1.0, 0.0); // definimos hacia arriba (eje Y)
+			//Fondo pantala inicig
 
 		Imagen("imagenes/tablero1.png"); //cargador de imágenes en pantalla
-	if (variante == ITALIANA) {
-		ETSIDI::setTextColor(0.20f, 0.75f, 0.60f);
-		ETSIDI::setFont("fuentes/4.ttf", 50);
-		ETSIDI::printxy("INSTRUCCIONES", -6, 11);
-		ETSIDI::setTextColor(1, 1, 1);
-		ETSIDI::setFont("fuentes/Bitwise.ttf", 15);
-		//ETSIDI::setTextColor(1, 1, 1);
-		ETSIDI::printxy("1- LOS PEONES NO PUEDEN CAPTURAR A LAS DAMAS NUNCA", -9, 8.5);
-		ETSIDI::printxy("2  LAS DAMAS SOLO PUEDEN COMER A LAS FICHAS ENEMIGAS  ", -9, 7.5);
-		ETSIDI::printxy("CONTIGUAS TANTO ADELANTE COMO HACIA ATRAS", -8, 6.5);
-		ETSIDI::printxy("3  SI EL JUGADOR NO PUEDE MOVER NI COMER PIERDE  ", -9, 5.5);
-		ETSIDI::printxy("4  EMPIEZAN LAS DORADAS", -9, 4.5);
-		ETSIDI::printxy("5  LOS PEONES SOLO PUEDEN COMER HACIA DELANTE", -9, 3.5);
-		ETSIDI::setFont("fuentes/Bitwise.ttf", 10);
-		ETSIDI::printxy("Pulse tecla -C- PARA CONTINUAR", -8, 1.5);
-		ETSIDI::printxy("Pulse tecla -E- PARA CAMBIAR DE JUEGO", -1, 1.5);
-	}
-	else if (variante == CHECKERS) {
-		ETSIDI::setTextColor(0.20f, 0.75f, 0.60f);
-		ETSIDI::setFont("fuentes/4.ttf", 50);
-		ETSIDI::printxy("INSTRUCCIONES", -6, 11);
-		ETSIDI::setTextColor(1,1, 1);
-		ETSIDI::setFont("fuentes/Bitwise.ttf", 15);
-		//ETSIDI::setTextColor(1, 1, 1);
-		ETSIDI::printxy("1- LAS DAMAS SOLO SE PUEDEN MOVER UNA CASILLA HACIA ", -9, 9.5);
-		ETSIDI::printxy("DELANTE Y HACIA ATRAS", -8, 8.5);
-		ETSIDI::printxy("2  LAS DAMAS SOLO PUEDEN COMER A LAS FICHAS ENEMIGAS  ", -9,7.5);
-		ETSIDI::printxy("CONTIGUAS TANTO ADELANTE COMO HACIA ATRAS", -8, 6.5);
-		ETSIDI::printxy("3  SI EL JUGADOR NO PUEDE MOVER NI COMER PIERDE  ", -9, 5.5);
-		ETSIDI::printxy("4  EMPIEZAN LAS ROJAS", -9, 4.5);
-		ETSIDI::printxy("5  LOS PEONES SOLO PUEDEN COMER HACIA DELANTE", -9, 3.5);
-		ETSIDI::setFont("fuentes/Bitwise.ttf", 10);
-		ETSIDI::printxy("Pulse tecla -C- PARA CONTINUAR", -8, 1.5);
-		ETSIDI::printxy("Pulse tecla -E- PARA CAMBIAR DE JUEGO", -1, 1.5);
+		if (variante == ITALIANA) {
+			ETSIDI::setTextColor(0.20f, 0.75f, 0.60f);
+			ETSIDI::setFont("fuentes/4.ttf", 50);
+			ETSIDI::printxy("INSTRUCCIONES", -6, 11);
+			ETSIDI::setTextColor(1, 1, 1);
+			ETSIDI::setFont("fuentes/Bitwise.ttf", 15);
+			//ETSIDI::setTextColor(1, 1, 1);
+			ETSIDI::printxy("1- LOS PEONES NO PUEDEN CAPTURAR A LAS DAMAS NUNCA", -9, 8.5);
+			ETSIDI::printxy("2  LAS DAMAS SOLO PUEDEN COMER A LAS FICHAS ENEMIGAS  ", -9, 7.5);
+			ETSIDI::printxy("CONTIGUAS TANTO ADELANTE COMO HACIA ATRAS", -8, 6.5);
+			ETSIDI::printxy("3  SI EL JUGADOR NO PUEDE MOVER NI COMER PIERDE  ", -9, 5.5);
+			ETSIDI::printxy("4  EMPIEZAN LAS DORADAS", -9, 4.5);
+			ETSIDI::printxy("5  LOS PEONES SOLO PUEDEN COMER HACIA DELANTE", -9, 3.5);
+			ETSIDI::setFont("fuentes/Bitwise.ttf", 10);
+			ETSIDI::printxy("Pulse tecla -C- PARA CONTINUAR", -8, 1.5);
+			ETSIDI::printxy("Pulse tecla -E- PARA CAMBIAR DE JUEGO", -1, 1.5);
+		}
+		else if (variante == CHECKERS) {
+			ETSIDI::setTextColor(0.20f, 0.75f, 0.60f);
+			ETSIDI::setFont("fuentes/4.ttf", 50);
+			ETSIDI::printxy("INSTRUCCIONES", -6, 11);
+			ETSIDI::setTextColor(1, 1, 1);
+			ETSIDI::setFont("fuentes/Bitwise.ttf", 15);
+			//ETSIDI::setTextColor(1, 1, 1);
+			ETSIDI::printxy("1- LAS DAMAS SOLO SE PUEDEN MOVER UNA CASILLA HACIA ", -9, 9.5);
+			ETSIDI::printxy("DELANTE Y HACIA ATRAS", -8, 8.5);
+			ETSIDI::printxy("2  LAS DAMAS SOLO PUEDEN COMER A LAS FICHAS ENEMIGAS  ", -9, 7.5);
+			ETSIDI::printxy("CONTIGUAS TANTO ADELANTE COMO HACIA ATRAS", -8, 6.5);
+			ETSIDI::printxy("3  SI EL JUGADOR NO PUEDE MOVER NI COMER PIERDE  ", -9, 5.5);
+			ETSIDI::printxy("4  EMPIEZAN LAS ROJAS", -9, 4.5);
+			ETSIDI::printxy("5  LOS PEONES SOLO PUEDEN COMER HACIA DELANTE", -9, 3.5);
+			ETSIDI::setFont("fuentes/Bitwise.ttf", 10);
+			ETSIDI::printxy("Pulse tecla -C- PARA CONTINUAR", -8, 1.5);
+			ETSIDI::printxy("Pulse tecla -E- PARA CAMBIAR DE JUEGO", -1, 1.5);
 
 		}
-	else if (variante == PERUANA) {
-		ETSIDI::setTextColor(0.20f, 0.75f, 0.60f);
-		ETSIDI::setFont("fuentes/4.ttf", 50);
-		ETSIDI::printxy("INSTRUCCIONES", -6, 11);
-		ETSIDI::setTextColor(1, 1, 1);
-		ETSIDI::setFont("fuentes/Bitwise.ttf", 15);
-		//ETSIDI::setTextColor(1, 1, 1);
-		ETSIDI::printxy("1- PIERDE QUIEN SE QUEDA SIN FICHAS EN EL TABLERO", -9, 8.5);
-		ETSIDI::printxy("2  LAS DAMAS SOLO PUEDEN COMER A LAS FICHAS ENEMIGAS  ", -9, 7.5);
-		ETSIDI::printxy("CONTIGUAS TANTO ADELANTE COMO HACIA ATRAS", -8, 6.5);
-		ETSIDI::printxy("3  SI EL JUGADOR NO PUEDE MOVER NI COMER PIERDE  ", -9, 5.5);
-		ETSIDI::printxy("4  EMPIEZAN LAS AZULES", -9, 4.5);
-		ETSIDI::printxy("5  LA FICHA QUE COME OCUPA EL LUGAR DE LA COMIDA", -9, 3.5);
-		ETSIDI::setFont("fuentes/Bitwise.ttf", 10);
-		ETSIDI::printxy("Pulse tecla -C- PARA CONTINUAR", -8, 1.5);
-		ETSIDI::printxy("Pulse tecla -E- PARA CAMBIAR DE JUEGO", -1, 1.5);
-	}
-	else if (variante == RUSA) {
-		ETSIDI::setTextColor(0.20f, 0.75f, 0.60f);
-		ETSIDI::setFont("fuentes/4.ttf", 50);
-		ETSIDI::printxy("INSTRUCCIONES", -6, 11);
-		ETSIDI::setTextColor(1, 1, 1);
-		ETSIDI::setFont("fuentes/Bitwise.ttf", 15);
-		ETSIDI::printxy("1- LAS DAMAS SOLO SE PUEDEN MOVER UNA CASILLA HACIA ", -9, 9.5);
-		ETSIDI::printxy("DELANTE Y HACIA ATRAS", -8, 8.5);
-		ETSIDI::printxy("2  LAS DAMAS SOLO PUEDEN COMER A LAS FICHAS ENEMIGAS", -9, 7.5);
-		ETSIDI::printxy("CONTIGUAS TANTO ADELANTE COMO HACIA ATRAS", -8, 6.5);
-		ETSIDI::printxy("3  SI EL JUGADOR NO PUEDE MOVER NI COMER PIERDE  ", -9, 5.5);
-		ETSIDI::printxy("4  EMPIEZAN LAS BLANCAS", -9, 4.5);
-		ETSIDI::printxy("5  LOS PEONES SOLO PUEDEN COMER HACIA DELANTE", -9, 3.5);
-		ETSIDI::printxy("6  AL SER DAMA UN PEON NO PIERDE SU TURNO", -9, 2.5);
-		ETSIDI::setFont("fuentes/Bitwise.ttf", 10);
-		ETSIDI::printxy("Pulse tecla -C- PARA CONTINUAR", -8, 1.5);
-		ETSIDI::printxy("Pulse tecla -E- PARA CAMBIAR DE JUEGO", -1, 1.5);
+		else if (variante == PERUANA) {
+			ETSIDI::setTextColor(0.20f, 0.75f, 0.60f);
+			ETSIDI::setFont("fuentes/4.ttf", 50);
+			ETSIDI::printxy("INSTRUCCIONES", -6, 11);
+			ETSIDI::setTextColor(1, 1, 1);
+			ETSIDI::setFont("fuentes/Bitwise.ttf", 15);
+			//ETSIDI::setTextColor(1, 1, 1);
+			ETSIDI::printxy("1- PIERDE QUIEN SE QUEDA SIN FICHAS EN EL TABLERO", -9, 8.5);
+			ETSIDI::printxy("2  LAS DAMAS SOLO PUEDEN COMER A LAS FICHAS ENEMIGAS  ", -9, 7.5);
+			ETSIDI::printxy("CONTIGUAS TANTO ADELANTE COMO HACIA ATRAS", -8, 6.5);
+			ETSIDI::printxy("3  SI EL JUGADOR NO PUEDE MOVER NI COMER PIERDE  ", -9, 5.5);
+			ETSIDI::printxy("4  EMPIEZAN LAS AZULES", -9, 4.5);
+			ETSIDI::printxy("5  LA FICHA QUE COME OCUPA EL LUGAR DE LA COMIDA", -9, 3.5);
+			ETSIDI::setFont("fuentes/Bitwise.ttf", 10);
+			ETSIDI::printxy("Pulse tecla -C- PARA CONTINUAR", -8, 1.5);
+			ETSIDI::printxy("Pulse tecla -E- PARA CAMBIAR DE JUEGO", -1, 1.5);
 		}
-	else if (variante == ESPAN) {
-		ETSIDI::setTextColor(0.20f, 0.75f, 0.60f);
-		ETSIDI::setFont("fuentes/4.ttf", 50);
-		ETSIDI::printxy("INSTRUCCIONES", -6, 11);
-		ETSIDI::setTextColor(1, 1, 1);
-		ETSIDI::setFont("fuentes/Bitwise.ttf", 15);
-		ETSIDI::printxy("1- LAS DAMAS SOLO SE PUEDEN MOVER UNA CASILLA HACIA ", -9, 9.5);
-		ETSIDI::printxy("DELANTE Y HACIA ATRAS", -8, 8.5);
-		ETSIDI::printxy("2  LAS DAMAS SOLO PUEDEN COMER A LAS FICHAS ENEMIGAS", -9, 7.5);
-		ETSIDI::printxy("CONTIGUAS TANTO ADELANTE COMO HACIA ATRAS", -8, 6.5);
-		ETSIDI::printxy("3  SI EL JUGADOR NO PUEDE MOVER NI COMER PIERDE  ", -9, 5.5);
-		ETSIDI::printxy("4  EMPIEZAN LAS BLANCAS", -9, 4.5);
-		ETSIDI::printxy("5  LOS PEONES SOLO PUEDEN COMER HACIA DELANTE", -9, 3.5);
-		ETSIDI::setFont("fuentes/Bitwise.ttf", 10);
-		ETSIDI::printxy("Pulse tecla -C- PARA CONTINUAR", -8, 1.5);
-		ETSIDI::printxy("Pulse tecla -E- PARA CAMBIAR DE JUEGO", -1, 1.5);
-	}
-	else if (variante == TURCA) {
-		ETSIDI::setTextColor(0.20f, 0.75f, 0.60f);
-		ETSIDI::setFont("fuentes/4.ttf", 50);
-		ETSIDI::printxy("INSTRUCCIONES", -6, 11);
-		ETSIDI::setTextColor(1, 1, 1);
-		ETSIDI::setFont("fuentes/Bitwise.ttf", 15);
-		ETSIDI::printxy("1- CAPTURAN EN LINEA RECTA HACIA DELANTE O", -9, 9.5);
-		ETSIDI::printxy("HACIA LOS LADOS", -8, 8.5);
-		ETSIDI::printxy("2  LAS DAMAS TAMBIEN CAPTURAN EN LINEA RECTAS", -9, 7.5);
-		ETSIDI::printxy("3  SI EL JUGADOR NO PUEDE MOVER NI COMER PIERDE  ", -9, 6.5);
-		ETSIDI::printxy("4  EMPIEZAN LAS BLANCAS", -9, 5.5);
-		ETSIDI::printxy("5  LOS PEONES SOLO PUEDEN COMER HACIA DELANTE", -9, 4.5);
-		ETSIDI::setFont("fuentes/Bitwise.ttf", 10);
-		ETSIDI::printxy("Pulse tecla -C- PARA CONTINUAR", -8, 1.5);
-		ETSIDI::printxy("Pulse tecla -E- PARA CAMBIAR DE JUEGO", -1, 1.5);
-	}
-	else if (variante == INTERNACIONAL) {
-	ETSIDI::setTextColor(0.20f, 0.75f, 0.60f);
-	ETSIDI::setFont("fuentes/4.ttf", 50);
-	ETSIDI::printxy("INSTRUCCIONES", -6, 11);
-	ETSIDI::setTextColor(1, 1, 1);
-	ETSIDI::setFont("fuentes/Bitwise.ttf", 15);
-	ETSIDI::printxy("1- CAPTURAN EN LINEA DIAGONAL HACIA DELANTE O", -9, 9.5);
-	ETSIDI::printxy("HACIA ATRÁS", -8, 8.5);
-	ETSIDI::printxy("2  LAS DAMAS TAMBIEN CAPTURAN EN LINEAS DIAGONALES", -9, 7.5);
-	ETSIDI::printxy("3  SI EL JUGADOR NO PUEDE MOVER NI COMER PIERDE  ", -9, 6.5);
-	ETSIDI::printxy("4  EMPIEZAN LAS BLANCAS", -9, 5.5);
-	ETSIDI::setFont("fuentes/Bitwise.ttf", 10);
-	ETSIDI::printxy("Pulse tecla -C- PARA CONTINUAR", -8, 1.5);
-	ETSIDI::printxy("Pulse tecla -E- PARA CAMBIAR DE JUEGO", -1, 1.5);
-	}
+		else if (variante == RUSA) {
+			ETSIDI::setTextColor(0.20f, 0.75f, 0.60f);
+			ETSIDI::setFont("fuentes/4.ttf", 50);
+			ETSIDI::printxy("INSTRUCCIONES", -6, 11);
+			ETSIDI::setTextColor(1, 1, 1);
+			ETSIDI::setFont("fuentes/Bitwise.ttf", 15);
+			ETSIDI::printxy("1- LAS DAMAS SOLO SE PUEDEN MOVER UNA CASILLA HACIA ", -9, 9.5);
+			ETSIDI::printxy("DELANTE Y HACIA ATRAS", -8, 8.5);
+			ETSIDI::printxy("2  LAS DAMAS SOLO PUEDEN COMER A LAS FICHAS ENEMIGAS", -9, 7.5);
+			ETSIDI::printxy("CONTIGUAS TANTO ADELANTE COMO HACIA ATRAS", -8, 6.5);
+			ETSIDI::printxy("3  SI EL JUGADOR NO PUEDE MOVER NI COMER PIERDE  ", -9, 5.5);
+			ETSIDI::printxy("4  EMPIEZAN LAS BLANCAS", -9, 4.5);
+			ETSIDI::printxy("5  LOS PEONES SOLO PUEDEN COMER HACIA DELANTE", -9, 3.5);
+			ETSIDI::printxy("6  AL SER DAMA UN PEON NO PIERDE SU TURNO", -9, 2.5);
+			ETSIDI::setFont("fuentes/Bitwise.ttf", 10);
+			ETSIDI::printxy("Pulse tecla -C- PARA CONTINUAR", -8, 1.5);
+			ETSIDI::printxy("Pulse tecla -E- PARA CAMBIAR DE JUEGO", -1, 1.5);
+		}
+		else if (variante == ESPAN) {
+			ETSIDI::setTextColor(0.20f, 0.75f, 0.60f);
+			ETSIDI::setFont("fuentes/4.ttf", 50);
+			ETSIDI::printxy("INSTRUCCIONES", -6, 11);
+			ETSIDI::setTextColor(1, 1, 1);
+			ETSIDI::setFont("fuentes/Bitwise.ttf", 15);
+			ETSIDI::printxy("1- LAS DAMAS SOLO SE PUEDEN MOVER UNA CASILLA HACIA ", -9, 9.5);
+			ETSIDI::printxy("DELANTE Y HACIA ATRAS", -8, 8.5);
+			ETSIDI::printxy("2  LAS DAMAS SOLO PUEDEN COMER A LAS FICHAS ENEMIGAS", -9, 7.5);
+			ETSIDI::printxy("CONTIGUAS TANTO ADELANTE COMO HACIA ATRAS", -8, 6.5);
+			ETSIDI::printxy("3  SI EL JUGADOR NO PUEDE MOVER NI COMER PIERDE  ", -9, 5.5);
+			ETSIDI::printxy("4  EMPIEZAN LAS BLANCAS", -9, 4.5);
+			ETSIDI::printxy("5  LOS PEONES SOLO PUEDEN COMER HACIA DELANTE", -9, 3.5);
+			ETSIDI::setFont("fuentes/Bitwise.ttf", 10);
+			ETSIDI::printxy("Pulse tecla -C- PARA CONTINUAR", -8, 1.5);
+			ETSIDI::printxy("Pulse tecla -E- PARA CAMBIAR DE JUEGO", -1, 1.5);
+		}
+		else if (variante == TURCA) {
+			ETSIDI::setTextColor(0.20f, 0.75f, 0.60f);
+			ETSIDI::setFont("fuentes/4.ttf", 50);
+			ETSIDI::printxy("INSTRUCCIONES", -6, 11);
+			ETSIDI::setTextColor(1, 1, 1);
+			ETSIDI::setFont("fuentes/Bitwise.ttf", 15);
+			ETSIDI::printxy("1- CAPTURAN EN LINEA RECTA HACIA DELANTE O", -9, 9.5);
+			ETSIDI::printxy("HACIA LOS LADOS", -8, 8.5);
+			ETSIDI::printxy("2  LAS DAMAS TAMBIEN CAPTURAN EN LINEA RECTAS", -9, 7.5);
+			ETSIDI::printxy("3  SI EL JUGADOR NO PUEDE MOVER NI COMER PIERDE  ", -9, 6.5);
+			ETSIDI::printxy("4  EMPIEZAN LAS BLANCAS", -9, 5.5);
+			ETSIDI::printxy("5  LOS PEONES SOLO PUEDEN COMER HACIA DELANTE", -9, 4.5);
+			ETSIDI::setFont("fuentes/Bitwise.ttf", 10);
+			ETSIDI::printxy("Pulse tecla -C- PARA CONTINUAR", -8, 1.5);
+			ETSIDI::printxy("Pulse tecla -E- PARA CAMBIAR DE JUEGO", -1, 1.5);
+		}
+		else if (variante == INTERNACIONAL) {
+			ETSIDI::setTextColor(0.20f, 0.75f, 0.60f);
+			ETSIDI::setFont("fuentes/4.ttf", 50);
+			ETSIDI::printxy("INSTRUCCIONES", -6, 11);
+			ETSIDI::setTextColor(1, 1, 1);
+			ETSIDI::setFont("fuentes/Bitwise.ttf", 15);
+			ETSIDI::printxy("1- CAPTURAN EN LINEA DIAGONAL HACIA DELANTE O", -9, 9.5);
+			ETSIDI::printxy("HACIA ATRÁS", -8, 8.5);
+			ETSIDI::printxy("2  LAS DAMAS TAMBIEN CAPTURAN EN LINEAS DIAGONALES", -9, 7.5);
+			ETSIDI::printxy("3  SI EL JUGADOR NO PUEDE MOVER NI COMER PIERDE  ", -9, 6.5);
+			ETSIDI::printxy("4  EMPIEZAN LAS BLANCAS", -9, 5.5);
+			ETSIDI::setFont("fuentes/Bitwise.ttf", 10);
+			ETSIDI::printxy("Pulse tecla -C- PARA CONTINUAR", -8, 1.5);
+			ETSIDI::printxy("Pulse tecla -E- PARA CAMBIAR DE JUEGO", -1, 1.5);
+		}
+		else if (variante == CANADIENSE) {
+			ETSIDI::setTextColor(0.20f, 0.75f, 0.60f);
+			ETSIDI::setFont("fuentes/4.ttf", 50);
+			ETSIDI::printxy("INSTRUCCIONES", -6, 11);
+			ETSIDI::setTextColor(1, 1, 1);
+			ETSIDI::setFont("fuentes/Bitwise.ttf", 15);
+			ETSIDI::printxy("1- CAPTURAN EN LINEA DIAGONAL HACIA DELANTE O", -9, 9.5);
+			ETSIDI::printxy("HACIA ATRÁS", -8, 8.5);
+			ETSIDI::printxy("2-  LAS DAMAS TAMBIEN CAPTURAN EN LINEAS DIAGONALES", -9, 7.5);
+			ETSIDI::printxy("3-  SI EL JUGADOR NO PUEDE MOVER NI COMER PIERDE  ", -9, 6.5);
+			ETSIDI::printxy("4-  EMPIEZAN LAS BLANCAS", -9, 5.5);
+			ETSIDI::printxy("5-  EL TABLERO ES DE 12x12", -9, 4.5);
+			ETSIDI::setFont("fuentes/Bitwise.ttf", 10);
+			ETSIDI::printxy("Pulse tecla -C- PARA CONTINUAR", -8, 1.5);
+			ETSIDI::printxy("Pulse tecla -E- PARA CAMBIAR DE JUEGO", -1, 1.5);
+		}
 	}
 }
 
@@ -663,6 +685,18 @@ void Coordinador::crearTablero(void)
 		}
 		else if (!IA) {
 			a = new Board(dimensiones);
+			//Board* a = new Board(8);
+			tablero++;
+		}
+		break;
+	case CANADIENSE:
+		if (IA) {
+			a = new BoardCanadienseIA();
+			//Board* a = new Board(8);
+			tablero++;
+		}
+		else if (!IA) {
+			a = new BoardCanadiense();
 			//Board* a = new Board(8);
 			tablero++;
 		}
