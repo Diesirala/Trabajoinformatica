@@ -2315,8 +2315,10 @@ void BoardTurcas::actualizarEstado(void)
 
 
 		}
-		if (posDeComer == 0 && posDeMover == 0 && movimientos == 1)
-			estado = TABLAS;
+		if (posDeComer == 0 && posDeMover == 0 && movimientos == 1 && turno == 1)
+			estado = DERROTAB;
+		if (posDeComer == 0 && posDeMover == 0 && movimientos == 1 && turno == -1)
+			estado = VICTORIAB;
 
 		if (blancas == 0) //GANAN NEGRAS
 			estado = DERROTAB;
