@@ -285,7 +285,7 @@ void Coordinador::Draw(){
 	else if (estado == JUGANDO)
 	{
 		if (tablero == 0) 
-		crearTablero(dimensiones, variante);
+		crearTablero();
 		if (a->estadoPartida() == DERROTAB) {
 			estado = DERROTAB;
 			tablero = 0;
@@ -579,90 +579,90 @@ void Coordinador::MouseButton(int x, int y, int button, bool down, bool sKey, bo
 
 }
 
-void Coordinador::crearTablero(int n , tipo_juego tip)
+void Coordinador::crearTablero(void)
 {
-	switch (tip)
+	switch (variante)
 	{
 	case ESPAN:
 		if (IA) {
-			a = new BoardEspañolasIA(8, tip);
+			a = new BoardEspañolasIA();
 			//Board* a = new Board(8);
 			tablero++;
 		}
 		else if (!IA) {
-			a = new BoardEspañolas(8, tip);
+			a = new BoardEspañolas();
 			//Board* a = new Board(8);
 			tablero++;
 		}
 		break;
 	case PERUANA:
 		if (IA) {
-			a = new BoardPeruanasIA(8, tip);
+			a = new BoardPeruanasIA();
 			//Board* a = new Board(8);
 			tablero++;
 		}
 		else if (!IA) {
-			a = new BoardPeruanas(8, tip);
+			a = new BoardPeruanas();
 			//Board* a = new Board(8);
 			tablero++;
 		}
 		break;
 	case RUSA:
 		if (IA) {
-			a = new BoardRusasIA(8, tip);
+			a = new BoardRusasIA();
 			//Board* a = new Board(8);
 			tablero++;
 		}
 		else if (!IA) {
-			a = new BoardRusas(8, tip);
+			a = new BoardRusas();
 			//Board* a = new Board(8);
 			tablero++;
 		}
 		break;
 	case CHECKERS:
 		if (IA) {
-			a = new BoardCheckersIA(8, tip);
+			a = new BoardCheckersIA();
 			//Board* a = new Board(8);
 			tablero++;
 		}
 		else if (!IA) {
-			a = new BoardCheckers(8, tip);
+			a = new BoardCheckers();
 			//Board* a = new Board(8);
 			tablero++;
 		}
 		break;
 	case ITALIANA:
 		if (IA) {
-			a = new BoardItalianasIA(8, tip);
+			a = new BoardItalianasIA();
 			//Board* a = new Board(8);
 			tablero++;
 		}
 		else if (!IA) {
-			a = new BoardItalianas(8, tip);
+			a = new BoardItalianas();
 			//Board* a = new Board(8);
 			tablero++;
 		}
 		break;
 	case TURCA:
 		if (IA) {
-			a = new BoardTurcasIA(n, tip);
+			a = new BoardTurcasIA();
 			//Board* a = new Board(8);
 			tablero++;
 		}
 		else if (!IA) {
-			a = new BoardTurcas(n, tip);
+			a = new BoardTurcas();
 			//Board* a = new Board(8);
 			tablero++;
 		}
 		break;
 	case INTERNACIONAL:
 		if (IA) {
-			a = new BoardIA(n, tip);
+			a = new BoardIA(dimensiones);
 			//Board* a = new Board(8);
 			tablero++;
 		}
 		else if (!IA) {
-			a = new Board(n, tip);
+			a = new Board(dimensiones);
 			//Board* a = new Board(8);
 			tablero++;
 		}

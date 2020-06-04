@@ -28,7 +28,7 @@
 	void KeyDown(unsigned char key);
 	void SpecialKeyDown(unsigned char key);
 	void MouseButton(int x, int y, int button, bool down, bool shiftKey, bool ctrlKey);
-	void crearTablero(int , tipo_juego);
+	void crearTablero(void);
 	void Imagen(const char*);
 	int getDimensiones() { return dimensiones; }
 	//coord
