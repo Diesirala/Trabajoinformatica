@@ -12,15 +12,46 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\board.cpp" />
+    <ClCompile Include="src\BoardCanadiense.cpp" />
+    <ClCompile Include="src\BoardCanadienseIA.cpp" />
+    <ClCompile Include="src\BoardCheckers.cpp" />
+    <ClCompile Include="src\BoardCheckersIA.cpp" />
+    <ClCompile Include="src\BoardEspañolas.cpp" />
+    <ClCompile Include="src\BoardEspañolasIA.cpp" />
     <ClCompile Include="src\boardgl.cpp" />
+    <ClCompile Include="src\BoardIA.cpp" />
+    <ClCompile Include="src\BoardItalianas.cpp" />
+    <ClCompile Include="src\BoardItalianasIA.cpp" />
+    <ClCompile Include="src\BoardPeruanas.cpp" />
+    <ClCompile Include="src\BoardPeruanasIA .cpp" />
+    <ClCompile Include="src\BoardRusas.cpp" />
+    <ClCompile Include="src\BoardRusasIA .cpp" />
+    <ClCompile Include="src\BoardTurcas.cpp" />
+    <ClCompile Include="src\BoardTurcasIA.cpp" />
     <ClCompile Include="src\Coordinador.cpp" />
     <ClCompile Include="src\Formas3D.cpp" />
     <ClCompile Include="src\game.cpp" />
     <ClCompile Include="src\gltools.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BoardPeruanas.h" />
     <ClInclude Include="src\board.h" />
+    <ClInclude Include="src\BoardCanadiense.h" />
+    <ClInclude Include="src\BoardCanadienseIA.h" />
+    <ClInclude Include="src\BoardCheckers.h" />
+    <ClInclude Include="src\BoardCheckersIA.h" />
+    <ClInclude Include="src\BoardEspañolas.h" />
+    <ClInclude Include="src\BoardEspañolasIA.h" />
     <ClInclude Include="src\boardgl.h" />
+    <ClInclude Include="src\BoardIA.h" />
+    <ClInclude Include="src\BoardItalianas.h" />
+    <ClInclude Include="src\BoardItalianasIA.h" />
+    <ClInclude Include="src\BoardPeruanas.h" />
+    <ClInclude Include="src\BoardPeruanasIA .h" />
+    <ClInclude Include="src\BoardRusas.h" />
+    <ClInclude Include="src\BoardRusasIA .h" />
+    <ClInclude Include="src\BoardTurcas.h" />
+    <ClInclude Include="src\BoardTurcasIA.h" />
     <ClInclude Include="src\Coordinador.h" />
     <ClInclude Include="src\Enumeraciones.h" />
     <ClInclude Include="src\Formas3D.h" />
