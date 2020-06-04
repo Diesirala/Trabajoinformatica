@@ -136,6 +136,7 @@ void Coordinador::KeyDown(unsigned char key)
 		{
 		case 'e': {
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+			ETSIDI::play("sonidos/campana.wav");
 			estado = INICIO;
 			tablero = 0;
 			delete  scene;
@@ -156,7 +157,7 @@ void Coordinador::KeyDown(unsigned char key)
 		tablero = 0;
 		delete  scene;
 		delete a;
-		ETSIDI::play("sonidos/GAMEOVER.wav");
+		
 		if (key == 'c')
 		{
 			ETSIDI::play("sonidos/campana.wav");
@@ -322,7 +323,7 @@ void Coordinador::Draw(){
 
 	else if (estado == DERROTAB)
 	{
-
+	ETSIDI::play("sonidos/GAMEOVER.wav");
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	gluPerspective(40.0, 800 / 600.0f, 0.1, 150);
 	glMatrixMode(GL_MODELVIEW);
@@ -343,6 +344,7 @@ void Coordinador::Draw(){
 
 	else if (estado == VICTORIAB)
 	{
+	ETSIDI::play("sonidos/win.wav");
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	gluPerspective(40.0, 800 / 600.0f, 0.1, 150);
 	glMatrixMode(GL_MODELVIEW);
