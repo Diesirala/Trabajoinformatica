@@ -4,6 +4,25 @@
 #include "board.h"
 #include "piece.h"
 #include "Enumeraciones.h"
+#include "BoardCanadiense.h"
+#include "BoardCanadienseIA.h"
+#include "BoardCheckers.h"
+#include "BoardCheckersIA.h"
+#include "BoardEspañolas.h"
+#include "BoardEspañolasIA.h"
+#include "BoardIA.h"
+#include "BoardItalianas.h"
+#include "BoardItalianasIA.h"
+#include "BoardPeruanas.h"
+#include "BoardPeruanasIA .h"
+#include "BoardRusas.h"
+#include "BoardRusasIA .h"
+#include "BoardTurcas.h"
+#include "BoardTurcasIA.h"
+
+
+
+
 //enum tipo_juego { ESPAN, PERUANA, RUSA, INGLESA };
  class Coordinador{
  protected:
