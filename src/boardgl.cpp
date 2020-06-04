@@ -270,7 +270,9 @@ void BoardGL::dibuja(int n) {
 			Formas3D::Cilindro(0.06, 0.15, WHITEP, GREY);
 			GLTools::Color(gltools::MARRON, 1.0f);//Cambiamos el color del tablero
 		} // caso reina JUGADOR
-		else if (n == 4) {
+		
+		}
+	else if (n == 4) {
 			if (variante == CHECKERS) {
 				Formas3D::Cilindro(0.06, 0.15, RED, RED_DARK);
 				GLTools::Color(gltools::WHITEP, 1.0f);//Cambiamos el color del tablero
@@ -303,6 +305,5 @@ void BoardGL::dibuja(int n) {
 				Formas3D::Cilindro(0.06, 0.15, Grey_dark2, BLACK);
 				GLTools::Color(gltools::MARRON, 1.0f);
 			}
-		}
 	}
 }
