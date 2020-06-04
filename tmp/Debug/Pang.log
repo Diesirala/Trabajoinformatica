@@ -1,3 +1,6 @@
 ﻿  Coordinador.cpp
 D:\OneDrive - Universidad Politécnica de Madrid\Documents\Trabajo Informatica\Trabajoinformatica\Trabajogit2.0\src\board.h(117,10): warning C4141: 'virtual': se ha utilizado más de una vez
+  board.cpp
+D:\OneDrive - Universidad Politécnica de Madrid\Documents\Trabajo Informatica\Trabajoinformatica\Trabajogit2.0\src\board.h(117,10): warning C4141: 'virtual': se ha utilizado más de una vez
+  Generando código...
   Pang.vcxproj -> D:\OneDrive - Universidad Politécnica de Madrid\Documents\Trabajo Informatica\Trabajoinformatica\Trabajogit2.0\bin\Pang.exe
