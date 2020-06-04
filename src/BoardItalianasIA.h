@@ -1,6 +1,5 @@
 #pragma once
 #include "BoardItalianas.h"
-#include <stdlib.h>
 class BoardItalianasIA : public BoardItalianas {
 protected:
 	//int IA;
@@ -9,9 +8,6 @@ protected:
 public:
 	BoardItalianasIA() :BoardItalianas() {
 	}
-	/*BoardItalianasIA(BoardItalianasIA& a) :BoardItalianas(a) {
-	}*/
-
 	virtual void moverIA(void) {
 
 		for (int i = 0; i < 20; i++) {

@@ -306,18 +306,7 @@ void Coordinador::Draw(){
 			estado = TABLAS;
 			tablero = 0;
 		}
-		switch (estado){
-
-		case 2:
-			cout << " Estado de la partida Jugando " << endl;
-			break;
-		case 3:
-			cout << " Estado de la partida VictoriaB " << endl;
-			break;
-		case 4:
-			cout << " Estado de la partida DerrotaB  " << endl;
-			break;
-		}
+		
 
 	}
 
@@ -404,7 +393,6 @@ void Coordinador::Draw(){
 			ETSIDI::printxy("INSTRUCCIONES", -6, 11);
 			ETSIDI::setTextColor(1, 1, 1);
 			ETSIDI::setFont("fuentes/Bitwise.ttf", 15);
-			//ETSIDI::setTextColor(1, 1, 1);
 			ETSIDI::printxy("1- LOS PEONES NO PUEDEN CAPTURAR A LAS DAMAS NUNCA", -9, 8.5);
 			ETSIDI::printxy("2  LAS DAMAS SOLO PUEDEN COMER A LAS FICHAS ENEMIGAS  ", -9, 7.5);
 			ETSIDI::printxy("CONTIGUAS TANTO ADELANTE COMO HACIA ATRAS", -8, 6.5);
@@ -422,7 +410,6 @@ void Coordinador::Draw(){
 			ETSIDI::printxy("INSTRUCCIONES", -6, 11);
 			ETSIDI::setTextColor(1, 1, 1);
 			ETSIDI::setFont("fuentes/Bitwise.ttf", 15);
-			//ETSIDI::setTextColor(1, 1, 1);
 			ETSIDI::printxy("1- LAS DAMAS SOLO SE PUEDEN MOVER UNA CASILLA HACIA ", -9, 9.5);
 			ETSIDI::printxy("DELANTE Y HACIA ATRAS", -8, 8.5);
 			ETSIDI::printxy("2  LAS DAMAS SOLO PUEDEN COMER A LAS FICHAS ENEMIGAS  ", -9, 7.5);
@@ -442,7 +429,6 @@ void Coordinador::Draw(){
 			ETSIDI::printxy("INSTRUCCIONES", -6, 11);
 			ETSIDI::setTextColor(1, 1, 1);
 			ETSIDI::setFont("fuentes/Bitwise.ttf", 15);
-			//ETSIDI::setTextColor(1, 1, 1);
 			ETSIDI::printxy("1- PIERDE QUIEN SE QUEDA SIN FICHAS EN EL TABLERO", -9, 8.5);
 			ETSIDI::printxy("2  LAS DAMAS SOLO PUEDEN COMER A LAS FICHAS ENEMIGAS  ", -9, 7.5);
 			ETSIDI::printxy("CONTIGUAS TANTO ADELANTE COMO HACIA ATRAS", -8, 6.5);
@@ -602,16 +588,8 @@ void Coordinador::MouseButton(int x, int y, int button, bool down, bool sKey, bo
 	else if (button == MOUSE_MIDDLE_BUTTON)
 		midButton = down;
 	///////////////////////////
-
 		//***WRITE ACTIONS CONNECTED TO MOUSE STATE HERE
-
 		//print cell coordinates after click
-	if (down)
-	{
-		cout << "(" << xcell_sel << "," << ycell_sel << ")" << endl;// estas dos variables son las coordenadas de cada casilla
-		cout << "(" << posX << "," << posY << ")" << endl;// con esto coges todas las posiciones que pertenecen a la misma casilla
-	}
-
 }
 
 void Coordinador::crearTablero(void)
@@ -621,96 +599,80 @@ void Coordinador::crearTablero(void)
 	case ESPAN:
 		if (IA) {
 			a = new BoardEspañolasIA();
-			//Board* a = new Board(8);
 			tablero++;
 		}
 		else if (!IA) {
 			a = new BoardEspañolas();
-			//Board* a = new Board(8);
 			tablero++;
 		}
 		break;
 	case PERUANA:
 		if (IA) {
 			a = new BoardPeruanasIA();
-			//Board* a = new Board(8);
 			tablero++;
 		}
 		else if (!IA) {
 			a = new BoardPeruanas();
-			//Board* a = new Board(8);
 			tablero++;
 		}
 		break;
 	case RUSA:
 		if (IA) {
 			a = new BoardRusasIA();
-			//Board* a = new Board(8);
 			tablero++;
 		}
 		else if (!IA) {
 			a = new BoardRusas();
-			//Board* a = new Board(8);
 			tablero++;
 		}
 		break;
 	case CHECKERS:
 		if (IA) {
 			a = new BoardCheckersIA();
-			//Board* a = new Board(8);
 			tablero++;
 		}
 		else if (!IA) {
 			a = new BoardCheckers();
-			//Board* a = new Board(8);
 			tablero++;
 		}
 		break;
 	case ITALIANA:
 		if (IA) {
 			a = new BoardItalianasIA();
-			//Board* a = new Board(8);
 			tablero++;
 		}
 		else if (!IA) {
 			a = new BoardItalianas();
-			//Board* a = new Board(8);
 			tablero++;
 		}
 		break;
 	case TURCA:
 		if (IA) {
 			a = new BoardTurcasIA();
-			//Board* a = new Board(8);
 			tablero++;
 		}
 		else if (!IA) {
 			a = new BoardTurcas();
-			//Board* a = new Board(8);
 			tablero++;
 		}
 		break;
 	case INTERNACIONAL:
 		if (IA) {
 			a = new BoardIA(dimensiones);
-			//Board* a = new Board(8);
 			tablero++;
 		}
 		else if (!IA) {
 			a = new Board(dimensiones);
-			//Board* a = new Board(8);
 			tablero++;
 		}
 		break;
 	case CANADIENSE:
 		if (IA) {
 			a = new BoardCanadienseIA();
-			//Board* a = new Board(8);
 			tablero++;
 		}
 		else if (!IA) {
 			a = new BoardCanadiense();
-			//Board* a = new Board(8);
 			tablero++;
 		}
 		break;

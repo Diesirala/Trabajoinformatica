@@ -20,7 +20,6 @@ int BoardPeruanas::comer(int x, int y, int posicionx, int posiciony)
 				{
 
 					ETSIDI::play("sonidos/comer.wav");
-					//tab[posicionx][posiciony].setCell(posicionx, posiciony, Object::QUEEN_GREEN);
 					tab[x][y].setCell(-1, -1, Object::EMPTY_CELL);
 					tab[pmediox][pmedioy].setCell(pmediox, pmedioy, Object::QUEEN_GREEN);
 					pmovida = tab[posicionx][posiciony];
@@ -42,7 +41,6 @@ int BoardPeruanas::comer(int x, int y, int posicionx, int posiciony)
 				if (tab[pmediox][pmedioy].getType() == Object::QUEEN_GREEN || tab[pmediox][pmedioy].getType() == Object::QUEEN_GREENR)
 				{
 					ETSIDI::play("sonidos/comer.wav");
-					//tab[posicionx][posiciony].setCell(posicionx, posiciony, Object::QUEEN_BLACK);
 					tab[x][y].setCell(-1, -1, Object::EMPTY_CELL);
 					tab[pmediox][pmedioy].setCell(pmediox, pmedioy, Object::QUEEN_BLACK);
 					pmovida = tab[posicionx][posiciony];
@@ -79,7 +77,6 @@ int BoardPeruanas::comer(int x, int y, int posicionx, int posiciony)
 					{
 						if (tab[x][y].getType() == Object::QUEEN_GREENR && turno == 1) {
 							ETSIDI::play("sonidos/comer.wav");
-							//tab[posicionx][posiciony].setCell(posicionx, posiciony, Object::QUEEN_GREENR);
 							tab[posicionx - u][posiciony - k].setCell(posicionx - u, posiciony - k, Object::QUEEN_BLACKR);
 							tab[x][y].setCell(-1, -1, Object::EMPTY_CELL);
 							pmovida = tab[posicionx][posiciony];
@@ -92,7 +89,6 @@ int BoardPeruanas::comer(int x, int y, int posicionx, int posiciony)
 						if (tab[x][y].getType() == Object::QUEEN_BLACKR && turno == -1)
 						{
 							ETSIDI::play("sonidos/comer.wav");
-							//tab[posicionx][posiciony].setCell(posicionx, posiciony, Object::QUEEN_BLACKR);
 							tab[posicionx - u][posiciony - k].setCell(posicionx - u, posiciony - k, Object::QUEEN_BLACKR);
 							tab[x][y].setCell(-1, -1, Object::EMPTY_CELL);
 							pmovida = tab[posicionx][posiciony];
@@ -180,9 +176,7 @@ void BoardPeruanas::estadSoplido(void)
 			PiezasSoplido[1][i].getCellNumber(c, d);
 
 			PiezasSoplido[0][i].getCellNumber(e, f);
-			cout << "Piezas que pueden soplar las blancas: " << c << d << endl;
 
-			cout << "Piezas que pueden soplar las negras: " << e << f << endl;
 
 		}
 	}
@@ -223,8 +217,6 @@ void BoardPeruanas::actualizarEstado(void)
 		if (negras == 0)  //GANAN BLANCAS
 			estado = VICTORIAB;
 
-		cout << "Las posibilidades de comer son: " << posDeComer << endl;
-		cout << "Las posibilidades de moverse son: " << posDeMover << endl;
 	}
 
 }

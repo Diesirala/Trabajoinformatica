@@ -1,5 +1,4 @@
 #include "BoardEspañolasIA.h"
-#include <stdlib.h>
 
 int BoardEspañolasIA::comer(int x, int y, int posicionx, int posiciony)
 {
@@ -165,7 +164,7 @@ void BoardEspañolasIA::estadSoplido(void)
 							if (turno == -1)
 								PiezasSoplido[1][posDeComer - aux1] = tab[i][j];
 							posDeComer++;
-							//j++;
+							
 
 						}
 						if (copia.cambiarPosicion(i, j, k, l) == 1)
@@ -187,9 +186,7 @@ void BoardEspañolasIA::estadSoplido(void)
 			PiezasSoplido[1][i].getCellNumber(c, d);
 
 			PiezasSoplido[0][i].getCellNumber(e, f);
-			cout << "Piezas que pueden soplar las blancas: " << c << d << endl;
-
-			cout << "Piezas que pueden soplar las negras: " << e << f << endl;
+	
 
 		}
 	}
@@ -230,8 +227,6 @@ void BoardEspañolasIA::actualizarEstado(void)
 		if (negras == 0)  //GANAN BLANCAS
 			estado = VICTORIAB;
 
-		cout << "Las posibilidades de comer son: " << posDeComer << endl;
-		cout << "Las posibilidades de moverse son: " << posDeMover << endl;
 	}
 
 }

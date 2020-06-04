@@ -18,8 +18,6 @@ using namespace std;
 class BoardGL{
 
 public:
-	//Piece pieza;
-	
 	BoardGL(Board* pb):m_board(pb),variante(pb->getTipo() ),width(0.15),N(pb->getSize()),dist(2){
 		
 		
@@ -58,7 +56,7 @@ protected:
 	double center_x,center_y,center_z;
 	double dist;
 	//mouse	
-	//int xcell_sel, ycell_sel;			//cell selected with mouse
+
 
 
 	//mouse+special-keys combination state events 

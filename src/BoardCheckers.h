@@ -1,7 +1,6 @@
 
 #pragma once
 #include "board.h"
-#include <stdlib.h>
 class BoardCheckers : public Board {
 public:
 	BoardCheckers() :Board(8) {

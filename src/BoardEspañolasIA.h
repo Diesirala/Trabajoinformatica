@@ -1,6 +1,6 @@
 #pragma once
 #include "BoardIA.h"
-#include <stdlib.h>
+
 class BoardEspañolasIA :public BoardIA {
 public:
 	BoardEspañolasIA() :BoardIA(8) {

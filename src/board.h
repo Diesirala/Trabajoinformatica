@@ -15,7 +15,6 @@ using namespace std;
 class Board{
 public:
 	
-	//enum tipo_juego { ESPAN, PERUANA, RUSA, INGLESA };
 protected:
 	int cop;
 	const int N;		//NxN board
@@ -79,7 +78,6 @@ public:
 
 	}
 	virtual ~Board(){
-		//delete[] PiezasSoplido;
 		for(int i=0; i<N; i++)
 			delete [] tab[i];
 		delete [] tab;

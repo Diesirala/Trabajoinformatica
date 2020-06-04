@@ -2,7 +2,6 @@
 #include <board.h>
 class BoardIA :public Board {
 protected:
-	//int IA;
 	Piece posiblesMovimientos[20];
 	int posDeMover;
 public:
@@ -19,12 +18,6 @@ public:
 		}
 	}
 	virtual ~BoardIA() {}
-
-
-
-
-
-
 
 
 	virtual void moverIA(void) {
@@ -89,22 +82,9 @@ public:
 		if (movimientos == 0 && turno == -1)
 			pasoTurno();
 
-
-
-
-
-
-
-
-
 	}
 
 	virtual void Movimientos(void) {
-
-
-
-
-
 		if (cop == 0) {
 			Piece vacio[20];
 			if (turno == -1) {
@@ -130,10 +110,6 @@ public:
 								if (turno == -1)
 									posiblesMovimientos[posDeMover - aux] = tab[i][j];
 								posDeMover++;
-
-
-
-
 							}
 
 
@@ -158,7 +134,6 @@ public:
 			movimientos = 1;
 			turno = -turno;
 			actualizarEstado();
-			//estadSoplido();
 		}
 		if (turno == -1)
 			moverIA();

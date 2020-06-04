@@ -4,7 +4,6 @@
 /////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////
 #include "BoardEspañolas.h"
-#include <stdlib.h>
 int BoardEspañolas::comer(int x, int y, int posicionx, int posiciony)
 {
 
@@ -190,10 +189,7 @@ void BoardEspañolas::estadSoplido(void)
 			PiezasSoplido[1][i].getCellNumber(c, d);
 
 			PiezasSoplido[0][i].getCellNumber(e, f);
-			cout << "Piezas que pueden soplar las blancas: " << c << d << endl;
-
-			cout << "Piezas que pueden soplar las negras: " << e << f << endl;
-
+	
 		}
 	}
 
@@ -233,8 +229,7 @@ void BoardEspañolas::actualizarEstado(void)
 		if (negras == 0)  //GANAN BLANCAS
 			estado = VICTORIAB;
 
-		cout << "Las posibilidades de comer son: " << posDeComer << endl;
-		cout << "Las posibilidades de moverse son: " << posDeMover << endl;
+	
 	}
 
 }

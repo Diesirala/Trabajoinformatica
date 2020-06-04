@@ -101,9 +101,6 @@
     <ClInclude Include="src\Enumeraciones.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="BoardPeruanas.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="src\BoardTurcasIA.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>

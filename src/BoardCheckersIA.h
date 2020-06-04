@@ -1,16 +1,14 @@
 #pragma once
 #include "BoardCheckers.h"
-#include <stdlib.h>
 class BoardCheckersIA :public BoardCheckers {
 protected:
-	//int IA;
+
 	Piece posiblesMovimientos[20];
 	int posDeMover;
 public:
 	BoardCheckersIA() :BoardCheckers() {
 	}
-	/*BoardCheckersIA(BoardCheckersIA& a) :BoardCheckers(a) {
-	}*/
+
 
 	virtual void moverIA(void) {
 
@@ -143,7 +141,7 @@ public:
 			movimientos = 1;
 			turno = -turno;
 			actualizarEstado();
-			//estadSoplido();
+
 		}
 		if (turno == 1)
 			moverIA();

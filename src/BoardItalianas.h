@@ -1,6 +1,5 @@
 #pragma once
 #include "BoardCheckers.h"
-#include <stdlib.h>
 class BoardItalianas : public BoardCheckers {
 public:
 	BoardItalianas() :BoardCheckers() {

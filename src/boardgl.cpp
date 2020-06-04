@@ -116,9 +116,7 @@ void BoardGL::Draw(){
 	center_y=-N*width/2;
 	center_z=0;
 
-	//Borrado de la pantalla	
-	//glClearColor(1,1,1,1);// blanco del fondo
-	//GLTools::BackgroundColor(gltools::WHITE); // cambiar el color del fondo
+
 	setFondo();
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glMatrixMode(GL_MODELVIEW);	
@@ -126,9 +124,7 @@ void BoardGL::Draw(){
 	//Para definir el punto de vista
 	setOjo(m_board->getSize());
 	glEnable(GL_LIGHTING);
-	//setFondo(pieza.getTipo());
-	//Draws board and grid
-	//GLTools::Color(gltools::WHITE, 1.0f);
+
 	DrawGrid();
 	for (int i = 0;i < N;i++) {
 		for (int j = 0;j < N;j++) {

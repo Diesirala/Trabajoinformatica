@@ -20,10 +20,6 @@
 #include "BoardTurcas.h"
 #include "BoardTurcasIA.h"
 
-
-
-
-//enum tipo_juego { ESPAN, PERUANA, RUSA, INGLESA };
  class Coordinador{
  protected:
  public:
@@ -89,6 +85,6 @@ protected:
 	
 	int tablero; //1 SI SE HA CREADO EL TABLERO 0 SI NO SE HA CREADO
 	int dimensiones;
-	//tipo_juego variante;
+
 };
 

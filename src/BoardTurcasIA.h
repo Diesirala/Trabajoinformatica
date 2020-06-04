@@ -1,9 +1,8 @@
 #pragma once
 #include "BoardTurcas.h"
-#include <stdlib.h>
+
 class BoardTurcasIA : public BoardTurcas {
 protected:
-	//int IA;
 	Piece posiblesMovimientos[50];
 	int posDeMover;
 public:
@@ -144,7 +143,6 @@ public:
 			movimientos = 1;
 			turno = -turno;
 			actualizarEstado();
-			//estadSoplido();
 		}
 		if (turno == -1)
 			moverIA();

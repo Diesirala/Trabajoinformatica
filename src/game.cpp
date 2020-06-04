@@ -1,16 +1,9 @@
-//game.cpp: entry point for a general outline of baordgame using glut and OpenGL
-//			configures basic glut parameters and defines a scene wrapper for all 
-//			call backs
-//author:pss
-//date of creation: 9/5/16
+
 
 #include <iostream>
 #include "boardgl.h"
 #include"Coordinador.h"
 #include "glut.h"
-
-//#define GRID_SIZE	8		//NxN grid
-
 /////////////////////////////////
 //call back declarations: will be called by glut when registered
 
@@ -21,8 +14,7 @@ void OnTimer(int value);
 
 ////////////////////////////////////////////////
 //global objects which make the world
-//Board gameboard(8);
-//BoardGL scene(&gameboard);
+
 
 Coordinador escena;
 
@@ -31,49 +23,7 @@ Coordinador escena;
 
 int main(int argc,char* argv[]){
 	//GL Initialization stuff
-	//CASO CON TURNOS 
-	/*gameboard.cambiarPosicion(5, 2, 4, 3);
-	
-	gameboard.cambiarPosicion(2, 5, 3, 4);
-	gameboard.comer(4, 3, 2, 5);
-	gameboard.pasoTurno();
-	gameboard.cambiarPosicion(2 ,1, 3, 0);*/
 
-
-
-	//gameboard.cambiarPosicion(2, 3, 3, 2);
-	//gameboard.cambiarPosicion(3, 2, 4, 1);
-	/*gameboard.cambiarPosicion(1, 2, 2, 3);
-	gameboard.cambiarPosicion(2, 3, 3, 4);
-	gameboard.cambiarPosicion(0, 3, 1, 2);
-	gameboard.cambiarPosicion(1, 2, 2, 3);
-
-	gameboard.comer(5, 2, 3, 0);
-	gameboard.comer(3, 0, 1, 2);
-
-	gameboard.cambiarPosicion(1, 2, 0, 3);
-	gameboard.cambiarPosicion(0, 3, 3, 0);
-	gameboard.cambiarPosicion(3, 0, 0, 3);
-
-	gameboard.cambiarPosicion(5, 4, 4, 3);
-	gameboard.cambiarPosicion(4, 3, 3, 2);
-	gameboard.cambiarPosicion(3, 2, 2, 1);
-	gameboard.cambiarPosicion(6, 5, 5, 4);
-	gameboard.cambiarPosicion(5, 4, 4, 3);
-	gameboard.cambiarPosicion(7, 6, 6, 5);
-
-	gameboard.comer(1, 0, 3, 2);
-	gameboard.comer(3, 2, 5, 4);
-	gameboard.comer(5, 4, 7, 6);
-
-	gameboard.cambiarPosicion(7, 6, 1, 0);
-	gameboard.cambiarPosicion(1, 0, 2, 1);
-	gameboard.cambiarPosicion(2, 1, 0, 3);
-	gameboard.cambiarPosicion(0, 3, 3, 6);
-	gameboard.cambiarPosicion(0, 3, 0, 4);
-
-
-	gameboard.comer(1, 2, 3, 4);*/
 
 
 	glutInit(&argc, argv);
@@ -86,7 +36,7 @@ int main(int argc,char* argv[]){
 	glutDisplayFunc(OnDraw);
 	glutKeyboardFunc(OnKeyboardDown);
 	glutMouseFunc(OnMouseClick);
-	//glutTimerFunc(25,OnTimer,0);			 //set timer if required, currently not used
+	
 	
 	//sets light and perspective
       escena.init();
@@ -131,13 +81,12 @@ void OnMouseClick(int b,int state, int x,int y){
 		button=MOUSE_LEFT_BUTTON;
 		
 	}
-	if(b==GLUT_RIGHT_BUTTON){
+	if(b==GLUT_RIGHT_BUTTON)
 		button=MOUSE_RIGHT_BUTTON;
-		cout<<"MOUSE_RIGHT_BUTTON"<<endl;
-	}
+		
 	if (b == GLUT_MIDDLE_BUTTON) {
 		button = MOUSE_MIDDLE_BUTTON;
-		cout << "MOUSE_MIDDLE_BUTTON" << endl;
+		
 	}
 		
 	int specialKey = glutGetModifiers();
@@ -150,29 +99,24 @@ void OnMouseClick(int b,int state, int x,int y){
 				xactual = escena.xcell_sel;
 				yactual = escena.ycell_sel;
 				count++;
-				cout << xactual << yactual << "   actual" << endl;
+				
 				if (escena.a->soplido(xactual, yactual) || escena.a->getPieceType(xactual, yactual) == Object::EMPTY_CELL) {
-					//escena.a->actualizarEstado();
+					
 					count--;
 				}
-				/*if (escena.a->getPieceType(xactual, yactual) == Object::EMPTY_CELL)
-					count--;*/
-				//escena.a->actualizarEstado();
-				//escena.a->soplido(xactual, yactual);
+			
 			}
 			else {
 				posicionx = escena.xcell_sel;
 				posiciony = escena.ycell_sel;
 				count--;
-				cout << posicionx << posiciony << endl;
+				
 				escena.a->cambiarPosicion(xactual, yactual, posicionx, posiciony);
-				//escena.a->actualizarEstado();
+				
 				escena.a->comer(xactual, yactual, posicionx, posiciony);
-				//escena.a->actualizarEstado();
-				//escena.a->actualizarEstado();
-				//escena.a->soplido(posicionx, posiciony);
+				
 			}
-			//cout << escena.a->estadoPartida() << endl;
+			
 		}
 	}
 	if (button == MOUSE_RIGHT_BUTTON && down) {

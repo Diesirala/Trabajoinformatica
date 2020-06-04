@@ -1,6 +1,5 @@
 #pragma once
 #include "BoardIA.h"
-#include <stdlib.h>
 class BoardRusasIA : public BoardIA {
 protected:
 	virtual void reina(int posicionx, int posiciony);
